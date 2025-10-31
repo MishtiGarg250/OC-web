@@ -106,22 +106,12 @@ function Footer() {
         </div>
         </div>
         <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-center md:text-left text-sm text-gray-400">
-              © 2024 OpenCode Events. All rights reserved.
+          
+            <p className="text-center text-sm text-gray-400">
+              © 2025 OpenCode Event. All rights reserved.
             </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="/privacy" className="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-300">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-300">
-                Terms of Service
-              </a>
-              <a href="/code-of-conduct" className="text-sm text-gray-400 hover:text-blue-400 transition-colors duration-300">
-                Code of Conduct
-              </a>
-            </div>
-          </div>
+            
+  
         </div>
     </footer>
   )

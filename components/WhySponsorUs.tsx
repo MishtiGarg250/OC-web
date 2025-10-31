@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { BackgroundGradient } from "./ui/background-gradient";
 const benefits = [
   {
     title: "Amplify Your Brand Presence",
@@ -67,19 +66,7 @@ function WhySponsorUs() {
             </div>
 
             <div className="mt-16 text-center">
-  <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-8 max-w-4xl mx-auto shadow-lg">
-    <h3 className="text-3xl font-semibold text-white mb-4">
-      Ready to Empower the Next Generation of Innovators?
-    </h3>
-    <p className="text-lg text-gray-400 mb-6 max-w-2xl mx-auto leading-relaxed">
-      Partner with <span className="text-blue-400 font-medium">OpenCode</span> and join forces with global tech leaders 
-      who believe in building a more open, inclusive, and innovative world through technology.  
-      Your support fuels creativity, mentorship, and real-world impact for thousands of passionate contributors.
-    </p>
-    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-blue-700/30">
-      Become a Sponsor
-    </button>
-  </div>
+  
 </div>
 
         </div>

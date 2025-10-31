@@ -9,25 +9,37 @@ import { cn } from "@/utils/cn";
 const sponsors = [
   {
     name: "Sponsor 1",
-    logo: "/placeholder-sponsor-1.svg",
+    logo: "/logos_taskade.svg",
     width: 180,
     height: 80,
   },
   {
     name: "Sponsor 2",
-    logo: "/placeholder-sponsor-2.svg",
+    logo: "/logos_polygon.svg",
     width: 160,
     height: 70,
   },
   {
     name: "Sponsor 3",
-    logo: "/placeholder-sponsor-3.svg",
+    logo: "/logos_digital-ocean.svg",
     width: 200,
     height: 60,
   },
   {
     name: "Sponsor 4",
-    logo: "/placeholder-sponsor-4.svg",
+    logo: "/logos_filecoin.svg",
+    width: 170,
+    height: 65,
+  },
+  {
+    name: "Sponsor 5",
+    logo: "/logos_replit.svg",
+    width: 170,
+    height: 65,
+  },
+  {
+    name: "Sponsor 6",
+    logo: "/logos_github.svg",
     width: 170,
     height: 65,
   },
@@ -35,7 +47,7 @@ const sponsors = [
 
 export function Sponsors() {
   return (
-    <section id="sponsors" className="relative w-full py-20 bg-black">
+    <section id="sponsors" className="relative w-full py-20 bg-[#0a0a0a">
       <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]" />
       
       <div className="container mx-auto px-4 relative z-10">
@@ -46,8 +58,8 @@ export function Sponsors() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
-            Our Sponsors
+          <h2 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-600 drop-shadow-[0_0_20px_rgba(59,130,246,0.5)] mb-4">
+            Past Sponsors
           </h2>
           <p className="mt-4 text-lg text-neutral-400 max-w-2xl mx-auto">
             We're grateful to our amazing sponsors who make this event possible

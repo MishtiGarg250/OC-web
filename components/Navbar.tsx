@@ -37,7 +37,7 @@ export default function Navbar({ className }: { className?: string }) {
           <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-cyan-400 p-[2px] group-hover:scale-105 transition-transform">
             <div className="bg-black/90 rounded-full flex items-center justify-center w-full h-full">
               <Image
-                src="/logo.svg"
+                src="/openCode.svg"
                 width={28}
                 height={28}
                 alt="OpenCode Logo"
