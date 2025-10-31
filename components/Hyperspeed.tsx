@@ -1212,6 +1212,7 @@ class App {
     const delta = this.clock.getDelta();
     this.render(delta);
     this.update(delta);
+    // here are some changes done here
     requestAnimationFrame(this.tick);
   }
 }

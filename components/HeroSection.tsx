@@ -25,7 +25,7 @@ function HeroSection() {
         >
           Fuel Open Source Innovation
         </motion.h1>
-
+        {/*here are more changes */}
         {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 15 }}
