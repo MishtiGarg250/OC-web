@@ -1,39 +1,39 @@
 "use client";
 import React from "react";
 import { BackgroundGradient } from "./ui/background-gradient";
-
 const benefits = [
-    {
-        title: "Massive Developer Reach",
-        description: "Connect with 50,000+ developers, students, and tech professionals across 100+ countries",
-        stats: "50K+ Developers"
-    },
-    {
-        title: "Top Talent Pipeline",
-        description: "Access the next generation of tech leaders from top universities and coding bootcamps",
-        stats: "500+ Universities"
-    },
-    {
-        title: "Global Brand Visibility",
-        description: "Get featured across our events, social media, and community platforms worldwide",
-        stats: "100+ Countries"
-    },
-    {
-        title: "Open Source Impact",
-        description: "Support meaningful projects that are shaping the future of technology and innovation",
-        stats: "1000+ Projects"
-    },
-    {
-        title: "Community Engagement",
-        description: "Build authentic relationships with passionate developers who value your contribution",
-        stats: "95% Satisfaction"
-    },
-    {
-        title: "Measurable ROI",
-        description: "Track your impact with detailed analytics and engagement metrics from our events",
-        stats: "Real-time Analytics"
-    }
+  {
+    title: "Amplify Your Brand Presence",
+    description:
+      "Showcase your brand to a global audience of passionate developers, innovators, and creators. Gain long-term visibility across our website, event platforms, and open-source repositories.",
+  },
+  {
+    title: "Connect with Top Talent",
+    description:
+      "Engage directly with skilled contributors, mentors, and students from premier institutions. Build meaningful relationships with the next generation of developers and tech leaders.",
+  },
+  {
+    title: "Champion Open Source",
+    description:
+      "Demonstrate your commitment to open-source values by supporting projects that solve real-world challenges and empower the global tech community.",
+  },
+  {
+    title: "Foster Diversity and Inclusion",
+    description:
+      "Be part of an initiative that encourages participation from all backgrounds. Support an environment where every contributor feels welcome and inspired to learn.",
+  },
+  {
+    title: "Strengthen Community Engagement",
+    description:
+      "Collaborate with developers who share your passion for innovation. Create a lasting impact by being part of a community that values collaboration and shared growth.",
+  },
+  {
+    title: "Collaborative Marketing Opportunities",
+    description:
+      "Co-create campaigns, workshops, and challenges that align with your brand values. Experience organic outreach through our engaged open-source ecosystem.",
+  },
 ];
+
 
 function WhySponsorUs() {
   return (
@@ -59,9 +59,7 @@ function WhySponsorUs() {
                                 <p className="text-sm text-gray-400 mb-4 leading-relaxed">
                                     {benefit.description}
                                 </p>
-                                <div className="text-2xl font-bold text-blue-400">
-                                    {benefit.stats}
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -69,16 +67,21 @@ function WhySponsorUs() {
             </div>
 
             <div className="mt-16 text-center">
-                <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-8 max-w-4xl mx-auto">
-                    <h3 className="text-2xl font-semibold text-white mb-4">Ready to Make an Impact?</h3>
-                    <p className="text-lg text-gray-400 mb-6 max-w-2xl mx-auto">
-                        Join companies like GitHub, Google, Microsoft, and Amazon in supporting the open-source community
-                    </p>
-                    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200">
-                        Start Sponsoring Today
-                    </button>
-                </div>
-            </div>
+  <div className="bg-[#1a1a1a] border border-gray-800 rounded-lg p-8 max-w-4xl mx-auto shadow-lg">
+    <h3 className="text-3xl font-semibold text-white mb-4">
+      Ready to Empower the Next Generation of Innovators?
+    </h3>
+    <p className="text-lg text-gray-400 mb-6 max-w-2xl mx-auto leading-relaxed">
+      Partner with <span className="text-blue-400 font-medium">OpenCode</span> and join forces with global tech leaders 
+      who believe in building a more open, inclusive, and innovative world through technology.  
+      Your support fuels creativity, mentorship, and real-world impact for thousands of passionate contributors.
+    </p>
+    <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors duration-200 shadow-md hover:shadow-blue-700/30">
+      Become a Sponsor
+    </button>
+  </div>
+</div>
+
         </div>
     </div>
   )

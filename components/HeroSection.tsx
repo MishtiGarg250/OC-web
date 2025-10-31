@@ -1,7 +1,6 @@
-import Link from "next/link"
+
 import { Spotlight } from "./ui/Spotlight"
-import { Button } from "./ui/moving-border";
-import { WavyBackground } from "./ui/wavy-background";
+
 
 function HeroSection() {
   return (
@@ -29,26 +28,9 @@ function HeroSection() {
             className="mt-20 md:mt-0 text-4xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-600 drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]"
             >Fuel Open Source Innovation</h1>
             <p
-            className="mt-4 font-normal text-base md:text-lg text-gray-300 max-w-2xl mx-auto"
+            className="mt-6 font-normal text-base md:text-lg text-gray-300 max-w-2xl mx-auto"
             >Join the movement that's shaping the future of technology. Sponsor our open-source events and connect with the brightest developers, contribute to meaningful projects, and build lasting partnerships in the tech community.</p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href={"/sponsor-registration"}>
-                    <Button
-                    borderRadius="1.75rem"
-                    className="bg-blue-600 hover:bg-blue-700 text-white border-0 transition-all duration-300 shadow-lg hover:shadow-xl font-medium px-8 py-3"
-                    >
-                    Become a Sponsor
-                    </Button>
-                </Link>
-                <Link href={"/events"}>
-                    <Button
-                    borderRadius="1.75rem"
-                    className="bg-transparent text-white border-2 border-gray-600 hover:bg-gray-800/50 hover:border-gray-500 transition-all duration-300 font-medium px-8 py-3"
-                    >
-                    View Events
-                    </Button>
-                </Link>
-            </div>
+            
         </div>
         </div>
   )

@@ -1,41 +1,79 @@
-"use client"
-import React, {useState} from "react"
-import { HoveredLink,Menu, MenuItem,ProductItem  } from "./ui/navbar-menu"
-import {cn} from "@/utils/cn"
-import Link from "next/link"
-export default function Navbar({className}: {className?:string}){
-    const [active, setActive] = useState<string | null>(null);
-    return(
-        <div
-      className={cn("fixed top-10 inset-x-0 max-w-4xl mx-auto z-50", className)}
+"use client";
+import React, { useState, useEffect } from "react";
+import { cn } from "@/utils/cn";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "./ui/button";
+import { motion } from "framer-motion";
+
+export default function Navbar({ className }: { className?: string }) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+      className={cn(
+        "fixed top-6 inset-x-0 z-50 flex justify-center px-4",
+        className
+      )}
     >
-      <Menu setActive={setActive}>
-        <MenuItem setActive={setActive} active={active} item="Events">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/events">All Events</HoveredLink>
-            <HoveredLink href="/events/hackathons">Hackathons</HoveredLink>
-            <HoveredLink href="/events/workshops">Workshops</HoveredLink>
-            <HoveredLink href="/events/conferences">Conferences</HoveredLink>
+      <div
+        className={cn(
+          "flex items-center justify-between w-full max-w-5xl rounded-full px-6 py-3 transition-all duration-300",
+          "backdrop-blur-md bg-black/30 border border-white/10",
+          scrolled ? "shadow-[0_0_25px_rgba(0,0,0,0.3)] bg-black/50" : ""
+        )}
+      >
+        {/* Left: Logo */}
+        <Link href="/" className="flex items-center space-x-2 group">
+          <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-cyan-400 p-[2px] group-hover:scale-105 transition-transform">
+            <div className="bg-black/90 rounded-full flex items-center justify-center w-full h-full">
+              <Image
+                src="/logo.svg"
+                width={28}
+                height={28}
+                alt="OpenCode Logo"
+                className="opacity-90 group-hover:opacity-100 transition-opacity"
+              />
+            </div>
           </div>
-        </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Participate">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/sponsor-registration">Sponsor Registration</HoveredLink>
-            <HoveredLink href="/register">Company Registration</HoveredLink>
-            <HoveredLink href="/register/developer">Developer Registration</HoveredLink>
-            <HoveredLink href="/projects">Browse Projects</HoveredLink>
-            <HoveredLink href="/mentorship">Mentorship Program</HoveredLink>
-          </div>
-        </MenuItem>
-        <MenuItem setActive={setActive} active={active} item="Community">
-          <div className="flex flex-col space-y-4 text-sm">
-            <HoveredLink href="/community">About Us</HoveredLink>
-            <HoveredLink href="/community/impact">Our Impact</HoveredLink>
-            <HoveredLink href="https://discord.gg/opencode" target="_blank">Discord Server</HoveredLink>
-            <HoveredLink href="/community/partners">Partners</HoveredLink>
-          </div>
-        </MenuItem>
-      </Menu>
-    </div>
-    )
+          <span className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-tight">
+            OpenCode
+          </span>
+        </Link>
+
+        {/* Right: Buttons */}
+        <div className="flex items-center space-x-4">
+          <Button
+            variant="ghost"
+            className="text-gray-300 hover:text-white hover:bg-white/10 rounded-full px-5 py-2 text-sm transition-all"
+            asChild
+          >
+            <Link href="/sponsor-registration">Sponsor Us</Link>
+          </Button>
+
+          <Button
+            className="rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-medium text-sm px-5 py-2 shadow-md hover:shadow-lg hover:brightness-110 transition-all"
+            asChild
+          >
+            <Link
+              href="https://discord.gg/SxBATvUPnC"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Join Discord
+            </Link>
+          </Button>
+        </div>
+      </div>
+    </motion.nav>
+  );
 }

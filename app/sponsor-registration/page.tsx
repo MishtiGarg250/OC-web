@@ -31,40 +31,52 @@ export default function SponsorRegistration() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-  
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+      setIsSubmitted(true);
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("There was an error submitting your form. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] antialiased flex items-center justify-center pt-32 pb-20">
-        <BackgroundGradient className="max-w-md mx-auto p-8 rounded-[22px] bg-white dark:bg-zinc-900 text-center">
-          <div className="text-6xl mb-4">✓</div>
-          <h2 className="text-2xl font-bold text-black dark:text-neutral-200 mb-4">
+      <div className="min-h-screen bg-[#0a0a0a] text-neutral-200 flex items-center justify-center pt-32 pb-20">
+        <BackgroundGradient className="max-w-md mx-auto p-8 rounded-[22px] bg-[#111] text-center">
+          <div className="text-6xl mb-4 text-green-500">✓</div>
+          <h2 className="text-2xl font-bold mb-4">
             Registration Successful!
           </h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mb-6">
+          <p className="text-neutral-400 mb-6">
             Thank you for your interest in sponsoring OpenCode events. Our team will contact you within 24 hours to discuss the next steps.
           </p>
           <Button
             borderRadius="1.75rem"
-            className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800"
-            onClick={() => window.location.href = '/'}
+            className="bg-[#111] text-white border-neutral-700 hover:bg-[#222]"
+            onClick={() => (window.location.href = "/")}
           >
             Return to Home
           </Button>
@@ -74,107 +86,46 @@ export default function SponsorRegistration() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] antialiased pt-32 pb-20">
+    <div className="min-h-screen bg-[#0a0a0a] text-white antialiased pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-600 drop-shadow-[0_0_20px_rgba(59,130,246,0.5)] mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-600 mb-4">
             Sponsor Registration
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-neutral-400 max-w-3xl mx-auto">
             Join us in supporting the open-source community. Fill out the form below to become a sponsor for OpenCode events.
           </p>
         </div>
 
-        <BackgroundGradient className="rounded-[22px] bg-white dark:bg-zinc-900 p-8">
+        <BackgroundGradient className="rounded-[22px] bg-[#111] p-8 shadow-xl border border-neutral-800">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      
-              <div>
-                <label htmlFor="companyName" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
-                  Company Name *
-                </label>
-                <input
-                  type="text"
-                  id="companyName"
-                  name="companyName"
-                  value={formData.companyName}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="Enter your company name"
-                />
-              </div>
+              {[
+                { id: "companyName", label: "Company Name *", type: "text", placeholder: "Enter your company name" },
+                { id: "ownerName", label: "Owner/Representative Name *", type: "text", placeholder: "Enter owner/representative name" },
+                { id: "contactNumber", label: "Contact Number *", type: "tel", placeholder: "Enter contact number" },
+                { id: "email", label: "Email Address *", type: "email", placeholder: "Enter email address" },
+                { id: "website", label: "Company Website", type: "url", placeholder: "https://yourcompany.com" },
+              ].map((field) => (
+                <div key={field.id}>
+                  <label htmlFor={field.id} className="block text-sm font-medium text-neutral-300 mb-2">
+                    {field.label}
+                  </label>
+                  <input
+                    type={field.type}
+                    id={field.id}
+                    name={field.id}
+                    value={(formData as any)[field.id]}
+                    onChange={handleInputChange}
+                    required={field.label.includes("*")}
+                    placeholder={field.placeholder}
+                    className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+              ))}
 
-        
               <div>
-                <label htmlFor="ownerName" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
-                  Owner/Representative Name *
-                </label>
-                <input
-                  type="text"
-                  id="ownerName"
-                  name="ownerName"
-                  value={formData.ownerName}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="Enter owner/representative name"
-                />
-              </div>
-
-      
-              <div>
-                <label htmlFor="contactNumber" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
-                  Contact Number *
-                </label>
-                <input
-                  type="tel"
-                  id="contactNumber"
-                  name="contactNumber"
-                  value={formData.contactNumber}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="Enter contact number"
-                />
-              </div>
-
-        
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="Enter email address"
-                />
-              </div>
-
-        
-              <div>
-                <label htmlFor="website" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
-                  Company Website
-                </label>
-                <input
-                  type="url"
-                  id="website"
-                  name="website"
-                  value={formData.website}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                  placeholder="https://yourcompany.com"
-                />
-              </div>
-
-  
-              <div>
-                <label htmlFor="companySize" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
+                <label htmlFor="companySize" className="block text-sm font-medium text-neutral-300 mb-2">
                   Company Size
                 </label>
                 <select
@@ -182,7 +133,7 @@ export default function SponsorRegistration() {
                   name="companySize"
                   value={formData.companySize}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">Select company size</option>
                   <option value="1-10">1-10 employees</option>
@@ -192,8 +143,9 @@ export default function SponsorRegistration() {
                   <option value="1000+">1000+ employees</option>
                 </select>
               </div>
+
               <div>
-                <label htmlFor="industry" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
+                <label htmlFor="industry" className="block text-sm font-medium text-neutral-300 mb-2">
                   Industry
                 </label>
                 <select
@@ -201,7 +153,7 @@ export default function SponsorRegistration() {
                   name="industry"
                   value={formData.industry}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">Select industry</option>
                   <option value="Technology">Technology</option>
@@ -215,9 +167,8 @@ export default function SponsorRegistration() {
                 </select>
               </div>
 
-      
               <div className="md:col-span-2">
-                <label htmlFor="sponsorshipType" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
+                <label htmlFor="sponsorshipType" className="block text-sm font-medium text-neutral-300 mb-2">
                   Sponsorship Type *
                 </label>
                 <select
@@ -226,20 +177,18 @@ export default function SponsorRegistration() {
                   value={formData.sponsorshipType}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">Select sponsorship type</option>
                   <option value="monetary">Monetary Support</option>
                   <option value="internship">Internship Opportunities</option>
                   <option value="goodies">Goodies & Swag</option>
-    
                 </select>
               </div>
             </div>
 
-            {/* Company Details */}
             <div>
-              <label htmlFor="companyDetails" className="block text-sm font-medium text-black dark:text-neutral-200 mb-2">
+              <label htmlFor="companyDetails" className="block text-sm font-medium text-neutral-300 mb-2">
                 Company Details *
               </label>
               <textarea
@@ -249,18 +198,17 @@ export default function SponsorRegistration() {
                 onChange={handleInputChange}
                 required
                 rows={6}
-                className="w-full px-4 py-3 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-zinc-800 text-black dark:text-white focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-vertical"
-                placeholder="Tell us about your company, its mission, products/services, and why you want to sponsor OpenCode events..."
+                placeholder="Tell us about your company, its mission, and why you want to sponsor OpenCode..."
+                className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
               />
             </div>
 
-            {/* Submit Button */}
             <div className="text-center pt-6">
               <Button
                 type="submit"
                 disabled={isSubmitting}
                 borderRadius="1.75rem"
-                className="bg-white dark:bg-black text-black dark:text-white border-neutral-200 dark:border-slate-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#1a1a1a] text-white border-neutral-700 hover:bg-[#222] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? "Submitting..." : "Submit Registration"}
               </Button>

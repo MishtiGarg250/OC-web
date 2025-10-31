@@ -20,41 +20,25 @@ function Footer() {
         </div>
         <div>
           <h2 className="text-lg font-semibold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-            Quick Links
+            Contact Details
           </h2>
           <ul className="space-y-2">
             <li>
-              <a
-                href="/"
-                className="hover:text-blue-400 transition-colors duration-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-              >
-                Home
-              </a>
+              
+                +91 8604379134
+              
             </li>
             <li>
-              <a
-                href="/events"
-                className="hover:text-blue-400 transition-colors duration-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-              >
-                Events
-              </a>
+              
+                +91 7248119726
+              
             </li>
             <li>
-              <a
-                href="/sponsor-registration"
-                className="hover:text-blue-400 transition-colors duration-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-              >
-                Sponsor
-              </a>
+              
+                +91 8837844288
+            
             </li>
-            <li>
-              <a
-                href="/community"
-                className="hover:text-blue-400 transition-colors duration-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
-              >
-                Community
-              </a>
-            </li>
+            
           </ul>
         </div>
         <div>
@@ -63,7 +47,7 @@ function Footer() {
           </h2>
           <div className="space-y-3">
             <a
-              href="https://discord.gg/opencode"
+              href="https://discord.gg/SxBATvUPnC"
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:text-blue-400 transition-colors duration-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
@@ -79,15 +63,15 @@ function Footer() {
               GitHub
             </a>
             <a
-              href="https://twitter.com/opencode"
+              href="https://www.instagram.com/geekhaven_iiita/"
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:text-blue-400 transition-colors duration-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
             >
-              Twitter
+              Instagram
             </a>
             <a
-              href="https://linkedin.com/company/opencode"
+              href="https://www.linkedin.com/company/geekhaven-iiita"
               target="_blank"
               rel="noopener noreferrer"
               className="block hover:text-blue-400 transition-colors duration-300 hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)]"
@@ -107,7 +91,8 @@ function Footer() {
             </p>
             <p className="flex items-center">
               <span className="w-2 h-2 bg-cyan-400 rounded-full mr-2 animate-pulse delay-100"></span>
-              Email: hello@opencode.events
+              Email: geekhaven@iiita.ac.in
+
             </p>
             <p className="flex items-center">
               <span className="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse delay-200"></span>
