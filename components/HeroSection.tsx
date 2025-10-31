@@ -3,26 +3,19 @@
 import { motion } from "framer-motion";
 import { Spotlight } from "./ui/Spotlight";
 import Link from "next/link";
+import Hyperspeed, { hyperspeedPresets } from "./Hyperspeed";
 
 function HeroSection() {
   return (
-    <section className="relative flex items-center justify-center min-h-[42rem] overflow-hidden border-b border-blue-500/10 bg-[#030712]">
-    
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-transparent to-cyan-900/20"></div>
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
-        <div className="absolute top-10 left-20 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-32 right-32 w-[30rem] h-[30rem] bg-cyan-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute bottom-10 left-1/3 w-[25rem] h-[25rem] bg-indigo-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
-      </div>
+    <section className="relative flex min-h-[42rem] items-center justify-center overflow-hidden border-b border-blue-500/10 bg-[#030712]">
+      <Hyperspeed
+        className="absolute inset-0 z-0"
+        effectOptions={hyperspeedPresets.one}
+      />
 
-      {/* 🔳 Grid overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none"></div>
+      <Spotlight className="z-20 -top-40 left-0 md:left-60 md:-top-20" fill="black" />
 
-    
-      <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="black" />
-
-
-      <div className="relative z-10 text-center px-6">
+      <div className="relative z-30 mx-auto flex max-w-4xl flex-col items-center px-6 text-center">
         {/* Animated heading */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
@@ -46,23 +39,28 @@ function HeroSection() {
           the tech community.
         </motion.p>
 
-        
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+        >
+          <Link
+            href="/sponsor-registration"
+            className="inline-flex items-center rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-500/30 transition hover:brightness-110"
+          >
+            Become a Sponsor
+          </Link>
+          <Link
+            href="#how-it-works"
+            className="inline-flex items-center rounded-full border border-white/20 px-8 py-3 text-sm font-semibold text-white/80 transition hover:border-white/40 hover:text-white"
+          >
+            See How It Works
+          </Link>
+        </motion.div>
       </div>
-
-    
-      <motion.div
-        className="absolute bottom-10 right-10 w-20 h-20 bg-cyan-400/10 rounded-full blur-2xl"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.div
-        className="absolute top-20 left-10 w-16 h-16 bg-blue-500/10 rounded-full blur-2xl"
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
     </section>
   );
 }
 
 export default HeroSection;
-
