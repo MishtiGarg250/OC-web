@@ -22,23 +22,34 @@ function Footer() {
           <h2 className="text-lg font-semibold mb-4 bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
             Contact Details
           </h2>
-          <ul className="space-y-2">
-            <li>
-              
-                +91 8604379134
-              
+          <ul className="space-y-3">
+            <li className="flex items-start">
+              <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-2 flex-shrink-0"></div>
+              <div>
+                <p className="font-medium text-white">Arpit Anand</p>
+                <a href="tel:+918604379134" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  +91 8604379134
+                </a>
+              </div>
             </li>
-            <li>
-              
-                +91 7248119726
-              
+            <li className="flex items-start">
+              <div className="w-2 h-2 bg-cyan-400 rounded-full mt-2 mr-2 flex-shrink-0"></div>
+              <div>
+                <p className="font-medium text-white">Naitik Jain</p>
+                <a href="tel:+917248119726" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  +91 7248119726
+                </a>
+              </div>
             </li>
-            <li>
-              
-                +91 8837844288
-            
+            <li className="flex items-start">
+              <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 mr-2 flex-shrink-0"></div>
+              <div>
+                <p className="font-medium text-white">Vansh Dhawan</p>
+                <a href="tel:+918837844288" className="text-gray-300 hover:text-blue-400 transition-colors">
+                  +91 8837844288
+                </a>
+              </div>
             </li>
-            
           </ul>
         </div>
         <div>

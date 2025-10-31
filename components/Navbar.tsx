@@ -4,10 +4,12 @@ import { cn } from "@/utils/cn";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar({ className }: { className?: string }) {
   const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 10);
@@ -15,53 +17,72 @@ export default function Navbar({ className }: { className?: string }) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
-        "fixed top-6 inset-x-0 z-50 flex justify-center px-4",
+        "fixed top-0 inset-x-0 z-50 px-4 pt-2 sm:pt-6",
         className
       )}
     >
       <div
         className={cn(
-          "flex items-center justify-between w-full max-w-5xl rounded-full px-6 py-3 transition-all duration-300",
+          "flex items-center justify-between w-full max-w-5xl mx-auto rounded-full px-4 sm:px-6 py-3 transition-all duration-300",
           "backdrop-blur-md bg-black/30 border border-white/10",
           scrolled ? "shadow-[0_0_25px_rgba(0,0,0,0.3)] bg-black/50" : ""
         )}
       >
-        {/* Left: Logo */}
+        {/* Left: Logo - Hide text on mobile */}
         <Link href="/" className="flex items-center space-x-2 group">
-          <div className="relative w-10 h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-cyan-400 p-[2px] group-hover:scale-105 transition-transform">
+          <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-cyan-400 p-[2px] group-hover:scale-105 transition-transform">
             <div className="bg-black/90 rounded-full flex items-center justify-center w-full h-full">
               <Image
                 src="/openCode.svg"
-                width={28}
-                height={28}
+                width={24}
+                height={24}
                 alt="OpenCode Logo"
-                className="opacity-90 group-hover:opacity-100 transition-opacity"
+                className="opacity-90 group-hover:opacity-100 transition-opacity w-5 h-5 sm:w-7 sm:h-7"
               />
             </div>
           </div>
-          <span className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-tight">
+          <span className="hidden sm:inline-block text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-tight">
             OpenCode
           </span>
         </Link>
 
-        {/* Right: Buttons */}
-        <div className="flex items-center space-x-4">
+        {/* Mobile menu button */}
+        <div className="sm:hidden">
+          <button
+            onClick={toggleMenu}
+            className="text-gray-300 hover:text-white focus:outline-none"
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+          </button>
+        </div>
+
+        {/* Desktop Navigation */}
+        <div className="hidden sm:flex items-center space-x-4">
           <Button
             variant="ghost"
-            className="text-gray-300 hover:text-white hover:bg-white/10 rounded-full px-5 py-2 text-sm transition-all"
+            className="text-gray-300 hover:text-white hover:bg-white/10 rounded-full px-4 py-1.5 sm:px-5 sm:py-2 text-sm transition-all"
             asChild
           >
             <Link href="/sponsor-registration">Sponsor Us</Link>
           </Button>
 
           <Button
-            className="rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-medium text-sm px-5 py-2 shadow-md hover:shadow-lg hover:brightness-110 transition-all"
+            className="rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-medium text-sm px-4 py-1.5 sm:px-5 sm:py-2 shadow-md hover:shadow-lg hover:brightness-110 transition-all"
             asChild
           >
             <Link
@@ -74,6 +95,41 @@ export default function Navbar({ className }: { className?: string }) {
           </Button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.2 }}
+            className="sm:hidden mt-3 w-full max-w-5xl mx-auto rounded-2xl backdrop-blur-md bg-black/50 border border-white/10 p-4 space-y-3"
+          >
+            <Button
+              variant="ghost"
+              className="w-full text-gray-300 hover:text-white hover:bg-white/10 rounded-full px-4 py-3 text-base transition-all justify-start"
+              asChild
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Link href="/sponsor-registration">Sponsor Us</Link>
+            </Button>
+            <Button
+              className="w-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-medium text-base px-4 py-3 shadow-md hover:shadow-lg hover:brightness-110 transition-all justify-start"
+              asChild
+              onClick={() => setIsMenuOpen(false)}
+            >
+              <Link
+                href="https://discord.gg/SxBATvUPnC"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Join Discord
+              </Link>
+            </Button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

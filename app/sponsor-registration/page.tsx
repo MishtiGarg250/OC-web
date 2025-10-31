@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { Button } from "@/components/ui/moving-border";
+import { CheckCircle } from "lucide-react";
 
 interface SponsorFormData {
   companyName: string;
   ownerName: string;
   contactNumber: string;
-  sponsorshipType: string;
+  sponsorshipType: string[];
   companyDetails: string;
   email: string;
   website: string;
@@ -20,24 +21,49 @@ export default function SponsorRegistration() {
     companyName: "",
     ownerName: "",
     contactNumber: "",
-    sponsorshipType: "",
+    sponsorshipType: [],
     companyDetails: "",
     email: "",
     website: "",
     companySize: "",
-    industry: ""
+    industry: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const sponsorshipOptions = [
+    { value: "monetary", label: "Monetary Support" },
+    { value: "internship", label: "Internship Opportunities" },
+    { value: "goodies", label: "Goodies & Swag" },
+  ];
+
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = e.target.value;
+    if (value && !formData.sponsorshipType.includes(value)) {
+      setFormData((prev) => ({
+        ...prev,
+        sponsorshipType: [...prev.sponsorshipType, value],
+      }));
+    }
+  };
+
+  const handleRemoveType = (value: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      sponsorshipType: prev.sponsorshipType.filter((item) => item !== value),
     }));
   };
 
@@ -50,9 +76,7 @@ export default function SponsorRegistration() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      if (!response.ok) {
-        throw new Error("Failed to submit form");
-      }
+      if (!response.ok) throw new Error("Failed to submit form");
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -66,12 +90,13 @@ export default function SponsorRegistration() {
     return (
       <div className="min-h-screen bg-[#0a0a0a] text-neutral-200 flex items-center justify-center pt-32 pb-20">
         <BackgroundGradient className="max-w-md mx-auto p-8 rounded-[22px] bg-[#111] text-center">
-          <div className="text-6xl mb-4 text-green-500">✓</div>
-          <h2 className="text-2xl font-bold mb-4">
-            Registration Successful!
-          </h2>
+          <div className="flex justify-center mb-4">
+            <CheckCircle className="h-12 w-12 text-blue-500" strokeWidth={1.5} />
+          </div>
+          <h2 className="text-2xl font-bold mb-4">Registration Successful!</h2>
           <p className="text-neutral-400 mb-6">
-            Thank you for your interest in sponsoring OpenCode events. Our team will contact you within 24 hours to discuss the next steps.
+            Thank you for your interest in sponsoring OpenCode events. Our team
+            will contact you within 24 hours to discuss the next steps.
           </p>
           <Button
             borderRadius="1.75rem"
@@ -93,7 +118,8 @@ export default function SponsorRegistration() {
             Sponsor Registration
           </h1>
           <p className="text-lg text-neutral-400 max-w-3xl mx-auto">
-            Join us in supporting the open-source community. Fill out the form below to become a sponsor for OpenCode events.
+            Join us in supporting the open-source community. Fill out the form
+            below to become a sponsor for OpenCode events.
           </p>
         </div>
 
@@ -101,14 +127,42 @@ export default function SponsorRegistration() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
-                { id: "companyName", label: "Company Name *", type: "text", placeholder: "Enter your company name" },
-                { id: "ownerName", label: "Owner/Representative Name *", type: "text", placeholder: "Enter owner/representative name" },
-                { id: "contactNumber", label: "Contact Number *", type: "tel", placeholder: "Enter contact number" },
-                { id: "email", label: "Email Address *", type: "email", placeholder: "Enter email address" },
-                { id: "website", label: "Company Website", type: "url", placeholder: "https://yourcompany.com" },
+                {
+                  id: "companyName",
+                  label: "Company Name *",
+                  type: "text",
+                  placeholder: "Enter your company name",
+                },
+                {
+                  id: "ownerName",
+                  label: "Owner/Representative Name *",
+                  type: "text",
+                  placeholder: "Enter owner/representative name",
+                },
+                {
+                  id: "contactNumber",
+                  label: "Contact Number *",
+                  type: "tel",
+                  placeholder: "Enter contact number",
+                },
+                {
+                  id: "email",
+                  label: "Email Address *",
+                  type: "email",
+                  placeholder: "Enter email address",
+                },
+                {
+                  id: "website",
+                  label: "Company Website",
+                  type: "url",
+                  placeholder: "https://yourcompany.com",
+                },
               ].map((field) => (
                 <div key={field.id}>
-                  <label htmlFor={field.id} className="block text-sm font-medium text-neutral-300 mb-2">
+                  <label
+                    htmlFor={field.id}
+                    className="block text-sm font-medium text-neutral-300 mb-2"
+                  >
                     {field.label}
                   </label>
                   <input
@@ -124,8 +178,12 @@ export default function SponsorRegistration() {
                 </div>
               ))}
 
+              {/* Company size */}
               <div>
-                <label htmlFor="companySize" className="block text-sm font-medium text-neutral-300 mb-2">
+                <label
+                  htmlFor="companySize"
+                  className="block text-sm font-medium text-neutral-300 mb-2"
+                >
                   Company Size
                 </label>
                 <select
@@ -144,8 +202,12 @@ export default function SponsorRegistration() {
                 </select>
               </div>
 
+              {/* Industry */}
               <div>
-                <label htmlFor="industry" className="block text-sm font-medium text-neutral-300 mb-2">
+                <label
+                  htmlFor="industry"
+                  className="block text-sm font-medium text-neutral-300 mb-2"
+                >
                   Industry
                 </label>
                 <select
@@ -167,28 +229,62 @@ export default function SponsorRegistration() {
                 </select>
               </div>
 
+              {/* Sponsorship type with tags */}
               <div className="md:col-span-2">
-                <label htmlFor="sponsorshipType" className="block text-sm font-medium text-neutral-300 mb-2">
+                <label
+                  htmlFor="sponsorshipType"
+                  className="block text-sm font-medium text-neutral-300 mb-2"
+                >
                   Sponsorship Type *
                 </label>
                 <select
                   id="sponsorshipType"
                   name="sponsorshipType"
-                  value={formData.sponsorshipType}
-                  onChange={handleInputChange}
-                  required
+                  onChange={handleSelectChange}
+                  value=""
+                  required={formData.sponsorshipType.length === 0}
                   className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">Select sponsorship type</option>
-                  <option value="monetary">Monetary Support</option>
-                  <option value="internship">Internship Opportunities</option>
-                  <option value="goodies">Goodies & Swag</option>
+                  {sponsorshipOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
                 </select>
+
+                {/* Tag-style chips */}
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {formData.sponsorshipType.map((type) => {
+                    const label =
+                      sponsorshipOptions.find((opt) => opt.value === type)
+                        ?.label || type;
+                    return (
+                      <div
+                        key={type}
+                        className="flex items-center bg-blue-600/20 border border-blue-500/40 text-blue-300 px-3 py-1 rounded-full text-sm"
+                      >
+                        {label}
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveType(type)}
+                          className="ml-2 text-blue-300 hover:text-blue-400 focus:outline-none"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
+            {/* Company details */}
             <div>
-              <label htmlFor="companyDetails" className="block text-sm font-medium text-neutral-300 mb-2">
+              <label
+                htmlFor="companyDetails"
+                className="block text-sm font-medium text-neutral-300 mb-2"
+              >
                 Company Details *
               </label>
               <textarea
