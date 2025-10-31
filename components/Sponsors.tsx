@@ -10,15 +10,10 @@ const sponsors = [
   {
     name: "Sponsor 1",
     logo: "/logos_taskade.svg",
-    width: 180,
-    height: 80,
+    width: 170,
+    height: 65,
   },
-  {
-    name: "Sponsor 2",
-    logo: "/logos_polygon.svg",
-    width: 160,
-    height: 70,
-  },
+  
   {
     name: "Sponsor 3",
     logo: "/logos_digital-ocean.svg",
@@ -32,17 +27,39 @@ const sponsors = [
     height: 65,
   },
   {
-    name: "Sponsor 5",
-    logo: "/logos_replit.svg",
+    name: "Sponsor 7",
+    logo: "/logos_solana.svg",
     width: 170,
     height: 65,
   },
+  {
+    name: "Sponsor 8",
+    logo: "/logos_upcloud.svg",
+    width: 170,
+    height: 65,
+  },
+  
   {
     name: "Sponsor 6",
     logo: "/logos_github.svg",
     width: 170,
     height: 65,
   },
+  {
+    name: "Sponsor 5",
+    logo: "/logos_replit.svg",
+    width: 170,
+    height: 65,
+  },
+  
+  
+  {
+    name: "Sponsor 2",
+    logo: "/logos_polygon.svg",
+    width: 170,
+    height: 65,
+  },
+
 ];
 
 export function Sponsors() {
