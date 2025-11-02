@@ -285,7 +285,7 @@ export default function SponsorRegistration() {
                 htmlFor="companyDetails"
                 className="block text-sm font-medium text-neutral-300 mb-2"
               >
-                Company Details *
+                Any thought you would like to share *
               </label>
               <textarea
                 id="companyDetails"
@@ -294,7 +294,7 @@ export default function SponsorRegistration() {
                 onChange={handleInputChange}
                 required
                 rows={6}
-                placeholder="Tell us about your company, its mission, and why you want to sponsor OpenCode..."
+                placeholder="Share your thoughts…"
                 className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
               />
             </div>

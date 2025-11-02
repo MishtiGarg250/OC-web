@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     // Send the email using Resend
     const { data, error } = await resend.emails.send({
       from: 'OpenCode Sponsorship <onboarding@resend.dev>',
-      to: 'gargmishti9@gmail.com',
+      to: 'geekhaven@iiita.ac.in',
       replyTo: formData.email,
       subject: `New Sponsorship Request from ${formData.companyName}`,
       html: `
