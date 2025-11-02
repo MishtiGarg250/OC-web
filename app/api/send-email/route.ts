@@ -1,8 +1,5 @@
-import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
 
 interface SponsorFormData {
   companyName: string;
@@ -12,7 +9,7 @@ interface SponsorFormData {
   website: string;
   companySize: string;
   industry: string;
-  sponsorshipType: string[]
+  sponsorshipType: string[];
   companyDetails: string;
 }
 
@@ -20,24 +17,32 @@ export async function POST(request: Request) {
   try {
     const formData: SponsorFormData = await request.json();
 
-    // Validate required fields
     if (!formData.companyName || !formData.email || !formData.ownerName) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
-    // Format sponsorship types (comma-separated string or fallback)
     const sponsorshipTypes =
       formData.sponsorshipType && formData.sponsorshipType.length > 0
-        ? formData.sponsorshipType.join(', ')
-        : 'Not specified';
+        ? formData.sponsorshipType.join(", ")
+        : "Not specified";
 
-    // Send the email using Resend
-    const { data, error } = await resend.emails.send({
-      from: 'OpenCode Sponsorship <onboarding@resend.dev>',
-      to: 'geekhaven@iiita.ac.in',
+    
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com", 
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER, 
+        pass: process.env.SMTP_PASS, 
+      },
+    });
+
+    const mailOptions = {
+      from: `"OpenCode Sponsorship" <${process.env.SMTP_USER}>`,
+      to: "geekhaven@iiita.ac.in",
       replyTo: formData.email,
       subject: `New Sponsorship Request from ${formData.companyName}`,
       html: `
@@ -50,21 +55,21 @@ export async function POST(request: Request) {
             <h3 style="color: #60a5fa; margin-top: 0;">Company Information</h3>
             <p><strong>Company Name:</strong> ${formData.companyName}</p>
             <p><strong>Contact Person:</strong> ${formData.ownerName}</p>
-            <p><strong>Email:</strong> <a href="mailto:${formData.email}" style="color: #3b82f6;">${formData.email}</a></p>
-            <p><strong>Contact Number:</strong> ${formData.contactNumber || 'Not provided'}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Contact Number:</strong> ${formData.contactNumber || "Not provided"}</p>
             <p><strong>Website:</strong> ${
               formData.website
                 ? `<a href="${formData.website}" target="_blank" style="color: #3b82f6;">${formData.website}</a>`
-                : 'Not provided'
+                : "Not provided"
             }</p>
-            <p><strong>Company Size:</strong> ${formData.companySize || 'Not specified'}</p>
-            <p><strong>Industry:</strong> ${formData.industry || 'Not specified'}</p>
+            <p><strong>Company Size:</strong> ${formData.companySize || "Not specified"}</p>
+            <p><strong>Industry:</strong> ${formData.industry || "Not specified"}</p>
             <p><strong>Sponsorship Type:</strong> ${sponsorshipTypes}</p>
           </div>
 
           <div style="background-color: #111827; padding: 20px; border-radius: 8px;">
             <h3 style="color: #60a5fa; margin-top: 0;">Additional Details</h3>
-            <p>${formData.companyDetails ? formData.companyDetails.replace(/\n/g, '<br>') : 'No additional details provided.'}</p>
+            <p>${formData.companyDetails ? formData.companyDetails.replace(/\n/g, "<br>") : "No additional details provided."}</p>
           </div>
 
           <p style="margin-top: 30px; font-size: 14px; color: #9ca3af; text-align: center; border-top: 1px solid #374151; padding-top: 20px;">
@@ -72,42 +77,33 @@ export async function POST(request: Request) {
           </p>
         </div>
       `,
-      text: `New Sponsorship Request
+      text: `
+New Sponsorship Request
 
-Company Information:
-- Company Name: ${formData.companyName}
-- Contact Person: ${formData.ownerName}
-- Email: ${formData.email}
-- Contact Number: ${formData.contactNumber || 'Not provided'}
-- Website: ${formData.website || 'Not provided'}
-- Company Size: ${formData.companySize || 'Not specified'}
-- Industry: ${formData.industry || 'Not specified'}
-- Sponsorship Type: ${sponsorshipTypes}
+Company Name: ${formData.companyName}
+Contact Person: ${formData.ownerName}
+Email: ${formData.email}
+Contact Number: ${formData.contactNumber || "Not provided"}
+Website: ${formData.website || "Not provided"}
+Company Size: ${formData.companySize || "Not specified"}
+Industry: ${formData.industry || "Not specified"}
+Sponsorship Type: ${sponsorshipTypes}
 
 Additional Details:
-${formData.companyDetails || 'No additional details provided.'}
+${formData.companyDetails || "No additional details provided."}
+      `,
+    };
 
-This email was sent from the OpenCode sponsorship form.`,
-    });
-
-    if (error) {
-      console.error('Resend API error:', error);
-      throw new Error(error.message);
-    }
+    await transporter.sendMail(mailOptions);
 
     return NextResponse.json({
       success: true,
-      message: 'Email sent successfully!',
-      data,
+      message: "Email sent successfully to geekhaven@iiita.ac.in!",
     });
   } catch (error: any) {
-    console.error('Error sending email:', error);
+    console.error("Error sending email:", error);
     return NextResponse.json(
-      {
-        success: false,
-        error: 'Failed to send email',
-        details: error.message || 'Unknown error occurred',
-      },
+      { success: false, error: error.message || "Failed to send email" },
       { status: 500 }
     );
   }
