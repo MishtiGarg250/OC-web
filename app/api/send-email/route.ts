@@ -1,10 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Initialize Resend with API key from environment variables
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Updated type: sponsorshipType is now an array
+
 interface SponsorFormData {
   companyName: string;
   ownerName: string;
@@ -13,7 +12,7 @@ interface SponsorFormData {
   website: string;
   companySize: string;
   industry: string;
-  sponsorshipType: string[]; // ✅ now supports multiple values
+  sponsorshipType: string[]
   companyDetails: string;
 }
 
