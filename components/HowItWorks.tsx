@@ -90,7 +90,7 @@ function HowItWorks() {
   }, []);
 
   return (
-    <div id="how-it-works" className="py-12 sm:py-16 lg:py-20 bg-[#0a0a0a] border-t border-gray-800/50">
+    <div id="how-it-works" className="py-12 sm:py-16 lg:py-20 bg-[#0a0a0a] border-t border-gray-800/50 scroll-mt-28 md:scroll-mt-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-600 mb-3 sm:mb-4">
