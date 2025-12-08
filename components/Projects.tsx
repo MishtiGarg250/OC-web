@@ -1,13 +1,62 @@
 "use client";
-
 import Link from "next/link";
+import React from "react";
+import {
+  Rocket,
+  BarChart,
+  ShoppingCart,
+  Wallet,
+  Palette,
+  ShieldAlert,
+  Dumbbell,
+  Terminal,
+  Gamepad2,
+} from "lucide-react";
 
-const projects = [
+
+type IconKey =
+  | "rocket"
+  | "barChart"
+  | "shoppingCart"
+  | "wallet"
+  | "palette"
+  | "shieldAlert"
+  | "dumbbell"
+  | "terminal"
+  | "gamepad2";
+
+/* ---------------- ICON MAP ---------------- */
+
+const iconMap: Record<IconKey, React.ElementType> = {
+  rocket: Rocket,
+  barChart: BarChart,
+  shoppingCart: ShoppingCart,
+  wallet: Wallet,
+  palette: Palette,
+  shieldAlert: ShieldAlert,
+  dumbbell: Dumbbell,
+  terminal: Terminal,
+  gamepad2: Gamepad2,
+};
+
+type Project = {
+  id: number;
+  name: string;
+  description: string;
+  icon: IconKey;
+  color: string;
+  span: string;
+  link: string;
+};
+
+/* ---------------- PROJECT DATA ---------------- */
+
+const projects: Project[] = [
   {
     id: 1,
     name: "Code-Digger",
     description: "Cool code debugging stuff",
-    icon: "🚀",
+    icon: "rocket",
     color: "from-cyan-400/20 to-cyan-600/20",
     span: "col-span-2 row-span-1",
     link: "https://github.com/opencodeiiita/CodeDigger",
@@ -17,7 +66,7 @@ const projects = [
     name: "EmotionAnalysis",
     description:
       "we'll be working on dataset with text and the emotions detected in those texts.",
-    icon: "📊",
+    icon: "barChart",
     color: "from-purple-400/20 to-purple-600/20",
     span: "col-span-1 row-span-2",
     link: "https://github.com/opencodeiiita/EmotionAnalysis",
@@ -26,8 +75,7 @@ const projects = [
     id: 3,
     name: "CampusOLX",
     description: "local online marketplace specifically designed for students",
-    icon: "🛒",
-    
+    icon: "shoppingCart",
     color: "from-blue-400/20 to-blue-600/20",
     span: "col-span-1 row-span-2",
     link: "https://github.com/opencodeiiita/Aloha",
@@ -37,27 +85,26 @@ const projects = [
     name: "SolMintNFT",
     description:
       "SolMintNFT is a project under OpenCode'22, that will be building an NFT marketplace using the Solana blockchain.",
-    icon: "🦧",
+    icon: "wallet",
     color: "from-green-400/20 to-green-600/20",
     span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/SolMintNFT",
   },
   {
     id: 5,
-     name: "Aloha",
+    name: "Aloha",
     description:
       "An Opencode22 Repository with some tasks only for Freshies at IIITA",
-    icon: "🎨",   
+    icon: "palette",
     color: "from-green-400/20 to-green-600/20",
     span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/CampusOLX",
   },
-  
   {
     id: 6,
     name: "Cyber-War",
     description: "Contains weekly cybersec related tasks",
-    icon: "⚠️",
+    icon: "shieldAlert",
     color: "from-orange-400/20 to-orange-600/20",
     span: "col-span-2 row-span-1",
     link: "https://github.com/opencodeiiita/Cyber-War",
@@ -66,7 +113,7 @@ const projects = [
     id: 7,
     name: "Fitezo",
     description: "Flutter based app",
-    icon: "💪🏻",
+    icon: "dumbbell",
     color: "from-green-400/20 to-green-600/20",
     span: "col-span-2 row-span-1",
     link: "https://github.com/opencodeiiita/fitezo",
@@ -76,7 +123,7 @@ const projects = [
     name: "Go Git",
     description:
       "GoGit is a repository to help you learn the basics as well as the intricacies of git and github through some fun tasks",
-    icon: "🧑🏻‍💻",
+    icon: "terminal",
     color: "from-red-400/20 to-red-600/20",
     span: "col-span-2 row-span-1",
     link: "https://github.com/opencodeiiita/GoGit-4.0",
@@ -86,12 +133,14 @@ const projects = [
     name: "ZoombieMania",
     description:
       "A 3d platformer zombie survival shooter made with Unity Engine. To contribute use Unity Version 2021.3.11f1",
-    icon: "👾",
+    icon: "gamepad2",
     color: "from-blue-400/20 to-blue-600/20",
     span: "col-span-2 row-span-1",
     link: "https://github.com/opencodeiiita/ZoombieMania-",
   },
 ];
+
+
 
 function Projects() {
   return (
@@ -116,50 +165,55 @@ function Projects() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px]">
-            {projects.map((project) => (
-              <div
-                key={project.id}
-                className={`${project.span} group relative`}
-              >
-                <div className="absolute inset-0 bg-linear-to-br from-white/5 via-white/3 to-white/0 rounded-2xl border border-white/10 backdrop-blur-md transition-all duration-300 group-hover:border-white/20 group-hover:from-white/8 group-hover:via-white/5 group-hover:shadow-lg group-hover:shadow-cyan-500/10"></div>
+            {projects.map((project) => {
+              const Icon = iconMap[project.icon];
 
+              return (
                 <div
-                  className={`absolute inset-0 bg-linear-to-br ${project.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                ></div>
+                  key={project.id}
+                  className={`${project.span} group relative`}
+                >
+                  <div className="absolute inset-0 bg-linear-to-br from-white/5 via-white/3 to-white/0 rounded-2xl border border-white/10 backdrop-blur-md transition-all duration-300 group-hover:border-white/20 group-hover:from-white/8 group-hover:via-white/5 group-hover:shadow-lg group-hover:shadow-cyan-500/10"></div>
 
-                <div className="relative h-full p-6 flex flex-col justify-between">
-                  <div className="flex items-center justify-between">
-                    <span className="text-4xl">{project.icon}</span>
-                    <div className="w-8 h-8 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <Link href={project.link}>
-                        <svg
-                          className="w-4 h-4 text-white/60"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M13 7l5 5m0 0l-5 5m5-5H6"
-                          />
-                        </svg>
-                      </Link>
+                  <div
+                    className={`absolute inset-0 bg-linear-to-br ${project.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                  ></div>
+
+                  <div className="relative h-full p-6 flex flex-col justify-between">
+                    <div className="flex items-center justify-between">
+                      <Icon className="w-10 h-10 text-white/80 group-hover:text-cyan-300 transition-colors" />
+
+                      <div className="w-8 h-8 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <Link href={project.link}>
+                          <svg
+                            className="w-4 h-4 text-white/60"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M13 7l5 5m0 0l-5 5m5-5H6"
+                            />
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <h3 className="text-white font-semibold text-lg group-hover:text-cyan-300 transition-colors">
+                        {project.name}
+                      </h3>
+                      <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">
+                        {project.description}
+                      </p>
                     </div>
                   </div>
-
-                  <div className="space-y-1">
-                    <h3 className="text-white font-semibold text-lg group-hover:text-cyan-300 transition-colors">
-                      {project.name}
-                    </h3>
-                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">
-                      {project.description}
-                    </p>
-                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
