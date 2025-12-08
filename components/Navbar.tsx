@@ -12,7 +12,7 @@ export default function Navbar({ className }: { className?: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
+    const handleScroll = () => setScrolled(window.scrollY > 80);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -20,6 +20,8 @@ export default function Navbar({ className }: { className?: string }) {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const isCompact = scrolled;
 
   return (
     <motion.nav
@@ -33,9 +35,11 @@ export default function Navbar({ className }: { className?: string }) {
     >
       <div
         className={cn(
-          "flex items-center justify-between w-full max-w-5xl mx-auto rounded-full px-4 sm:px-6 py-3 transition-all duration-300",
+          "flex items-center justify-between w-full mx-auto transition-all duration-500",
           "backdrop-blur-md bg-black/30 border border-white/10",
-          scrolled ? "shadow-[0_0_25px_rgba(0,0,0,0.3)] bg-black/50" : ""
+          isCompact
+            ? "max-w-5xl rounded-full px-4 sm:px-6 py-2 shadow-[0_0_25px_rgba(0,0,0,0.3)] bg-black/60"
+            : "max-w-6xl rounded-[2.75rem] px-6 sm:px-8 py-4 shadow-[0_20px_80px_-60px_rgba(59,130,246,0.45)] bg-black/40"
         )}
       >
         {/* Left: Logo - Hide text on mobile */}

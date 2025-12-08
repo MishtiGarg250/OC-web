@@ -16,7 +16,8 @@ const sponsors = [
     width: 170,
     height: 65,
     highlight: true,
-    description: "Collaborative AI workspace powering student builders and hack teams."
+    description: "Collaborative AI workspace powering student builders and hack teams.",
+    engagement: "Sponsored keynote + live AI build-along"
   },
   
   {
@@ -25,7 +26,8 @@ const sponsors = [
     logo: "/logos_digital-ocean.svg",
     width: 200,
     height: 60,
-    description: "Developer-loved cloud infrastructure for rapid shipping."
+    description: "Developer-loved cloud infrastructure for rapid shipping.",
+    engagement: "Cloud credits, scale workshops, and migration clinics"
   },
   {
     name: "Filecoin",
@@ -33,7 +35,8 @@ const sponsors = [
     logo: "/logos_filecoin.svg",
     width: 170,
     height: 65,
-    description: "Decentralized storage powering open internet experiences."
+    description: "Decentralized storage powering open internet experiences.",
+    engagement: "On-chain data lab + decentralized storage challenge"
   },
   {
     name: "Solana",
@@ -41,7 +44,8 @@ const sponsors = [
     logo: "/logos_solana.svg",
     width: 170,
     height: 65,
-    description: "High-throughput blockchain backing our web3 build track."
+    description: "High-throughput blockchain backing our web3 build track.",
+    engagement: "Web3 starter kits and ecosystem mentor hours"
   },
   {
     name: "UpCloud",
@@ -49,7 +53,8 @@ const sponsors = [
     logo: "/logos_upcloud.svg",
     width: 170,
     height: 65,
-    description: "High-performance compute for rapid prototyping."
+    description: "High-performance compute for rapid prototyping.",
+    engagement: "Bare-metal sprint track and performance clinic"
   },
   
   {
@@ -58,7 +63,8 @@ const sponsors = [
     logo: "/logos_github.svg",
     width: 170,
     height: 65,
-    description: "The collaboration platform where every OpenCode repo lives."
+    description: "The collaboration platform where every OpenCode repo lives.",
+    engagement: "Maintainer AMAs + Actions security deep-dives"
   },
   {
     name: "Replit",
@@ -66,7 +72,8 @@ const sponsors = [
     logo: "/logos_replit.svg",
     width: 170,
     height: 65,
-    description: "Browser-first IDE for instant demos and hands-on workshops."
+    description: "Browser-first IDE for instant demos and hands-on workshops.",
+    engagement: "Hands-on labs with starter templates and coach time"
   },
   
   
@@ -76,7 +83,8 @@ const sponsors = [
     logo: "/logos_polygon.svg",
     width: 170,
     height: 65,
-    description: "Scaling web3 apps for the next billion users."
+    description: "Scaling web3 apps for the next billion users.",
+    engagement: "Zero-knowledge demos + grants office hours"
   },
 
 ];
@@ -148,7 +156,7 @@ export function Sponsors() {
                 </p>
                 <div className="relative mt-4 flex items-center gap-2 text-xs text-cyan-200/80">
                   <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_0_4px_rgba(34,211,238,0.2)]" />
-                  Engaged in: workshops, product demos, and challenge prizes
+                  {sponsor.engagement}
                 </div>
               </SpotlightCard>
             </motion.div>
