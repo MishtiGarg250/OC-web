@@ -5,6 +5,7 @@ import HowItWorks from "@/components/HowItWorks";
 import WhySponsorUs from "@/components/WhySponsorUs";
 import { Testimonials } from "@/components/Testimonials";
 import { Sponsors } from "@/components/Sponsors";
+import Projects from "@/components/Projects";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <HeroSection />
       <Sponsors/>
       <HowItWorks />
+      <Projects />
       <WhySponsorUs />
       <Footer />
     </main>
