@@ -1,4 +1,3 @@
-
 import Footer from "@/components/Footer";
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
@@ -11,10 +10,11 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] antialiased">
       <HeroSection />
-      <Sponsors/>
+      <Sponsors />
       <HowItWorks />
       <Projects />
       <WhySponsorUs />
+      <Testimonials />
       <Footer />
     </main>
   );
