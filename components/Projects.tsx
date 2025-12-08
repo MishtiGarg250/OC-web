@@ -68,7 +68,7 @@ const projects = [
     description: "Flutter based app",
     icon: "💪🏻",
     color: "from-green-400/20 to-green-600/20",
-    span: "col-span-1 row-span-1",
+    span: "col-span-2 row-span-1",
     link: "https://github.com/opencodeiiita/fitezo",
   },
   {
