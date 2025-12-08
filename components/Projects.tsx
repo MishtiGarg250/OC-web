@@ -24,12 +24,12 @@ const projects = [
   },
   {
     id: 3,
-    name: "Aloha",
-    description:
-      "An Opencode22 Repository with some tasks only for Freshies at IIITA",
-    icon: "🎨",
+    name: "CampusOLX",
+    description: "local online marketplace specifically designed for students",
+    icon: "🛒",
+    
     color: "from-blue-400/20 to-blue-600/20",
-    span: "col-span-1 row-span-1",
+    span: "col-span-1 row-span-2",
     link: "https://github.com/opencodeiiita/Aloha",
   },
   {
@@ -43,25 +43,18 @@ const projects = [
     link: "https://github.com/opencodeiiita/SolMintNFT",
   },
   {
-    id: 4,
-    name: "CampusOLX",
-    description: "local online marketplace specifically designed for students",
-    icon: "🛒",
+    id: 5,
+     name: "Aloha",
+    description:
+      "An Opencode22 Repository with some tasks only for Freshies at IIITA",
+    icon: "🎨",   
     color: "from-green-400/20 to-green-600/20",
     span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/CampusOLX",
   },
+  
   {
-    id: 4,
-    name: "Fitezo",
-    description: "Flutter based app",
-    icon: "💪🏻",
-    color: "from-green-400/20 to-green-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/fitezo",
-  },
-  {
-    id: 5,
+    id: 6,
     name: "Cyber-War",
     description: "Contains weekly cybersec related tasks",
     icon: "⚠️",
@@ -70,23 +63,32 @@ const projects = [
     link: "https://github.com/opencodeiiita/Cyber-War",
   },
   {
-    id: 6,
+    id: 7,
+    name: "Fitezo",
+    description: "Flutter based app",
+    icon: "💪🏻",
+    color: "from-green-400/20 to-green-600/20",
+    span: "col-span-1 row-span-1",
+    link: "https://github.com/opencodeiiita/fitezo",
+  },
+  {
+    id: 8,
     name: "Go Git",
     description:
       "GoGit is a repository to help you learn the basics as well as the intricacies of git and github through some fun tasks",
     icon: "🧑🏻‍💻",
     color: "from-red-400/20 to-red-600/20",
-    span: "col-span-1 row-span-1",
+    span: "col-span-2 row-span-1",
     link: "https://github.com/opencodeiiita/GoGit-4.0",
   },
   {
-    id: 3,
+    id: 9,
     name: "ZoombieMania",
     description:
       "A 3d platformer zombie survival shooter made with Unity Engine. To contribute use Unity Version 2021.3.11f1",
     icon: "👾",
     color: "from-blue-400/20 to-blue-600/20",
-    span: "col-span-1 row-span-1",
+    span: "col-span-2 row-span-1",
     link: "https://github.com/opencodeiiita/ZoombieMania-",
   },
 ];
