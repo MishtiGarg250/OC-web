@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import BlurText from "./BlurText";
 const testimonials = [
   {
@@ -12,7 +12,7 @@ const testimonials = [
   },
   {
     quote:
-      "Mentor reviews were gold. My PR velocity doubled and that gnarly refactor finally merged",
+      "Mentor reviews were gold. My PR velocity doubled and that gnarly refactor finally merged.",
     name: "Rahul Menon",
     title: "Open source maintainer",
     align: "center",
@@ -55,8 +55,8 @@ const containerVariants = {
   },
 };
 
-export const cardVariants = {
-  hidden: (i: number) => ({
+const cardVariants: Variants = {
+  hidden: (i: number = 0) => ({
     opacity: 0,
     x: i % 2 === 0 ? -50 : 50,
     y: 30,
@@ -69,6 +69,7 @@ export const cardVariants = {
     y: 0,
     scale: 1,
     transition: {
+      type: "spring",
       stiffness: 120,
       damping: 20,
     },
