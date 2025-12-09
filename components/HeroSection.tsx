@@ -67,7 +67,7 @@ function HeroSection() {
             shadowColor="#3b82f6"
             className="text-lg sm:text-xl font-black uppercase tracking-[0.28em] text-blue-300"
           >
-            OpenSource&apos;25
+            OpenCode&apos;25
           </LineShadowText>
         </motion.div>
 

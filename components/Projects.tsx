@@ -58,7 +58,7 @@ const projects: Project[] = [
     description: "Cool code debugging stuff",
     icon: "rocket",
     color: "from-cyan-400/20 to-cyan-600/20",
-    span: "col-span-2 row-span-1",
+    span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/CodeDigger",
   },
   {
@@ -68,7 +68,7 @@ const projects: Project[] = [
       "we'll be working on dataset with text and the emotions detected in those texts.",
     icon: "barChart",
     color: "from-purple-400/20 to-purple-600/20",
-    span: "col-span-1 row-span-2",
+    span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/EmotionAnalysis",
   },
   {
@@ -77,7 +77,7 @@ const projects: Project[] = [
     description: "local online marketplace specifically designed for students",
     icon: "shoppingCart",
     color: "from-blue-400/20 to-blue-600/20",
-    span: "col-span-1 row-span-2",
+    span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/Aloha",
   },
   {
@@ -106,7 +106,7 @@ const projects: Project[] = [
     description: "Contains weekly cybersec related tasks",
     icon: "shieldAlert",
     color: "from-orange-400/20 to-orange-600/20",
-    span: "col-span-2 row-span-1",
+    span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/Cyber-War",
   },
   {
@@ -115,7 +115,7 @@ const projects: Project[] = [
     description: "Flutter based app",
     icon: "dumbbell",
     color: "from-green-400/20 to-green-600/20",
-    span: "col-span-2 row-span-1",
+    span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/fitezo",
   },
   {
@@ -125,7 +125,7 @@ const projects: Project[] = [
       "GoGit is a repository to help you learn the basics as well as the intricacies of git and github through some fun tasks",
     icon: "terminal",
     color: "from-red-400/20 to-red-600/20",
-    span: "col-span-2 row-span-1",
+    span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/GoGit-4.0",
   },
   {
@@ -135,7 +135,7 @@ const projects: Project[] = [
       "A 3d platformer zombie survival shooter made with Unity Engine. To contribute use Unity Version 2021.3.11f1",
     icon: "gamepad2",
     color: "from-blue-400/20 to-blue-600/20",
-    span: "col-span-2 row-span-1",
+    span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/ZoombieMania-",
   },
 ];
@@ -164,7 +164,7 @@ function Projects() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[200px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[200px]">
             {projects.map((project) => {
               const Icon = iconMap[project.icon];
 

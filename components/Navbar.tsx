@@ -56,7 +56,7 @@ export default function Navbar({ className }: { className?: string }) {
             </div>
           </div>
           <span className="hidden sm:inline-block text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-tight">
-            OpenCode
+            OpenCode&apos;25
           </span>
         </Link>
 
