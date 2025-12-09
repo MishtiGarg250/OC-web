@@ -79,7 +79,7 @@ const cardVariants: Variants = {
 
 export function Testimonials() {
   return (
-    <section className="relative w-full py-20 overflow-hidden bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.24),rgba(18,12,27,0.94)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#0c061a_0%,#0a0516_50%,#080414_100%)]">
+    <section className="relative w-full py-20 overflow-hidden  bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.24),rgba(18,12,27,0.92)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#0c061a_0%,#0a0516_50%,#080414_100%)] border-t border-purple-900/30">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -110,8 +110,7 @@ export function Testimonials() {
               key={item.name + i}
               custom={i}
               variants={cardVariants}
-              className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-7 backdrop-blur shadow-[0_20px_70px_-50px_rgba(168,85,247,0.5)] ${
-                item.featured ? "md:col-span-2" : ""
+              className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-7 backdrop-blur shadow-[0_20px_70px_-50px_rgba(168,85,247,0.5)] 
               }`}
             >
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_20%_20%,rgba(192,132,252,0.18),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(99,102,241,0.16),transparent_25%)]" />

@@ -37,7 +37,7 @@ const benefits = [
 
 function WhySponsorUs() {
   return (
-    <div className="py-20 bg-[#0a0a0a] border-t border-gray-800/50">
+    <div className="py-20  bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.24),rgba(18,12,27,0.92)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#0c061a_0%,#0a0516_50%,#080414_100%)] border-t border-purple-900/30">
         <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-16 space-y-3">
                 <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-purple-100/80">

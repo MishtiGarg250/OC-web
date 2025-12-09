@@ -90,7 +90,7 @@ const sponsors = [
 
 export function Sponsors() {
   return (
-    <section id="sponsors" className="relative w-full py-20 bg-gradient-to-b from-[#0f0820] via-[#0c0518] to-[#090312]">
+    <section id="sponsors" className="relative w-full py-20  bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.24),rgba(18,12,27,0.92)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#0c061a_0%,#0a0516_50%,#080414_100%)] border-t border-purple-900/30">
       <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]" />
       
       <div className="container mx-auto px-4 relative z-10">
