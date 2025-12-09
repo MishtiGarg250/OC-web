@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { motion , type Transition} from "motion/react";
+import { motion , type Transition} from "framer-motion";
 
 
 
