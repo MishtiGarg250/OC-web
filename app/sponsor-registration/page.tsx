@@ -91,7 +91,7 @@ export default function SponsorRegistration() {
       <div className="min-h-screen bg-[#0a0a0a] text-neutral-200 flex items-center justify-center pt-32 pb-20">
         <BackgroundGradient className="max-w-md mx-auto p-8 rounded-[22px] bg-[#111] text-center">
           <div className="flex justify-center mb-4">
-            <CheckCircle className="h-12 w-12 text-blue-500" strokeWidth={1.5} />
+            <CheckCircle className="h-12 w-12 text-purple-400" strokeWidth={1.5} />
           </div>
           <h2 className="text-2xl font-bold mb-4">Registration Successful!</h2>
           <p className="text-neutral-400 mb-6">
@@ -100,7 +100,7 @@ export default function SponsorRegistration() {
           </p>
           <Button
             borderRadius="1.75rem"
-            className="bg-[#111] text-white border-neutral-700 hover:bg-[#222]"
+            className="bg-[#111] text-white border-purple-700/20 hover:bg-[#120924]"
             onClick={() => (window.location.href = "/")}
           >
             Return to Home
@@ -114,7 +114,7 @@ export default function SponsorRegistration() {
     <div className="min-h-screen bg-[#0a0a0a] text-white antialiased pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-600 mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-purple-300 via-fuchsia-300 to-purple-500 drop-shadow-[0_0_20px_rgba(168,85,247,0.45)] mb-4">
             Sponsor Registration
           </h1>
           <p className="text-lg text-neutral-400 max-w-3xl mx-auto">
@@ -173,7 +173,7 @@ export default function SponsorRegistration() {
                     onChange={handleInputChange}
                     required={field.label.includes("*")}
                     placeholder={field.placeholder}
-                    className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   />
                 </div>
               ))}
@@ -191,7 +191,7 @@ export default function SponsorRegistration() {
                   name="companySize"
                   value={formData.companySize}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select company size</option>
                   <option value="1-10">1-10 employees</option>
@@ -215,7 +215,7 @@ export default function SponsorRegistration() {
                   name="industry"
                   value={formData.industry}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select industry</option>
                   <option value="Technology">Technology</option>
@@ -243,7 +243,7 @@ export default function SponsorRegistration() {
                   onChange={handleSelectChange}
                   value=""
                   required={formData.sponsorshipType.length === 0}
-                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Select sponsorship type</option>
                   {sponsorshipOptions.map((option) => (
@@ -262,13 +262,13 @@ export default function SponsorRegistration() {
                     return (
                       <div
                         key={type}
-                        className="flex items-center bg-blue-600/20 border border-blue-500/40 text-blue-300 px-3 py-1 rounded-full text-sm"
+                        className="flex items-center bg-purple-600/20 border border-purple-500/40 text-purple-300 px-3 py-1 rounded-full text-sm"
                       >
                         {label}
                         <button
                           type="button"
                           onClick={() => handleRemoveType(type)}
-                          className="ml-2 text-blue-300 hover:text-blue-400 focus:outline-none"
+                          className="ml-2 text-purple-300 hover:text-purple-400 focus:outline-none"
                         >
                           ✕
                         </button>
@@ -295,7 +295,7 @@ export default function SponsorRegistration() {
                 required
                 rows={6}
                 placeholder="Share your thoughts…"
-                className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-vertical"
+                className="w-full px-4 py-3 rounded-lg border border-neutral-700 bg-[#1a1a1a] text-white focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-vertical"
               />
             </div>
 
@@ -304,7 +304,7 @@ export default function SponsorRegistration() {
                 type="submit"
                 disabled={isSubmitting}
                 borderRadius="1.75rem"
-                className="bg-[#1a1a1a] text-white border-neutral-700 hover:bg-[#222] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#1a1a1a] text-white border-purple-700/10 hover:bg-[#120924] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? "Submitting..." : "Submit Registration"}
               </Button>
