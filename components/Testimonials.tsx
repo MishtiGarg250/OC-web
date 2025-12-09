@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 import BlurText from "./BlurText";
 const testimonials = [
   {
-    quote: "Hit 72/100 issues this season—OpenCode made the climb addictive. 🚀",
+    quote: "Hit 72/100 issues this season—OpenCode made the climb addictive. ",
     name: "Aanya Gupta",
     title: "Full-stack contributor",
     align: "left",
   },
   {
     quote:
-      "Mentor reviews were gold. My PR velocity doubled and that gnarly refactor finally merged. ⭐️",
+      "Mentor reviews were gold. My PR velocity doubled and that gnarly refactor finally merged",
     name: "Rahul Menon",
     title: "Open source maintainer",
     align: "center",
@@ -26,20 +26,20 @@ const testimonials = [
     align: "right",
   },
   {
-    quote: "Docs, tests, infra—88/100 tasks done and learned a ton. 📚",
+    quote: "Docs, tests, infra—88/100 tasks done and learned a ton. ",
     name: "Dev Jain",
     title: "Docs & QA",
     align: "left",
   },
   {
     quote:
-      "Pairing with sponsor engineers felt like a mini residency. Career-changing vibes. 🤝",
+      "Pairing with sponsor engineers felt like a mini residency. Career-changing vibes. ",
     name: "Sarika Bose",
     title: "Backend contributor",
     align: "right",
   },
   {
-    quote: "Stayed for the code reviews and crew. Leaderboard run next! ♥️",
+    quote: "Stayed for the code reviews and crew. Leaderboard run next!",
     name: "Leo Martins",
     title: "Mobile dev",
     align: "center",
@@ -55,25 +55,26 @@ const containerVariants = {
   },
 };
 
-const cardVariants = {
+export const cardVariants = {
   hidden: (i: number) => ({
     opacity: 0,
-    x: i % 2 === 0 ? -80 : 80,
+    x: i % 2 === 0 ? -50 : 50,
     y: 30,
-    scale: 0.95,
+    scale: 0.9,
   }),
+
   visible: {
     opacity: 1,
     x: 0,
     y: 0,
     scale: 1,
     transition: {
-      type: "spring",
       stiffness: 120,
-      damping: 16,
+      damping: 20,
     },
   },
 };
+
 
 export function Testimonials() {
   return (

@@ -184,17 +184,19 @@ function HowItWorks() {
               
               {/* Gradient Definitions */}
               <defs>
-                <linearGradient id="neonGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" style={{stopColor:"#3B82F6", stopOpacity:0.8}} />
-                  <stop offset="50%" style={{stopColor:"#22D3EE", stopOpacity:0.9}} />
-                  <stop offset="100%" style={{stopColor:"#3B82F6", stopOpacity:0.8}} />
-                </linearGradient>
-                <linearGradient id="neonGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" style={{stopColor:"#22D3EE", stopOpacity:0.8}} />
-                  <stop offset="50%" style={{stopColor:"#3B82F6", stopOpacity:0.9}} />
-                  <stop offset="100%" style={{stopColor:"#22D3EE", stopOpacity:0.8}} />
-                </linearGradient>
-              </defs>
+  <linearGradient id="neonGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" style={{ stopColor: "#A855F7", stopOpacity: 0.9 }} />   {/* Purple 500 */}
+    <stop offset="50%" style={{ stopColor: "#C084FC", stopOpacity: 1 }} />    {/* Purple 400 */}
+    <stop offset="100%" style={{ stopColor: "#9333EA", stopOpacity: 0.9 }} /> {/* Purple 600 */}
+  </linearGradient>
+
+  <linearGradient id="neonGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+    <stop offset="0%" style={{ stopColor: "#C084FC", stopOpacity: 0.9 }} />
+    <stop offset="50%" style={{ stopColor: "#A855F7", stopOpacity: 1 }} />
+    <stop offset="100%" style={{ stopColor: "#C084FC", stopOpacity: 0.9 }} />
+  </linearGradient>
+</defs>
+
             </svg>
             
             {/* Background Glow */}
