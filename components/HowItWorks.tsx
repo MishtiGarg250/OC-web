@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { StickyScroll } from "./ui/sticky-scroll-reveal";
+import BlurText from "./BlurText";
 
 const howItWorksContent = [
   {
@@ -67,8 +68,8 @@ interface ProcessCardProps {
 }
 
 const ProcessCard = ({ title, description, icon, className = '' }: ProcessCardProps) => (
-  <div className={`bg-gradient-to-br from-blue-600/10 to-cyan-600/10 rounded-xl border border-blue-500/20 p-5 sm:p-6 transform transition-all duration-300 hover:scale-[1.02] ${className}`}>
-    <div className="text-blue-400 mb-3">
+  <div className={`bg-gradient-to-br from-purple-600/10 to-indigo-600/10 rounded-xl border border-purple-500/30 p-5 sm:p-6 transform transition-all duration-300 hover:scale-[1.02] ${className}`}>
+    <div className="text-purple-300 mb-3">
       {icon}
     </div>
     <h3 className="text-white font-semibold text-lg mb-2">{title}</h3>
@@ -90,15 +91,17 @@ function HowItWorks() {
   }, []);
 
   return (
-    <div id="how-it-works" className="py-12 sm:py-16 lg:py-20 bg-[#0a0a0a] border-t border-gray-800/50 scroll-mt-28 md:scroll-mt-32">
+    <div id="how-it-works" className="py-12 sm:py-16 lg:py-20 bg-[radial-gradient(circle_at_50%_10%,rgba(149,117,205,0.24),rgba(21,10,30,0.92)38%,rgba(12,6,17,0.98)),linear-gradient(180deg,#0f0723_0%,#0c051b_45%,#090514_100%)] border-t border-purple-500/20 scroll-mt-28 md:scroll-mt-32">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-blue-400 via-cyan-400 to-blue-600 mb-3 sm:mb-4">
+          <h2 className="mb-3 sm:mb-4 text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-purple-300 via-fuchsia-300 to-purple-500">
             How OpenCode Works
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-            Join our open-source events and contribute to meaningful projects while building your skills and network
-          </p>
+          <BlurText
+            text="Join our open-source events and contribute to meaningful projects while building your skills and network"
+            className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto"
+            delay={40}
+          />
         </div>
         
         {/* Mobile/Tablet View - Simplified Cards */}
@@ -124,8 +127,8 @@ function HowItWorks() {
           
           <div className="relative h-[600px] flex items-center justify-center">
             {/* Process Steps with Icons */}
-            <div className="absolute top-8 right-16 w-64 h-40 bg-gradient-to-br from-blue-600/20 to-cyan-600/20 rounded-xl border border-blue-500/30 p-6 transform rotate-3 hover:rotate-0 transition-all duration-300">
-              <div className="text-blue-400 text-2xl mb-2">
+            <div className="absolute top-8 right-16 w-64 h-40 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 rounded-xl border border-purple-500/30 p-6 transform rotate-3 hover:rotate-0 transition-all duration-300 shadow-[0_20px_60px_-40px_rgba(168,85,247,0.55)]">
+              <div className="text-purple-300 text-2xl mb-2">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
                 </svg>
@@ -134,8 +137,8 @@ function HowItWorks() {
               <p className="text-gray-400 text-sm">Join events and projects</p>
             </div>
             
-            <div className="absolute top-32 left-12 w-56 h-36 bg-gradient-to-br from-cyan-600/20 to-blue-600/20 rounded-xl border border-cyan-500/30 p-6 transform -rotate-2 hover:rotate-0 transition-all duration-300">
-              <div className="text-cyan-400 text-2xl mb-2">
+            <div className="absolute top-32 left-12 w-56 h-36 bg-gradient-to-br from-fuchsia-500/20 to-purple-600/20 rounded-xl border border-purple-400/40 p-6 transform -rotate-2 hover:rotate-0 transition-all duration-300 shadow-[0_20px_60px_-40px_rgba(139,92,246,0.55)]">
+              <div className="text-purple-200 text-2xl mb-2">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M16,4C18.2,4 20,5.8 20,8C20,10.2 18.2,12 16,12C13.8,12 12,10.2 12,8C12,5.8 13.8,4 16,4M16,14C20.4,14 24,15.8 24,18V20H8V18C8,15.8 11.6,14 16,14M8,4C10.2,4 12,5.8 12,8C12,10.2 10.2,12 8,12C5.8,12 4,10.2 4,8C4,5.8 5.8,4 8,4M8,14C12.4,14 16,15.8 16,18V20H0V18C0,15.8 3.6,14 8,14Z" />
                 </svg>
@@ -144,8 +147,8 @@ function HowItWorks() {
               <p className="text-gray-400 text-sm">Work with global developers</p>
             </div>
             
-            <div className="absolute top-56 right-8 w-60 h-44 bg-gradient-to-br from-blue-700/20 to-cyan-700/20 rounded-xl border border-blue-400/30 p-6 transform rotate-1 hover:rotate-0 transition-transform duration-300">
-              <div className="text-blue-300 text-2xl mb-2">
+            <div className="absolute top-56 right-8 w-60 h-44 bg-gradient-to-br from-indigo-700/20 to-purple-700/20 rounded-xl border border-purple-300/40 p-6 transform rotate-1 hover:rotate-0 transition-transform duration-300 shadow-[0_20px_60px_-40px_rgba(99,102,241,0.55)]">
+              <div className="text-purple-200 text-2xl mb-2">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M2.81,14.126L5.64,17.04C6.05,17.45 6.05,18.11 5.64,18.52C5.23,18.93 4.57,18.93 4.16,18.52L1.33,15.61C0.92,15.2 0.92,14.54 1.33,14.13C1.74,13.72 2.4,13.72 2.81,14.126ZM7.5,8.5C8.33,8.5 9,9.17 9,10C9,10.83 8.33,11.5 7.5,11.5C6.67,11.5 6,10.83 6,10C6,9.17 6.67,8.5 7.5,8.5ZM12.5,8.5C13.33,8.5 14,9.17 14,10C14,10.83 13.33,11.5 12.5,11.5C11.67,11.5 11,10.83 11,10C11,9.17 11.67,8.5 12.5,8.5ZM17.5,8.5C18.33,8.5 19,9.17 19,10C19,10.83 18.33,11.5 17.5,11.5C16.67,11.5 16,10.83 16,10C16,9.17 16.67,8.5 17.5,8.5ZM22.19,14.126L19.36,17.04C18.95,17.45 18.95,18.11 19.36,18.52C19.77,18.93 20.43,18.93 20.84,18.52L23.67,15.61C24.08,15.2 24.08,14.54 23.67,14.13C23.26,13.72 22.6,13.72 22.19,14.126Z" />
                 </svg>
@@ -154,8 +157,8 @@ function HowItWorks() {
               <p className="text-gray-400 text-sm">Make meaningful impact</p>
             </div>
             
-            <div className="absolute bottom-16 left-8 w-52 h-38 bg-gradient-to-br from-cyan-700/20 to-blue-700/20 rounded-xl border border-cyan-400/30 p-6 transform -rotate-1 hover:rotate-0 transition-transform duration-300">
-              <div className="text-cyan-300 text-2xl mb-2">
+            <div className="absolute bottom-16 left-8 w-52 h-38 bg-gradient-to-br from-purple-700/20 to-indigo-700/20 rounded-xl border border-purple-300/40 p-6 transform -rotate-1 hover:rotate-0 transition-transform duration-300 shadow-[0_20px_60px_-40px_rgba(124,58,237,0.55)]">
+              <div className="text-purple-200 text-2xl mb-2">
                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M5,16L3,5L8.5,10L12,4L15.5,10L21,5L19,16H5M12,18A2,2 0 0,1 14,20A2,2 0 0,1 12,22A2,2 0 0,1 10,20A2,2 0 0,1 12,18Z" />
                 </svg>
