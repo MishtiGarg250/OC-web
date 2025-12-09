@@ -44,14 +44,14 @@ export default function Navbar({ className }: { className?: string }) {
       >
         {/* Left: Logo - Hide text on mobile */}
         <Link href="/" className="flex items-center space-x-2 group">
-          <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-br from-blue-500 to-cyan-400 p-[2px] group-hover:scale-105 transition-transform">
+          <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-br from-purple-500 to-purple-400 p-[2px] group-hover:scale-105 transition-transform">
             <div className="bg-black/90 rounded-full flex items-center justify-center w-full h-full">
               <Image
-                src="/openCode.svg"
-                width={24}
-                height={24}
+                src="/logo_rb-min.png"
+                width={32}
+                height={32}
                 alt="OpenCode Logo"
-                className="opacity-90 group-hover:opacity-100 transition-opacity w-5 h-5 sm:w-7 sm:h-7"
+                className="opacity-90 group-hover:opacity-100 transition-opacity w-6 h-6 sm:w-8 sm:h-8"
               />
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function Navbar({ className }: { className?: string }) {
           </Button>
 
           <Button
-            className="rounded-full bg-gradient-to-r from-blue-600 to-cyan-400 text-white font-medium text-sm px-4 py-1.5 sm:px-5 sm:py-2 shadow-md hover:shadow-lg hover:brightness-110 transition-all"
+            className="rounded-full bg-gradient-to-r from-purple-600 via-fuchsia-500 to-purple-400 text-white font-medium text-sm px-4 py-1.5 sm:px-5 sm:py-2 shadow-md hover:shadow-lg hover:brightness-110 transition-all"
             asChild
           >
             <Link

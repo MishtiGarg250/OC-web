@@ -5,7 +5,6 @@ import Link from "next/link"
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
-import SplitText from "./SplitText";
 import SpotlightCard from "./SpotlightCard";
 
 const sponsors = [
@@ -91,7 +90,7 @@ const sponsors = [
 
 export function Sponsors() {
   return (
-    <section id="sponsors" className="relative w-full py-20 bg-[#0a0a0a]">
+    <section id="sponsors" className="relative w-full py-20 bg-gradient-to-b from-[#0f0820] via-[#0c0518] to-[#090312]">
       <div className="absolute inset-0 bg-grid-white/[0.05] [mask-image:linear-gradient(to_bottom,transparent,black,transparent)]" />
       
       <div className="container mx-auto px-4 relative z-10">
@@ -102,14 +101,10 @@ export function Sponsors() {
           viewport={{ once: true }}
           className="text-center mb-16 space-y-4"
         >
-          <SplitText
-            text="Trusted by developer-first leaders"
-            tag="h2"
-            splitType="words"
-            delay={60}
-            className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-blue-300 via-cyan-300 to-blue-500 drop-shadow-[0_0_22px_rgba(59,130,246,0.45)]"
-          />
-          <p className="text-lg text-neutral-300/90 max-w-3xl mx-auto leading-relaxed">
+          <h2 className="text-4xl md:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-purple-200 via-fuchsia-200 to-purple-400 drop-shadow-[0_0_22px_rgba(168,85,247,0.35)]">
+            Trusted by developer-first leaders
+          </h2>
+          <p className="text-lg text-purple-100/90 max-w-3xl mx-auto leading-relaxed">
             We partner with companies that champion builders. Here are a few of the brands already showing up for the OpenCode community.
           </p>
         </motion.div>
@@ -127,13 +122,13 @@ export function Sponsors() {
                 spotlightColor="rgba(56, 189, 248, 0.2)"
                 className={cn(
                   "group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur",
-                  "transition-all duration-300 hover:-translate-y-1 hover:border-cyan-400/50 hover:shadow-[0_20px_70px_-35px_rgba(14,165,233,0.6)]",
-                  sponsor.highlight && "border-cyan-400/60 bg-gradient-to-b from-cyan-500/10 via-white/5 to-white/0"
+                  "transition-all duration-300 hover:-translate-y-1 hover:border-purple-300/60 hover:shadow-[0_20px_70px_-35px_rgba(168,85,247,0.55)]",
+                  sponsor.highlight && "border-purple-300/70 bg-gradient-to-b from-purple-500/10 via-white/5 to-white/0"
                 )}
               >
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.2),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(34,211,238,0.2),transparent_25%)]" />
                 <div className="relative flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-blue-100/80">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-purple-100/80">
                     {sponsor.tier}
                   </span>
                   <span className="text-[11px] uppercase tracking-[0.18em] text-gray-400">
@@ -154,8 +149,8 @@ export function Sponsors() {
                 <p className="relative mt-4 text-sm text-gray-300 leading-relaxed">
                   {sponsor.description}
                 </p>
-                <div className="relative mt-4 flex items-center gap-2 text-xs text-cyan-200/80">
-                  <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_0_4px_rgba(34,211,238,0.2)]" />
+                <div className="relative mt-4 flex items-center gap-2 text-xs text-purple-200/80">
+                  <span className="h-2 w-2 rounded-full bg-purple-300 shadow-[0_0_0_4px_rgba(168,85,247,0.2)]" />
                   {sponsor.engagement}
                 </div>
               </SpotlightCard>
@@ -170,12 +165,12 @@ export function Sponsors() {
           viewport={{ once: true }}
           className="mt-16 flex flex-col items-center gap-6 text-center"
         >
-          <p className="max-w-2xl text-neutral-300/90">
+          <p className="max-w-2xl text-purple-100/90">
             Ready to join them? Tell us about your goals and we&apos;ll shape a sponsor package that fits your brand, from headline visibility to hands-on workshops.
           </p>
           <Link
             href="/sponsor-registration"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-blue-400 text-white font-semibold shadow-lg shadow-blue-500/30 transition hover:brightness-110"
+            className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-500 text-white font-semibold shadow-lg shadow-purple-500/30 transition hover:brightness-110"
           >
             Get in Touch
           </Link>
