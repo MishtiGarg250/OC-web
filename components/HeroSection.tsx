@@ -1,5 +1,5 @@
 "use client";
-
+import DownloadBrochureButton from "./DownloadBrochureButton";
 import { motion } from "framer-motion";
 import { Spotlight } from "./ui/Spotlight";
 import Link from "next/link";
@@ -8,13 +8,7 @@ import CountUp from "./CountUp";
 import { LineShadowText } from "./ui/line-shadow-text";
 
 function HeroSection() {
-  const handleHowItWorksClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const el = document.getElementById("how-it-works");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
+  
 
   return (
     <section className="relative flex min-h-[48rem] items-center justify-center overflow-hidden border-b border-purple-500/15 bg-[radial-gradient(circle_at_50%_20%,rgba(149,117,205,0.28),rgba(18,12,27,0.94)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#130b26_0%,#0d071f_55%,#080512_100%)] pt-28 pb-12 sm:pt-32">
@@ -83,13 +77,10 @@ function HeroSection() {
           >
             Become a Sponsor
           </Link>
-          <Link
-            href="#how-it-works"
-            onClick={handleHowItWorksClick}
-            className="inline-flex items-center rounded-full border border-white/15 px-8 py-3 text-sm font-semibold text-purple-100/90 transition hover:border-white/40 hover:text-white"
-          >
-            See How It Works
-          </Link>
+          <div>
+            <DownloadBrochureButton />
+          </div>
+    
         </motion.div>
 
         <motion.div
