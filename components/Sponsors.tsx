@@ -131,9 +131,7 @@ export function Sponsors() {
                   <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-purple-100/80">
                     {sponsor.tier}
                   </span>
-                  <span className="text-[11px] uppercase tracking-[0.18em] text-gray-400">
-                    {index < 2 ? "New for 2025" : "Returning"}
-                  </span>
+                  
                 </div>
 
                 <div className="relative mt-6 flex h-16 items-center justify-start">
