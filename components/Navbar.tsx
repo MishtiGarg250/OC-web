@@ -43,7 +43,7 @@ export default function Navbar({ className }: { className?: string }) {
         )}
       >
         {/* Left: Logo - Hide text on mobile */}
-        <Link href="/" className="flex items-center space-x-2 group">
+        <Link href="https://opencode25.vercel.app/" className="flex items-center space-x-2 group">
           <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden bg-gradient-to-br from-purple-500 to-purple-400 p-[2px] group-hover:scale-105 transition-transform">
             <div className="bg-black/90 rounded-full flex items-center justify-center w-full h-full">
               <Image
