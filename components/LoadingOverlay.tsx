@@ -13,7 +13,7 @@ export default function LoadingOverlay() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(false), 2500); // hold for at least 2.5s to avoid flash
+    const timer = setTimeout(() => setShow(false), 3500); // hold for at least 3.5s to avoid flash
     return () => clearTimeout(timer);
   }, []);
 

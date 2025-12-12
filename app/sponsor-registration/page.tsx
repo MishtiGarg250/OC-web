@@ -76,11 +76,18 @@ export default function SponsorRegistration() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-      if (!response.ok) throw new Error("Failed to submit form");
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        throw new Error(payload?.error || "Failed to submit form");
+      }
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("There was an error submitting your form. Please try again later.");
+      const message =
+        error instanceof Error && error.message
+          ? error.message
+          : "There was an error submitting your form. Please try again later.";
+      alert(message);
     } finally {
       setIsSubmitting(false);
     }
