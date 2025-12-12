@@ -1,44 +1,35 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+
 import BlurText from "./BlurText";
+
 import {
-  Rocket,
-  BarChart,
-  ShoppingCart,
-  Wallet,
-  Palette,
-  ShieldAlert,
+  ShieldCheck,
+  Brain,
+  Store,
+  HandHeart,
+  MessageCircle,
+  Users,
   Dumbbell,
-  Terminal,
-  Gamepad2,
+  Workflow,
+  Skull,
 } from "lucide-react";
-
-
-type IconKey =
-  | "rocket"
-  | "barChart"
-  | "shoppingCart"
-  | "wallet"
-  | "palette"
-  | "shieldAlert"
-  | "dumbbell"
-  | "terminal"
-  | "gamepad2";
 
 /* ---------------- ICON MAP ---------------- */
 
-const iconMap: Record<IconKey, React.ElementType> = {
-  rocket: Rocket,
-  barChart: BarChart,
-  shoppingCart: ShoppingCart,
-  wallet: Wallet,
-  palette: Palette,
-  shieldAlert: ShieldAlert,
-  dumbbell: Dumbbell,
-  terminal: Terminal,
-  gamepad2: Gamepad2,
+const iconMap = {
+  shieldCheck: ShieldCheck,        // FreshHat - Cybersecurity
+  brain: Brain,                    // EmotionAnalysis - ML / NLP
+  store: Store,                    // CampusOLX - Marketplace
+  handHeart: HandHeart,            // Donation App - Charity
+  messageCircle: MessageCircle,    // GeekChat - Chat App
+  users: Users,                    // Hitch - Community
+  dumbbell: Dumbbell,              // Fitezo - Fitness
+  workflow: Workflow,              // Huddle - Team Collaboration
+  skull: Skull,                    // ZoombieMania - Zombie Game
 };
+
+type IconKey = keyof typeof iconMap;
 
 type Project = {
   id: number;
@@ -55,19 +46,19 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    name: "Code-Digger",
-    description: "Cool code debugging stuff",
-    icon: "rocket",
+    name: "FreshHat-Learning-Repository",
+    description: "Welcome to the World of Cybersecurity Learning!",
+    icon: "shieldCheck",
     color: "from-cyan-400/20 to-cyan-600/20",
     span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/CodeDigger",
+    link: "https://github.com/opencodeiiita/FreshHat-Learning-Repository",
   },
   {
     id: 2,
     name: "EmotionAnalysis",
     description:
-      "we'll be working on dataset with text and the emotions detected in those texts.",
-    icon: "barChart",
+      "We'll be working on a dataset with text and emotion labels extracted from those texts.",
+    icon: "brain",
     color: "from-purple-400/20 to-purple-600/20",
     span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/EmotionAnalysis",
@@ -75,72 +66,70 @@ const projects: Project[] = [
   {
     id: 3,
     name: "CampusOLX",
-    description: "local online marketplace specifically designed for students",
-    icon: "shoppingCart",
+    description: "Local online marketplace specifically designed for students.",
+    icon: "store",
     color: "from-blue-400/20 to-blue-600/20",
     span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/Aloha",
   },
   {
     id: 4,
-    name: "SolMintNFT",
+    name: "Donation App",
     description:
-      "SolMintNFT is a project under OpenCode'22, that will be building an NFT marketplace using the Solana blockchain.",
-    icon: "wallet",
+      "A centralized hub for managing donations and specifying the beneficiary organizations.",
+    icon: "handHeart",
     color: "from-green-400/20 to-green-600/20",
     span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/SolMintNFT",
+    link: "https://github.com/opencodeiiita/Donation-App",
   },
   {
     id: 5,
-    name: "Aloha",
-    description:
-      "An Opencode22 Repository with some tasks only for Freshies at IIITA",
-    icon: "palette",
-    color: "from-green-400/20 to-green-600/20",
+    name: "GeekChat",
+    description: "A bi-directional chat application for the geeks of IIITA.",
+    icon: "messageCircle",
+    color: "from-pink-400/20 to-pink-600/20",
     span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/CampusOLX",
+    link: "https://github.com/opencodeiiita/Geek-Chat",
   },
   {
     id: 6,
-    name: "Cyber-War",
-    description: "Contains weekly cybersec related tasks",
-    icon: "shieldAlert",
+    name: "Hitch",
+    description: "Bridging conversations, building communities.",
+    icon: "users",
     color: "from-orange-400/20 to-orange-600/20",
     span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/Cyber-War",
+    link: "https://github.com/opencodeiiita/Hitch-Frontend",
   },
   {
     id: 7,
     name: "Fitezo",
-    description: "Flutter based app",
+    description: "Flutter-based fitness app.",
     icon: "dumbbell",
-    color: "from-green-400/20 to-green-600/20",
+    color: "from-green-500/20 to-green-700/20",
     span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/fitezo",
   },
   {
     id: 8,
-    name: "Go Git",
+    name: "Huddle",
     description:
-      "GoGit is a repository to help you learn the basics as well as the intricacies of git and github through some fun tasks",
-    icon: "terminal",
+      "A comprehensive space for teams to discuss ideas and explore ongoing projects.",
+    icon: "workflow",
     color: "from-red-400/20 to-red-600/20",
     span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/GoGit-4.0",
+    link: "https://github.com/opencodeiiita/Huddle",
   },
   {
     id: 9,
     name: "ZoombieMania",
     description:
-      "A 3d platformer zombie survival shooter made with Unity Engine. To contribute use Unity Version 2021.3.11f1",
-    icon: "gamepad2",
-    color: "from-blue-400/20 to-blue-600/20",
+      "A 3D zombie survival shooter made with Unity. Use Unity Version 2021.3.11f1.",
+    icon: "skull",
+    color: "from-blue-500/20 to-blue-700/20",
     span: "col-span-1 row-span-1",
     link: "https://github.com/opencodeiiita/ZoombieMania-",
   },
 ];
-
 
 
 function Projects() {
