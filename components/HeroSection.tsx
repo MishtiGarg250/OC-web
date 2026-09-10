@@ -28,7 +28,7 @@ function HeroSection() {
         <div className="flex flex-col items-center gap-3">
           <div className="flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-purple-100/90 backdrop-blur">
             <span className="h-2 w-2 rounded-full bg-purple-300 animate-pulse" />
-            OpenCode Sponsorship Program 2025
+            OpenCode Sponsorship Program 2026
             <span className="hidden sm:inline text-gray-400">|</span>
             <span className="hidden sm:inline text-gray-300">Headline slots closing soon</span>
           </div>
@@ -61,7 +61,7 @@ function HeroSection() {
             shadowColor="#a855f7"
             className="text-lg sm:text-xl font-black uppercase tracking-[0.28em] text-purple-200"
           >
-            OpenCode&apos;25
+            OpenCode&apos;26
           </LineShadowText>
         </motion.div>
 

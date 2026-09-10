@@ -119,7 +119,7 @@ function Footer() {
         <div className="border-t border-purple-900/40 mt-12 pt-8">
           
             <p className="text-center text-sm text-gray-400">
-              © 2025 OpenCode Event. All rights reserved.
+              © 2026 OpenCode Event. All rights reserved.
             </p>
             
   
