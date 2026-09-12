@@ -26,27 +26,27 @@ function Footer() {
             <li className="flex items-start">
               <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-2 flex-shrink-0"></div>
               <div>
-                <p className="font-medium text-white">Arpit Anand</p>
-                <a href="tel:+918604379134" className="text-gray-200 hover:text-purple-300 transition-colors">
-                  +91 8604379134
+                <p className="font-medium text-white">Abdul Azeem</p>
+                <a href="tel:+917217492629" className="text-gray-200 hover:text-purple-300 transition-colors">
+                  +91 721 749 2629
                 </a>
               </div>
             </li>
             <li className="flex items-start">
               <div className="w-2 h-2 bg-fuchsia-400 rounded-full mt-2 mr-2 flex-shrink-0"></div>
               <div>
-                <p className="font-medium text-white">Naitik Jain</p>
-                <a href="tel:+917248119726" className="text-gray-200 hover:text-purple-300 transition-colors">
-                  +91 7248119726
+                <p className="font-medium text-white">Adith Reganti</p>
+                <a href="tel:+918618275578" className="text-gray-200 hover:text-purple-300 transition-colors">
+                  +91 861 827 5578
                 </a>
               </div>
             </li>
             <li className="flex items-start">
               <div className="w-2 h-2 bg-purple-400 rounded-full mt-2 mr-2 flex-shrink-0"></div>
               <div>
-                <p className="font-medium text-white">Vansh Dhawan</p>
-                <a href="tel:+918837844288" className="text-gray-200 hover:text-purple-300 transition-colors">
-                  +91 8837844288
+                <p className="font-medium text-white">Anubhav Sharma</p>
+                <a href="tel:+919855488413" className="text-gray-200 hover:text-purple-300 transition-colors">
+                  +91 98554 88413
                 </a>
               </div>
             </li>

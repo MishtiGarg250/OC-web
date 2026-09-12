@@ -16,6 +16,39 @@ interface SponsorFormData {
   industry: string;
 }
 
+const contactFields = [
+  {
+    id: "companyName",
+    label: "Company Name *",
+    type: "text",
+    placeholder: "Enter your company name",
+  },
+  {
+    id: "ownerName",
+    label: "Owner/Representative Name *",
+    type: "text",
+    placeholder: "Enter owner/representative name",
+  },
+  {
+    id: "contactNumber",
+    label: "Contact Number *",
+    type: "tel",
+    placeholder: "Enter contact number",
+  },
+  {
+    id: "email",
+    label: "Email Address *",
+    type: "email",
+    placeholder: "Enter email address",
+  },
+  {
+    id: "website",
+    label: "Company Website",
+    type: "url",
+    placeholder: "https://yourcompany.com",
+  },
+] as const;
+
 export default function SponsorRegistration() {
   const [formData, setFormData] = useState<SponsorFormData>({
     companyName: "",
@@ -31,6 +64,7 @@ export default function SponsorRegistration() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [requestId, setRequestId] = useState("");
 
   const sponsorshipOptions = [
     { value: "monetary", label: "Monetary Support" },
@@ -80,6 +114,7 @@ export default function SponsorRegistration() {
       if (!response.ok) {
         throw new Error(payload?.error || "Failed to submit form");
       }
+      setRequestId(payload.requestId || "");
       setIsSubmitted(true);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -102,9 +137,15 @@ export default function SponsorRegistration() {
           </div>
           <h2 className="text-2xl font-bold mb-4">Registration Successful!</h2>
           <p className="text-neutral-400 mb-6">
-            Thank you for your interest in sponsoring OpenCode events. Our team
-            will contact you within 24 hours to discuss the next steps.
+            Thank you for your interest in sponsoring OpenCode&apos;26. A
+            confirmation has been sent to your email, and our team will contact
+            you about the next steps from geekhaven@iiita.ac.in.
           </p>
+          {requestId && (
+            <p className="mb-6 rounded-lg border border-purple-500/30 bg-purple-500/10 px-4 py-3 text-sm text-purple-200">
+              Reference ID: <strong>{requestId}</strong>
+            </p>
+          )}
           <Button
             borderRadius="1.75rem"
             className="bg-[#111] text-white border-purple-700/20 hover:bg-[#120924]"
@@ -126,45 +167,14 @@ export default function SponsorRegistration() {
           </h1>
           <p className="text-lg text-neutral-400 max-w-3xl mx-auto">
             Join us in supporting the open-source community. Fill out the form
-            below to become a sponsor for OpenCode events.
+            below to become a sponsor for OpenCode&apos;26.
           </p>
         </div>
 
         <BackgroundGradient className="rounded-[22px] bg-[#111] p-8 shadow-xl border border-neutral-800">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                {
-                  id: "companyName",
-                  label: "Company Name *",
-                  type: "text",
-                  placeholder: "Enter your company name",
-                },
-                {
-                  id: "ownerName",
-                  label: "Owner/Representative Name *",
-                  type: "text",
-                  placeholder: "Enter owner/representative name",
-                },
-                {
-                  id: "contactNumber",
-                  label: "Contact Number *",
-                  type: "tel",
-                  placeholder: "Enter contact number",
-                },
-                {
-                  id: "email",
-                  label: "Email Address *",
-                  type: "email",
-                  placeholder: "Enter email address",
-                },
-                {
-                  id: "website",
-                  label: "Company Website",
-                  type: "url",
-                  placeholder: "https://yourcompany.com",
-                },
-              ].map((field) => (
+              {contactFields.map((field) => (
                 <div key={field.id}>
                   <label
                     htmlFor={field.id}
@@ -176,7 +186,7 @@ export default function SponsorRegistration() {
                     type={field.type}
                     id={field.id}
                     name={field.id}
-                    value={(formData as any)[field.id]}
+                    value={formData[field.id]}
                     onChange={handleInputChange}
                     required={field.label.includes("*")}
                     placeholder={field.placeholder}
