@@ -5,43 +5,40 @@ import { motion, type Variants } from "framer-motion";
 import BlurText from "./BlurText";
 const testimonials = [
   {
-    quote: "Hit 72/100 issues this season—OpenCode made the climb addictive. ",
-    name: "Aanya Gupta",
-    title: "Full-stack contributor",
+    quote: "Merged 195 PRs and secured #1 on the leaderboard. OpenCode pushed my limits and taught me production-grade Git workflows.",
+    name: "Ishan Raj Singh (@ishanrajsingh)",
+    title: "Top Contributor (Rank #1, 5,110 pts)",
     align: "left",
   },
   {
-    quote:
-      "Mentor reviews were gold. My PR velocity doubled and that gnarly refactor finally merged.",
-    name: "Rahul Menon",
-    title: "Open source maintainer",
+    quote: "177 PRs merged across multiple repositories. Reviewing code and collaborating with maintainers accelerated my engineering skills.",
+    name: "Apoorv (@Apoorv012)",
+    title: "Top Contributor (Rank #2, 4,585 pts)",
     align: "center",
     featured: true,
   },
   {
-    quote:
-      "From first PR jitters to 40+ commits: OpenCode kept shipping fun and structured.",
-    name: "Irene Park",
-    title: "Frontend engineer",
+    quote: "Contributed 171 merged PRs. From resolving backend bugs to shipping frontend features, OpenCode made open source thrilling.",
+    name: "Prashant Dwivedi (@dwivediprashant)",
+    title: "Top Contributor (Rank #3, 4,485 pts)",
     align: "right",
   },
   {
-    quote: "Docs, tests, infra—88/100 tasks done and learned a ton. ",
-    name: "Dev Jain",
-    title: "Docs & QA",
+    quote: "Hit 111 merged PRs! OpenCode helped me transition from beginner scripts to contributing directly to real-world codebases.",
+    name: "Krishna (@Krishna200608)",
+    title: "Open Source Contributor (Rank #4, 3,095 pts)",
     align: "left",
   },
   {
-    quote:
-      "Pairing with sponsor engineers felt like a mini residency. Career-changing vibes. ",
-    name: "Sarika Bose",
-    title: "Backend contributor",
+    quote: "118 PRs merged across frontend and backend tracks. The mentorship and issue clarity kept me shipping throughout the month.",
+    name: "Suzzal (@suzzzal)",
+    title: "Open Source Contributor (Rank #5, 2,891 pts)",
     align: "right",
   },
   {
-    quote: "Stayed for the code reviews and crew. Leaderboard run next!",
-    name: "Leo Martins",
-    title: "Mobile dev",
+    quote: "Completed 117 merged PRs. The competitive yet collaborative environment made learning modern frameworks effortless.",
+    name: "Chithra (@Chithra582)",
+    title: "Open Source Contributor (Rank #6, 2,810 pts)",
     align: "center",
   },
 ];

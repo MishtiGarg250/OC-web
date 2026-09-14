@@ -90,9 +90,9 @@ function HeroSection() {
           className="mt-12 grid w-full max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3"
         >
           {[
-            { label: "Developers engaged", value: 2000, suffix: "+" },
-            { label: "Tracks & workshops", value: 12 },
-            { label: "Avg. brand recall lift", value: 36, suffix: "%" },
+            { label: "Developers engaged", value: 1000, suffix: "+" },
+            { label: "PRs Merged", value: 3700, suffix: "+" },
+            { label: "Tracks & Projects", value: 12  },
           ].map((item) => (
             <div
               key={item.label}
