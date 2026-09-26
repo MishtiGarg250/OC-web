@@ -1,136 +1,155 @@
 "use client";
-
-import React from "react";
-import { motion, type Variants } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { testimonialsData, TestimonialItem } from "@/data/testimonialsData";
+import { Quote, ChevronLeft, ChevronRight, Heart, Sparkles } from "lucide-react";
+import Image from "next/image";
 import BlurText from "./BlurText";
-const testimonials = [
-  {
-    quote: "Merged 195 PRs and secured #1 on the leaderboard. OpenCode pushed my limits and taught me production-grade Git workflows.",
-    name: "Ishan Raj Singh (@ishanrajsingh)",
-    title: "Top Contributor (Rank #1, 5,110 pts)",
-    align: "left",
-  },
-  {
-    quote: "177 PRs merged across multiple repositories. Reviewing code and collaborating with maintainers accelerated my engineering skills.",
-    name: "Apoorv (@Apoorv012)",
-    title: "Top Contributor (Rank #2, 4,585 pts)",
-    align: "center",
-    featured: true,
-  },
-  {
-    quote: "Contributed 171 merged PRs. From resolving backend bugs to shipping frontend features, OpenCode made open source thrilling.",
-    name: "Prashant Dwivedi (@dwivediprashant)",
-    title: "Top Contributor (Rank #3, 4,485 pts)",
-    align: "right",
-  },
-  {
-    quote: "Hit 111 merged PRs! OpenCode helped me transition from beginner scripts to contributing directly to real-world codebases.",
-    name: "Krishna (@Krishna200608)",
-    title: "Open Source Contributor (Rank #4, 3,095 pts)",
-    align: "left",
-  },
-  {
-    quote: "118 PRs merged across frontend and backend tracks. The mentorship and issue clarity kept me shipping throughout the month.",
-    name: "Suzzal (@suzzzal)",
-    title: "Open Source Contributor (Rank #5, 2,891 pts)",
-    align: "right",
-  },
-  {
-    quote: "Completed 117 merged PRs. The competitive yet collaborative environment made learning modern frameworks effortless.",
-    name: "Chithra (@Chithra582)",
-    title: "Open Source Contributor (Rank #6, 2,810 pts)",
-    align: "center",
-  },
-];
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
 
-const cardVariants: Variants = {
-  hidden: (i: number = 0) => ({
-    opacity: 0,
-    x: i % 2 === 0 ? -50 : 50,
-    y: 30,
-    scale: 0.9,
-  }),
-
-  visible: {
-    opacity: 1,
-    x: 0,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 20,
-    },
-  },
-};
-
+const filterCategories = ["All Stories", "Winner", "Internship", "Mentor", "Partner"] as const;
 
 export function Testimonials() {
-  return (
-    <section className="relative w-full py-20 overflow-hidden  bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.24),rgba(18,12,27,0.92)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#0c061a_0%,#0a0516_50%,#080414_100%)] border-t border-purple-900/30">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mb-16 space-y-4"
-        >
-          <h2 className="text-center text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-purple-100 to-purple-400">
-            Wall of Love
-          </h2>
-          <BlurText
-            text="Hear from the community of developers who have been part of our journey"
-            className="mt-4 text-lg text-purple-100/80 max-w-2xl mx-auto"
-            delay={50}
-          />
-        </motion.div>
+  const [selectedCategory, setSelectedCategory] = useState<string>("All Stories");
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-        <motion.div
-          className="relative mx-auto max-w-6xl grid gap-6 sm:gap-8 md:grid-cols-2"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {testimonials.map((item, i) => (
+  const filteredStories = testimonialsData.filter((item) => {
+    if (selectedCategory === "All Stories") return true;
+    return item.tag === selectedCategory;
+  });
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % filteredStories.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + filteredStories.length) % filteredStories.length);
+  };
+
+  return (
+    <section
+      id="testimonials"
+      className="relative w-full py-24 bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.22),rgba(14,8,22,0.95)45%,rgba(9,5,16,1)),linear-gradient(180deg,#090514_0%,#0c061a_50%,#090514_100%)] border-b border-purple-900/30 scroll-mt-20 overflow-hidden"
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-400/30 bg-purple-950/40 text-xs font-semibold uppercase tracking-[0.2em] text-purple-300 backdrop-blur-md"
+          >
+            <Heart className="w-3.5 h-3.5 text-purple-400" />
+            <span>Wall of Love</span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-5xl lg:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-300 via-fuchsia-300 to-indigo-300 drop-shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+          >
+            Community Stories
+          </motion.h2>
+
+          <div className="mt-4">
+            <BlurText
+              text="Hear from our top leaderboard finishers, alumni who translated OpenCode PRs into internships, and corporate mentors."
+              className="text-base sm:text-lg text-purple-100/85 max-w-2xl mx-auto leading-relaxed"
+              delay={25}
+            />
+          </div>
+        </div>
+
+        {/* Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-12 max-w-2xl mx-auto">
+          {filterCategories.map((cat) => {
+            const isActive = selectedCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => {
+                  setSelectedCategory(cat);
+                  setCurrentIndex(0);
+                }}
+                className={`relative px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                  isActive
+                    ? "text-white"
+                    : "text-gray-400 hover:text-white bg-white/5 border border-white/10"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="testimonialFilterTab"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md shadow-purple-500/40"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                  />
+                )}
+                <span className="relative z-10">{cat}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Testimonials Grid / Featured Showcase */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
+          {filteredStories.map((item: TestimonialItem, idx: number) => (
             <motion.div
-              key={item.name + i}
-              custom={i}
-              variants={cardVariants}
-              className={`group relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-7 backdrop-blur shadow-[0_20px_70px_-50px_rgba(168,85,247,0.5)] 
-              }`}
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-gradient-to-b from-[#160c2b]/80 to-[#0e071c]/90 p-7 backdrop-blur-md hover:border-purple-400/50 hover:-translate-y-1.5 hover:shadow-[0_20px_60px_-25px_rgba(168,85,247,0.4)] transition-all duration-300"
             >
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_20%_20%,rgba(192,132,252,0.18),transparent_35%),radial-gradient(circle_at_80%_0%,rgba(99,102,241,0.16),transparent_25%)]" />
-              <div className="relative">
-                <div className="absolute top-4 right-4 text-purple-300/40 text-3xl sm:text-4xl">
-                  &rdquo;
+              <div>
+                {/* Header with avatar & quote mark */}
+                <div className="flex items-start justify-between mb-5">
+                  <div className="flex items-center gap-3">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-purple-400/50 shadow-md">
+                      <Image
+                        src={item.avatar}
+                        alt={item.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="text-base font-bold text-white group-hover:text-purple-200 transition-colors">
+                        {item.name}
+                      </h4>
+                      <p className="text-xs text-purple-300/80 font-medium">
+                        {item.company || item.role}
+                      </p>
+                    </div>
+                  </div>
+
+                  <Quote className="w-8 h-8 text-purple-500/20 rotate-180 shrink-0" />
                 </div>
-                <p className="text-lg text-white leading-relaxed">
-                  {item.quote}
+
+                {/* Quote Text */}
+                <p className="text-sm text-gray-300 leading-relaxed italic mb-6">
+                  &ldquo;{item.quote}&rdquo;
                 </p>
-                <div className="mt-5 flex flex-col">
-                  <span className="text-base font-semibold text-purple-100">
-                    {item.name}
-                  </span>
-                  {item.title ? (
-                    <span className="text-sm text-purple-200/80">{item.title}</span>
-                  ) : null}
-                </div>
+              </div>
+
+              {/* Tag / Metrics Badge */}
+              <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-900/40 border border-purple-500/30 text-purple-300 font-semibold text-[11px]">
+                  <Sparkles className="w-3 h-3" />
+                  {item.prsOrPoints || item.tag}
+                </span>
+
+                <span className="text-gray-400 text-[11px] uppercase tracking-wider font-semibold">
+                  {item.tag}
+                </span>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
 }
+
+export default Testimonials;
