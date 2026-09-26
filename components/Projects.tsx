@@ -1,208 +1,213 @@
 "use client";
-import Link from "next/link";
-
+import React, { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { projectsData, ProjectItem } from "@/data/projectsData";
+import { ExternalLink, Github, FolderGit2, User, Layers } from "lucide-react";
+import Image from "next/image";
 import BlurText from "./BlurText";
 
-import {
-  ShieldCheck,
-  Brain,
-  Store,
-  HandHeart,
-  MessageCircle,
-  Users,
-  Dumbbell,
-  Workflow,
-  Skull,
-} from "lucide-react";
-
-/* ---------------- ICON MAP ---------------- */
-
-const iconMap = {
-  shieldCheck: ShieldCheck,        // FreshHat - Cybersecurity
-  brain: Brain,                    // EmotionAnalysis - ML / NLP
-  store: Store,                    // CampusOLX - Marketplace
-  handHeart: HandHeart,            // Donation App - Charity
-  messageCircle: MessageCircle,    // GeekChat - Chat App
-  users: Users,                    // Hitch - Community
-  dumbbell: Dumbbell,              // Fitezo - Fitness
-  workflow: Workflow,              // Huddle - Team Collaboration
-  skull: Skull,                    // ZoombieMania - Zombie Game
-};
-
-type IconKey = keyof typeof iconMap;
-
-type Project = {
-  id: number;
-  name: string;
-  description: string;
-  icon: IconKey;
-  color: string;
-  span: string;
-  link: string;
-};
-
-/* ---------------- PROJECT DATA ---------------- */
-
-const projects: Project[] = [
-  {
-    id: 1,
-    name: "CareerCraft",
-    description: "AI-powered resume intelligence engine and student career preparation platform.",
-    icon: "brain",
-    color: "from-purple-400/20 to-purple-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/CareerCraft",
-  },
-  {
-    id: 2,
-    name: "CampusOR",
-    description: "Campus operations and resource management system powered by Redis token queues.",
-    icon: "workflow",
-    color: "from-blue-400/20 to-blue-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/CampusOR",
-  },
-  {
-    id: 3,
-    name: "Alum-X",
-    description: "Full-stack networking platform connecting students with IIITA alumni for mentorship.",
-    icon: "users",
-    color: "from-cyan-400/20 to-cyan-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/Alum-X-Frontend",
-  },
-  {
-    id: 4,
-    name: "SpaceChat",
-    description: "High-performance, bi-directional real-time chat application for developers.",
-    icon: "messageCircle",
-    color: "from-pink-400/20 to-pink-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/SpaceChat",
-  },
-  {
-    id: 5,
-    name: "SnapMap",
-    description: "Location-aware campus mapping and interactive student social discovery.",
-    icon: "store",
-    color: "from-emerald-400/20 to-emerald-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/SnapMap",
-  },
-  {
-    id: 6,
-    name: "Learn_To_Hack",
-    description: "Hands-on cybersecurity challenges, OSINT exercises, and digital forensics.",
-    icon: "shieldCheck",
-    color: "from-red-400/20 to-red-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/Learn_To_Hack",
-  },
-  {
-    id: 7,
-    name: "Fem-care",
-    description: "Healthcare, menstrual hygiene tracking, and wellness platform.",
-    icon: "handHeart",
-    color: "from-rose-400/20 to-rose-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/Fem-care",
-  },
-  {
-    id: 8,
-    name: "Blob",
-    description: "Cross-platform mobile file sharing and cloud storage management app.",
-    icon: "workflow",
-    color: "from-amber-400/20 to-amber-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/Blob",
-  },
-  {
-    id: 9,
-    name: "MotionKit",
-    description: "Modular animations, transitions, and component library for modern web builders.",
-    icon: "dumbbell",
-    color: "from-indigo-400/20 to-indigo-600/20",
-    span: "col-span-1 row-span-1",
-    link: "https://github.com/opencodeiiita/MotionKit",
-  },
+const filterTabs = [
+  { id: "all", label: "All Tracks" },
+  { id: "web", label: "Web & Fullstack" },
+  { id: "mobile", label: "Mobile App" },
+  { id: "ai", label: "Machine Learning / AI" },
+  { id: "web3", label: "Web3 & Blockchain" },
+  { id: "cybersecurity", label: "Cybersecurity & Systems" },
 ];
 
-function Projects() {
-  return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.24),rgba(18,12,27,0.92)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#0c061a_0%,#0a0516_50%,#080414_100%)] border-t border-purple-900/30">
-      <section className="relative w-full py-20 px-4 sm:px-8 lg:px-12">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute -top-1/3 -left-1/3 w-full h-full bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
-          <div className="absolute -bottom-1/3 -right-1/3 w-full h-full bg-gradient-to-tl from-fuchsia-500/10 to-transparent rounded-full blur-3xl"></div>
-        </div>
+export default function Projects() {
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [visibleCount, setVisibleCount] = useState(projectsData.length);
 
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="text-center mb-16 space-y-4">
-            <h2 className="text-center text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-300 via-fuchsia-300 to-purple-400 bg-clip-text text-transparent">
-              Past Projects
-            </h2>
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "all") return projectsData;
+    return projectsData.filter((p) => p.domain === activeFilter);
+  }, [activeFilter]);
+
+  const displayedProjects = filteredProjects.slice(0, visibleCount);
+
+  return (
+    <div
+      id="projects"
+      className="min-h-screen py-24 scroll-mt-20 bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.22),rgba(14,8,22,0.95)45%,rgba(9,5,16,1)),linear-gradient(180deg,#090514_0%,#0c061a_50%,#090514_100%)] border-b border-purple-900/30 overflow-hidden"
+    >
+      <section className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-400/30 bg-purple-950/40 text-xs font-semibold uppercase tracking-[0.2em] text-purple-300 backdrop-blur-md mb-4"
+          >
+            <FolderGit2 className="w-3.5 h-3.5 text-purple-400" />
+            <span>Open Source Repositories</span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight"
+          >
+            Tracks &amp; Featured{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-300 via-fuchsia-300 to-indigo-300">
+              Projects
+            </span>
+          </motion.h2>
+
+          <div className="mt-4">
             <BlurText
-              text="Explore our portfolio of innovative solutions and successful implementations"
-              className="text-purple-100/80 text-lg max-w-2xl mx-auto"
-              delay={40}
+              text="Explore our active repositories spanning enterprise web platforms, smart contracts, decentralized systems, AI pipelines, and mobile apps."
+              className="text-base sm:text-lg text-purple-100/85 leading-relaxed"
+              delay={25}
             />
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[200px]">
-            {projects.map((project) => {
-              const Icon = iconMap[project.icon];
+        {/* Domain Filter Tabs */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-12 max-w-5xl mx-auto">
+          {filterTabs.map((tab) => {
+            const isActive = activeFilter === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  setActiveFilter(tab.id);
+                  setVisibleCount(projectsData.length);
+                }}
+                className={`relative px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
+                  isActive
+                    ? "text-white"
+                    : "text-gray-400 hover:text-white bg-white/5 border border-white/10"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="projectFilterTab"
+                    className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 shadow-md shadow-purple-500/40"
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                  />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
-              return (
-                <div
-                  key={project.id}
-                  className={`${project.span} group relative`}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-white/3 to-white/0 rounded-2xl border border-white/10 backdrop-blur-md transition-all duration-300 group-hover:border-white/20 group-hover:from-white/8 group-hover:via-white/5 group-hover:shadow-lg group-hover:shadow-purple-500/15"></div>
+        {/* Projects Grid */}
+        <motion.div
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto"
+        >
+          <AnimatePresence>
+            {displayedProjects.map((project: ProjectItem) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.35 }}
+                className="group relative flex flex-col justify-between rounded-2xl border border-white/10 bg-gradient-to-b from-[#130b26]/90 to-[#0d071a]/90 backdrop-blur-xl overflow-hidden hover:border-purple-400/50 hover:-translate-y-1.5 hover:shadow-[0_20px_60px_-25px_rgba(168,85,247,0.4)] transition-all duration-300"
+              >
+                {/* Image Banner */}
+                <div className="relative h-44 w-full overflow-hidden bg-black/40">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    unoptimized
+                    className="object-cover opacity-75 transition-transform duration-500 group-hover:scale-105 group-hover:opacity-90"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#130b26] via-[#130b26]/40 to-transparent" />
+                  
+                  {/* Domain Tag */}
+                  <div className="absolute top-3 left-3">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-black/60 border border-white/15 px-3 py-1 text-[11px] font-semibold text-purple-200 backdrop-blur-md">
+                      <Layers className="w-3 h-3 text-purple-400" />
+                      {project.domainLabel}
+                    </span>
+                  </div>
+                </div>
 
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.color} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                  ></div>
+                {/* Card Content */}
+                <div className="p-6 flex flex-col flex-1 justify-between">
+                  <div>
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <h3 className="text-xl font-bold text-white group-hover:text-purple-200 transition-colors">
+                        {project.title}
+                      </h3>
 
-                  <div className="relative h-full p-6 flex flex-col justify-between">
-                    <div className="flex items-center justify-between">
-                      <Icon className="w-10 h-10 text-white/80 group-hover:text-purple-200 transition-colors" />
-
-                      <div className="w-8 h-8 rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Link href={project.link}>
-                          <svg
-                            className="w-4 h-4 text-white/60"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M13 7l5 5m0 0l-5 5m5-5H6"
-                            />
-                          </svg>
-                        </Link>
-                      </div>
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-full bg-white/5 border border-white/10 text-gray-300 hover:text-white hover:bg-purple-600 transition-all shadow-sm"
+                        aria-label={`View ${project.title} on GitHub`}
+                      >
+                        <Github className="w-4 h-4" />
+                      </a>
                     </div>
 
-                    <div className="space-y-1">
-                      <h3 className="text-white font-semibold text-lg group-hover:text-purple-200 transition-colors">
-                        {project.name}
-                      </h3>
-                      <p className="text-gray-400 text-sm group-hover:text-gray-200 transition-colors">
-                        {project.description}
-                      </p>
+                    <p className="text-sm text-gray-300 leading-relaxed mb-4 line-clamp-3">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div>
+                    {/* Mentor Credit */}
+                    <div className="flex items-center gap-2 mb-4 text-xs text-purple-300/90 font-medium">
+                      <User className="w-3.5 h-3.5 text-purple-400" />
+                      <span>Mentor: {project.mentor}</span>
+                    </div>
+
+                    {/* Tech Badges */}
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-white/5">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2.5 py-0.5 rounded-full bg-purple-950/50 border border-purple-500/20 text-[11px] font-medium text-purple-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Load More Button */}
+        {visibleCount < filteredProjects.length && (
+          <div className="mt-12 text-center">
+            <button
+              onClick={() => setVisibleCount((prev) => prev + 6)}
+              className="inline-flex items-center gap-2 rounded-full bg-white/5 border border-purple-400/30 px-8 py-3 text-sm font-semibold text-white shadow-lg shadow-purple-900/20 hover:bg-purple-600 hover:border-purple-500 transition-all cursor-pointer"
+            >
+              Load More Projects ({filteredProjects.length - visibleCount} remaining)
+            </button>
           </div>
+        )}
+
+        {/* GitHub Org Link */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-gray-400">
+            Looking for all repositories?{" "}
+            <a
+              href="https://github.com/orgs/opencodeiiita/repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-purple-300 hover:text-white font-semibold underline underline-offset-4"
+            >
+              Explore all OpenCode repos on GitHub
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </p>
         </div>
       </section>
-    </main>
+    </div>
   );
 }
-
-export default Projects;
