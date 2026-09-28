@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Volume2, VolumeX, Film } from "lucide-react";
+import { openCinematicLanding } from "./CinematicIntro";
 
 interface NavItem {
   name: string;
@@ -19,15 +20,36 @@ const navItems: NavItem[] = [
   { name: "Sponsors", href: "#sponsors", isSection: true },
   { name: "Testimonials", href: "#testimonials", isSection: true },
   { name: "FAQ", href: "#faq", isSection: true },
-  { name: "Sponsor us", href: "/sponsor-registration", isSection: false },
 ];
 
 export default function Navbar({ className }: { className?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [heroMuted, setHeroMuted] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  useEffect(() => {
+    const handleSoundState = (e: Event) => {
+      const customEvent = e as CustomEvent<{ isMuted: boolean }>;
+      if (customEvent.detail && typeof customEvent.detail.isMuted === "boolean") {
+        setHeroMuted(customEvent.detail.isMuted);
+      }
+    };
+
+    window.addEventListener("hero-sound-state", handleSoundState);
+    window.dispatchEvent(new CustomEvent("query-hero-sound"));
+
+    return () => {
+      window.removeEventListener("hero-sound-state", handleSoundState);
+    };
+  }, []);
+
+  const toggleHeroSound = () => {
+    setHeroMuted((prev) => !prev);
+    window.dispatchEvent(new CustomEvent("toggle-hero-sound"));
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -66,112 +88,162 @@ export default function Navbar({ className }: { className?: string }) {
   const isCompact = scrolled;
 
   return (
-    <motion.nav
+    <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
       className={cn(
-        "fixed top-0 inset-x-0 z-50 px-4 pt-2 sm:pt-6",
+        "fixed top-0 inset-x-0 z-50 px-3 sm:px-6 pt-2 sm:pt-6 pointer-events-none",
         className
       )}
     >
-      <div
-        className={cn(
-          "flex items-center justify-between w-full mx-auto transition-all duration-500",
-          "backdrop-blur-md bg-[#1B1620]/75 border border-[#665B6D]/30",
-          isCompact
-            ? "max-w-5xl rounded-full px-4 sm:px-6 py-2 shadow-[0_0_30px_rgba(27,22,32,0.7)] bg-[#1B1620]/90 border border-[#665B6D]/35"
-            : "max-w-6xl rounded-[2.75rem] px-6 sm:px-8 py-3.5 shadow-[0_20px_80px_-50px_rgba(120,82,85,0.4)] bg-[#1B1620]/75 border border-[#665B6D]/30"
-        )}
-      >
-        {/* Left: Brand Title */}
-        <Link
-          href="/"
-          onClick={(e) => {
-            if (pathname === "/") {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }
-          }}
-          className="flex items-center group shrink-0"
+      <div className="flex items-center justify-center gap-2 sm:gap-3.5 w-full mx-auto max-w-7xl">
+        {/* Main Navbar Capsule */}
+        <nav
+          className={cn(
+            "pointer-events-auto flex items-center justify-between transition-all duration-500",
+            "backdrop-blur-md bg-[#07131F]/80 border border-[#AEBCC7]/15",
+            isCompact
+              ? "flex-1 max-w-5xl rounded-full px-4 sm:px-6 py-2 shadow-[0_0_30px_rgba(7,19,31,0.8)] bg-[#07131F]/90 border border-[#AEBCC7]/20"
+              : "flex-1 max-w-6xl rounded-[2.75rem] px-5 sm:px-8 py-3.5 shadow-[0_20px_80px_-50px_rgba(7,19,31,0.7)] bg-[#07131F]/80 border border-[#AEBCC7]/15"
+          )}
         >
-          <span className="text-lg sm:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FEF3ED] via-[#CF9690] to-[#E8C0BB] tracking-tight group-hover:opacity-90 transition-opacity">
-            OpenCode&apos;26
-          </span>
-        </Link>
-
-        {/* Center: Desktop Navigation Links */}
-        <div className="hidden lg:flex items-center gap-1 backdrop-blur-xl px-2 py-1.5 rounded-full border border-[#665B6D]/30 bg-[#291920]/40 shadow-inner">
-          {navItems.map((item, index) => {
-            const isHovered = hoveredIndex === index;
-            return (
-              <div key={item.name} className="relative">
-                {item.isSection ? (
-                  <button
-                    onClick={(e) => handleNavClick(e, item)}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    className="relative z-10 px-3 py-1.5 text-xs xl:text-sm font-medium text-[#C9BCC4] hover:text-[#FEF3ED] transition-colors cursor-pointer"
-                  >
-                    {isHovered && (
-                      <motion.div
-                        layoutId="navbar-hover"
-                        className="absolute inset-0 z-[-1] rounded-full bg-gradient-to-r from-[#665B6D]/90 via-[#785255]/90 to-[#9D767E]/90 shadow-md shadow-[#785255]/30"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                      />
-                    )}
-                    <span className="relative z-10">{item.name}</span>
-                  </button>
-                ) : (
-                  <Link
-                    href={item.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    className="relative z-10 block px-3 py-1.5 text-xs xl:text-sm font-medium text-[#C9BCC4] hover:text-[#FEF3ED] transition-colors"
-                  >
-                    {isHovered && (
-                      <motion.div
-                        layoutId="navbar-hover"
-                        className="absolute inset-0 z-[-1] rounded-full bg-gradient-to-r from-[#665B6D]/90 via-[#785255]/90 to-[#9D767E]/90 shadow-md shadow-[#785255]/30"
-                        transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                      />
-                    )}
-                    <span className="relative z-10">{item.name}</span>
-                  </Link>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Right: Join Discord CTA Button */}
-        <div className="hidden sm:flex items-center">
-          <Button
-            className="rounded-full bg-gradient-to-r from-[#60434A] via-[#785255] to-[#9D767E] text-[#FEF3ED] border border-[#CF9690]/30 font-medium text-sm px-4 py-1.5 sm:px-5 sm:py-2 shadow-md shadow-[#60434A]/40 hover:shadow-[#785255]/50 hover:brightness-110 transition-all cursor-pointer"
-            asChild
+          {/* Left: Brand Title */}
+          <Link
+            href="/"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            className="flex items-center group shrink-0"
           >
-            <Link
-              href="https://discord.gg/SxBATvUPnC"
-              target="_blank"
-              rel="noopener noreferrer"
+            <span className="text-lg sm:text-xl font-bold text-[#F4F1E8] tracking-tight group-hover:opacity-90 transition-opacity">
+              OpenCode<span className="text-[#D6B56C]">&apos;26</span>
+            </span>
+          </Link>
+
+          {/* Center: Desktop Navigation Links */}
+          <div className="hidden lg:flex items-center gap-1 backdrop-blur-xl px-2 py-1.5 rounded-full border border-[#AEBCC7]/15 bg-[#0B1C2A]/60 shadow-inner">
+            {navItems.map((item, index) => {
+              const isHovered = hoveredIndex === index;
+              return (
+                <div key={item.name} className="relative">
+                  {item.isSection ? (
+                    <button
+                      onClick={(e) => handleNavClick(e, item)}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      className="relative z-10 px-3 py-1.5 text-xs xl:text-sm font-medium text-[#AEBCC7] hover:text-[#F4F1E8] transition-colors cursor-pointer"
+                    >
+                      {isHovered && (
+                        <motion.div
+                          layoutId="navbar-hover"
+                          className="absolute inset-0 z-[-1] rounded-full bg-[#102535] border border-[#D6B56C]/30 shadow-md shadow-[#102535]/50"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                        />
+                      )}
+                      <span className="relative z-10">{item.name}</span>
+                    </button>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      className="relative z-10 block px-3 py-1.5 text-xs xl:text-sm font-medium text-[#AEBCC7] hover:text-[#F4F1E8] transition-colors"
+                    >
+                      {isHovered && (
+                        <motion.div
+                          layoutId="navbar-hover"
+                          className="absolute inset-0 z-[-1] rounded-full bg-[#102535] border border-[#D6B56C]/30 shadow-md shadow-[#102535]/50"
+                          transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                        />
+                      )}
+                      <span className="relative z-10">{item.name}</span>
+                    </Link>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Right: Sponsor Us CTA Button */}
+          <div className="hidden sm:flex items-center">
+            <Button
+              className="rounded-full bg-[#D6B56C] hover:bg-[#E5C982] text-[#08131D] font-semibold text-sm px-4 py-1.5 sm:px-5 sm:py-2 shadow-md shadow-[#D6B56C]/20 transition-all cursor-pointer border-none"
+              asChild
             >
-              Join Discord
-            </Link>
-          </Button>
-        </div>
+              <Link href="/sponsor-registration">
+                Sponsor Us
+              </Link>
+            </Button>
+          </div>
 
-        {/* Mobile Hamburger Toggle Button */}
-        <div className="lg:hidden flex items-center gap-2">
+          {/* Mobile Hamburger Toggle Button */}
+          <div className="lg:hidden flex items-center gap-2">
+            <button
+              onClick={toggleMenu}
+              className="text-[#AEBCC7] hover:text-[#F4F1E8] p-2 rounded-full bg-[#102535]/55 border border-[#AEBCC7]/15 focus:outline-none"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
+            </button>
+          </div>
+        </nav>
+
+        {/* Standalone Control Capsules: Play Trailer & Sound */}
+        <div className="pointer-events-auto shrink-0 flex items-center gap-2 sm:gap-2.5">
+          {/* Play Trailer Button */}
           <button
-            onClick={toggleMenu}
-            className="text-[#C9BCC4] hover:text-[#FEF3ED] p-2 rounded-full bg-[#291920]/50 border border-[#665B6D]/30 focus:outline-none"
-            aria-label="Toggle menu"
+            type="button"
+            onClick={() => openCinematicLanding()}
+            className={cn(
+              "group flex items-center gap-2 rounded-full border border-[#AEBCC7]/20 bg-[#102535]/70 hover:bg-[#102535]/95 text-xs sm:text-sm font-semibold text-[#F4F1E8] backdrop-blur-md shadow-lg shadow-[#07131F]/80 hover:border-[#D6B56C]/45 transition-all duration-300 cursor-pointer",
+              isCompact
+                ? "px-3 sm:px-3.5 py-2.5"
+                : "px-3.5 sm:px-4 py-3 sm:py-3.5"
+            )}
+            title="Play cinematic trailer"
           >
-            {isMenuOpen ? (
-              <X className="h-5 w-5" />
+            <Film className="w-4 h-4 text-[#D6B56C] transition-transform duration-300 group-hover:scale-110" />
+            <span className="hidden md:inline text-[#F4F1E8]">Play Trailer</span>
+          </button>
+
+          {/* Sound Switch Button */}
+          <button
+            type="button"
+            onClick={toggleHeroSound}
+            className={cn(
+              "group flex items-center gap-2 rounded-full border border-[#AEBCC7]/20 bg-[#102535]/70 hover:bg-[#102535]/95 text-xs sm:text-sm font-semibold text-[#F4F1E8] backdrop-blur-md shadow-lg shadow-[#07131F]/80 hover:border-[#D6B56C]/45 transition-all duration-300 cursor-pointer",
+              isCompact
+                ? "px-3 sm:px-3.5 py-2.5"
+                : "px-3.5 sm:px-4 py-3 sm:py-3.5"
+            )}
+            title={heroMuted ? "Turn background audio on" : "Turn background audio off"}
+          >
+            {heroMuted ? (
+              <>
+                <VolumeX className="w-4 h-4 text-[#718394] transition-colors group-hover:text-[#D6B56C]" />
+                <span className="hidden md:inline text-[#AEBCC7] group-hover:text-[#F4F1E8] transition-colors">
+                  Sound Off
+                </span>
+              </>
             ) : (
-              <Menu className="h-5 w-5" />
+              <>
+                <Volume2 className="w-4 h-4 text-[#D6B56C] animate-pulse" />
+                <span className="hidden md:inline text-[#F4F1E8]">Sound On</span>
+                <span className="hidden md:flex items-end gap-0.5 h-3 ml-0.5">
+                  <span className="w-0.5 bg-[#D6B56C] animate-pulse h-2.5" />
+                  <span className="w-0.5 bg-[#D6B56C] animate-pulse h-1.5" />
+                  <span className="w-0.5 bg-[#D6B56C] animate-pulse h-3" />
+                </span>
+              </>
             )}
           </button>
         </div>
@@ -185,14 +257,14 @@ export default function Navbar({ className }: { className?: string }) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden mt-3 w-full max-w-5xl mx-auto rounded-2xl backdrop-blur-2xl bg-[#1B1620]/95 border border-[#665B6D]/30 p-4 space-y-2 shadow-2xl"
+            className="pointer-events-auto lg:hidden mt-3 w-full max-w-5xl mx-auto rounded-2xl backdrop-blur-2xl bg-[#0B1C2A]/95 border border-[#AEBCC7]/15 p-4 space-y-2 shadow-2xl"
           >
             {navItems.map((item) =>
               item.isSection ? (
                 <button
                   key={item.name}
                   onClick={(e) => handleNavClick(e, item)}
-                  className="w-full text-left text-[#E6D8DB] hover:text-[#FEF3ED] hover:bg-[#60434A]/30 rounded-xl px-4 py-2.5 text-base font-medium transition-all"
+                  className="w-full text-left text-[#AEBCC7] hover:text-[#F4F1E8] hover:bg-[#102535] rounded-xl px-4 py-2.5 text-base font-medium transition-all"
                 >
                   {item.name}
                 </button>
@@ -201,30 +273,26 @@ export default function Navbar({ className }: { className?: string }) {
                   key={item.name}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="w-full text-left text-[#E6D8DB] hover:text-[#FEF3ED] hover:bg-[#60434A]/30 rounded-xl px-4 py-2.5 text-base font-medium transition-all block"
+                  className="w-full text-left text-[#AEBCC7] hover:text-[#F4F1E8] hover:bg-[#102535] rounded-xl px-4 py-2.5 text-base font-medium transition-all block"
                 >
                   {item.name}
                 </Link>
               )
             )}
-            <div className="pt-2 border-t border-[#665B6D]/20">
+            <div className="pt-2 border-t border-[#AEBCC7]/15">
               <Button
-                className="w-full rounded-full bg-gradient-to-r from-[#60434A] via-[#785255] to-[#9D767E] text-[#FEF3ED] border border-[#CF9690]/30 font-medium text-base px-4 py-2.5 shadow-md shadow-[#60434A]/40 hover:shadow-[#785255]/50 hover:brightness-110 transition-all justify-center cursor-pointer"
+                className="w-full rounded-full bg-[#D6B56C] hover:bg-[#E5C982] text-[#08131D] font-semibold text-base px-4 py-2.5 shadow-md shadow-[#D6B56C]/20 transition-all justify-center cursor-pointer border-none"
                 asChild
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Link
-                  href="https://discord.gg/SxBATvUPnC"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Join Discord
+                <Link href="/sponsor-registration">
+                  Sponsor Us
                 </Link>
               </Button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </motion.header>
   );
 }

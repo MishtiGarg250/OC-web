@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import BackgroundAudio from "@/components/BackgroundAudio";
 
 export const metadata: Metadata = {
   title: "OpenCode Events - Fuel Open Source Innovation",
@@ -16,6 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="font-sans antialiased">
+        <BackgroundAudio />
         <div className="relative w-full flex items-center justify-center">
           <Navbar />
         </div>

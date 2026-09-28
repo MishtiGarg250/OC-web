@@ -28,11 +28,11 @@ interface Petal {
 }
 
 const PETAL_COLORS = [
-  "rgba(207, 150, 144, 0.85)", // Soft Peach (#CF9690)
-  "rgba(232, 192, 187, 0.80)", // Light Blush (#E8C0BB)
-  "rgba(184, 135, 132, 0.85)", // Warm Rose (#B88784)
-  "rgba(157, 118, 126, 0.75)", // Dusty Rose (#9D767E)
-  "rgba(254, 243, 237, 0.70)", // Ivory (#FEF3ED)
+  "rgba(244, 241, 232, 0.85)", // Soft Moonlit White (#F4F1E8)
+  "rgba(217, 226, 232, 0.80)", // Cool Misty Blue-White (#D9E2E8)
+  "rgba(143, 175, 196, 0.75)", // Soft Desaturated Moon-Blue (#8FAFC4)
+  "rgba(214, 181, 108, 0.75)", // Moonlit Lantern Gold (#D6B56C)
+  "rgba(229, 201, 130, 0.70)", // Subtle Warm Gold Glow (#E5C982)
 ];
 
 export default function SakuraCanvas({
