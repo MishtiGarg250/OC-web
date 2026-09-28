@@ -1,4 +1,4 @@
-import LoadingOverlay from "@/components/LoadingOverlay";
+import CinematicIntro from "@/components/CinematicIntro";
 import HeroSection from "@/components/HeroSection";
 import StatsRibbon from "@/components/StatsRibbon";
 import AboutSection from "@/components/AboutSection";
@@ -12,8 +12,8 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen antialiased bg-[radial-gradient(circle_at_50%_0%,rgba(102,91,109,0.25),rgba(41,25,32,0.95)_40%,rgba(27,22,32,1)),linear-gradient(180deg,#1B1620_0%,#291920_50%,#1B1620_100%)] overflow-x-hidden">
-      <LoadingOverlay />
+    <main className="min-h-screen antialiased bg-[#07131F] text-[#AEBCC7] selection:bg-[#D6B56C]/30 selection:text-[#F4F1E8] overflow-x-hidden">
+      <CinematicIntro />
       <HeroSection />
       <StatsRibbon />
       <AboutSection />

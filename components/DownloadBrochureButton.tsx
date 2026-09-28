@@ -31,12 +31,12 @@ export default function DownloadBrochureButton({
       size={size}
       onClick={downloadBrochure}
       className={
-        `group inline-flex items-center rounded-full bg-gradient-to-r from-[#9D767E] via-[#CF9690] to-[#E8C0BB] px-8 py-3 text-sm font-semibold text-[#1B1620] shadow-lg shadow-[#CF9690]/25 transition hover:brightness-105 active:scale-[0.98] ${className}`
+        `group inline-flex items-center rounded-full border border-[#D6B56C]/45 bg-[#102535]/55 px-7 py-3 text-sm font-semibold text-[#F4F1E8] backdrop-blur-md shadow-lg transition hover:bg-[#102535]/80 hover:border-[#E5C982] active:scale-[0.98] ${className}`
       }
       {...props}
     >
       {showIcon && (
-        <Download className="w-5 h-5 text-[#1B1620] transition-transform group-hover:translate-y-0.5" />
+        <Download className="w-5 h-5 text-[#D6B56C] transition-transform group-hover:translate-y-0.5" />
       )}
       Brochure
     </Button>

@@ -130,25 +130,25 @@ export default function SponsorRegistration() {
 
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-[radial-gradient(circle_at_50%_10%,rgba(102,91,109,0.2),rgba(41,25,32,0.96)_40%,rgba(27,22,32,1)),linear-gradient(180deg,#1B1620_0%,#291920_50%,#1B1620_100%)] text-[#E6D8DB] flex items-center justify-center pt-32 pb-20">
-        <BackgroundGradient className="max-w-md mx-auto p-8 rounded-[22px] bg-[#1B1620] text-center border border-[#665B6D]/30">
+      <div className="min-h-screen bg-[#07131F] text-[#AEBCC7] flex items-center justify-center pt-32 pb-20">
+        <BackgroundGradient className="max-w-md mx-auto p-8 rounded-[22px] bg-[#102535] text-center border border-[#AEBCC7]/20">
           <div className="flex justify-center mb-4">
-            <CheckCircle className="h-12 w-12 text-[#CF9690]" strokeWidth={1.5} />
+            <CheckCircle className="h-12 w-12 text-[#D6B56C]" strokeWidth={1.5} />
           </div>
-          <h2 className="text-2xl font-bold mb-4 text-[#FEF3ED]">Registration Successful!</h2>
-          <p className="text-[#C9BCC4] mb-6">
+          <h2 className="text-2xl font-bold mb-4 text-[#F4F1E8]">Registration Successful!</h2>
+          <p className="text-[#AEBCC7] mb-6">
             Thank you for your interest in sponsoring OpenCode&apos;26. A
             confirmation has been sent to your email, and our team will contact
             you about the next steps from geekhaven@iiita.ac.in.
           </p>
           {requestId && (
-            <p className="mb-6 rounded-lg border border-[#CF9690]/30 bg-[#CF9690]/10 px-4 py-3 text-sm text-[#FEF3ED]">
+            <p className="mb-6 rounded-lg border border-[#D6B56C]/30 bg-[#D6B56C]/10 px-4 py-3 text-sm text-[#F4F1E8]">
               Reference ID: <strong>{requestId}</strong>
             </p>
           )}
           <Button
             borderRadius="1.75rem"
-            className="bg-[#291920] text-[#FEF3ED] border border-[#665B6D]/40 hover:bg-[#312C34]"
+            className="bg-[#D6B56C] text-[#08131D] font-semibold hover:bg-[#E5C982] transition-colors"
             onClick={() => (window.location.href = "/")}
           >
             Return to Home
@@ -159,26 +159,26 @@ export default function SponsorRegistration() {
   }
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_50%_10%,rgba(102,91,109,0.2),rgba(41,25,32,0.96)_40%,rgba(27,22,32,1)),linear-gradient(180deg,#1B1620_0%,#291920_50%,#1B1620_100%)] text-[#E6D8DB] antialiased pt-32 pb-20">
+    <div className="min-h-screen bg-[#07131F] text-[#AEBCC7] antialiased pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FEF3ED] via-[#CF9690] to-[#E8C0BB] drop-shadow-[0_4px_24px_rgba(207,150,144,0.35)] mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C] mb-4">
             Sponsor Registration
           </h1>
-          <p className="text-lg text-[#C9BCC4] max-w-3xl mx-auto">
+          <p className="text-lg text-[#AEBCC7] max-w-3xl mx-auto">
             Join us in supporting the open-source community. Fill out the form
             below to become a sponsor for OpenCode&apos;26.
           </p>
         </div>
 
-        <BackgroundGradient className="rounded-[22px] bg-[#1B1620]/95 backdrop-blur-md p-8 shadow-xl border border-[#665B6D]/40">
+        <BackgroundGradient className="rounded-[22px] bg-[#102535] backdrop-blur-md p-8 shadow-xl border border-[#AEBCC7]/20">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {contactFields.map((field) => (
                 <div key={field.id}>
                   <label
                     htmlFor={field.id}
-                    className="block text-sm font-medium text-[#E6D8DB] mb-2"
+                    className="block text-sm font-medium text-[#D9E2E8] mb-2"
                   >
                     {field.label}
                   </label>
@@ -190,7 +190,7 @@ export default function SponsorRegistration() {
                     onChange={handleInputChange}
                     required={field.label.includes("*")}
                     placeholder={field.placeholder}
-                    className="w-full px-4 py-3 rounded-lg border border-[#665B6D]/30 bg-[#291920]/80 text-[#FEF3ED] placeholder-[#8E8391] focus:ring-2 focus:ring-[#CF9690] focus:border-transparent transition"
+                    className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] placeholder-[#718394] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent transition"
                   />
                 </div>
               ))}
@@ -199,7 +199,7 @@ export default function SponsorRegistration() {
               <div>
                 <label
                   htmlFor="companySize"
-                  className="block text-sm font-medium text-[#E6D8DB] mb-2"
+                  className="block text-sm font-medium text-[#D9E2E8] mb-2"
                 >
                   Company Size
                 </label>
@@ -208,14 +208,14 @@ export default function SponsorRegistration() {
                   name="companySize"
                   value={formData.companySize}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-[#665B6D]/30 bg-[#291920]/80 text-[#FEF3ED] focus:ring-2 focus:ring-[#CF9690] focus:border-transparent transition"
+                  className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent transition"
                 >
-                  <option value="" className="bg-[#1B1620] text-[#FEF3ED]">Select company size</option>
-                  <option value="1-10" className="bg-[#1B1620] text-[#FEF3ED]">1-10 employees</option>
-                  <option value="11-50" className="bg-[#1B1620] text-[#FEF3ED]">11-50 employees</option>
-                  <option value="51-200" className="bg-[#1B1620] text-[#FEF3ED]">51-200 employees</option>
-                  <option value="201-1000" className="bg-[#1B1620] text-[#FEF3ED]">201-1000 employees</option>
-                  <option value="1000+" className="bg-[#1B1620] text-[#FEF3ED]">1000+ employees</option>
+                  <option value="" className="bg-[#0B1C2A] text-[#F4F1E8]">Select company size</option>
+                  <option value="1-10" className="bg-[#0B1C2A] text-[#F4F1E8]">1-10 employees</option>
+                  <option value="11-50" className="bg-[#0B1C2A] text-[#F4F1E8]">11-50 employees</option>
+                  <option value="51-200" className="bg-[#0B1C2A] text-[#F4F1E8]">51-200 employees</option>
+                  <option value="201-1000" className="bg-[#0B1C2A] text-[#F4F1E8]">201-1000 employees</option>
+                  <option value="1000+" className="bg-[#0B1C2A] text-[#F4F1E8]">1000+ employees</option>
                 </select>
               </div>
 
@@ -223,7 +223,7 @@ export default function SponsorRegistration() {
               <div>
                 <label
                   htmlFor="industry"
-                  className="block text-sm font-medium text-[#E6D8DB] mb-2"
+                  className="block text-sm font-medium text-[#D9E2E8] mb-2"
                 >
                   Industry
                 </label>
@@ -232,17 +232,17 @@ export default function SponsorRegistration() {
                   name="industry"
                   value={formData.industry}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-[#665B6D]/30 bg-[#291920]/80 text-[#FEF3ED] focus:ring-2 focus:ring-[#CF9690] focus:border-transparent transition"
+                  className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent transition"
                 >
-                  <option value="" className="bg-[#1B1620] text-[#FEF3ED]">Select industry</option>
-                  <option value="Technology" className="bg-[#1B1620] text-[#FEF3ED]">Technology</option>
-                  <option value="Finance" className="bg-[#1B1620] text-[#FEF3ED]">Finance</option>
-                  <option value="Healthcare" className="bg-[#1B1620] text-[#FEF3ED]">Healthcare</option>
-                  <option value="Education" className="bg-[#1B1620] text-[#FEF3ED]">Education</option>
-                  <option value="E-commerce" className="bg-[#1B1620] text-[#FEF3ED]">E-commerce</option>
-                  <option value="Manufacturing" className="bg-[#1B1620] text-[#FEF3ED]">Manufacturing</option>
-                  <option value="Consulting" className="bg-[#1B1620] text-[#FEF3ED]">Consulting</option>
-                  <option value="Other" className="bg-[#1B1620] text-[#FEF3ED]">Other</option>
+                  <option value="" className="bg-[#0B1C2A] text-[#F4F1E8]">Select industry</option>
+                  <option value="Technology" className="bg-[#0B1C2A] text-[#F4F1E8]">Technology</option>
+                  <option value="Finance" className="bg-[#0B1C2A] text-[#F4F1E8]">Finance</option>
+                  <option value="Healthcare" className="bg-[#0B1C2A] text-[#F4F1E8]">Healthcare</option>
+                  <option value="Education" className="bg-[#0B1C2A] text-[#F4F1E8]">Education</option>
+                  <option value="E-commerce" className="bg-[#0B1C2A] text-[#F4F1E8]">E-commerce</option>
+                  <option value="Manufacturing" className="bg-[#0B1C2A] text-[#F4F1E8]">Manufacturing</option>
+                  <option value="Consulting" className="bg-[#0B1C2A] text-[#F4F1E8]">Consulting</option>
+                  <option value="Other" className="bg-[#0B1C2A] text-[#F4F1E8]">Other</option>
                 </select>
               </div>
 
@@ -250,7 +250,7 @@ export default function SponsorRegistration() {
               <div className="md:col-span-2">
                 <label
                   htmlFor="sponsorshipType"
-                  className="block text-sm font-medium text-[#E6D8DB] mb-2"
+                  className="block text-sm font-medium text-[#D9E2E8] mb-2"
                 >
                   Sponsorship Type *
                 </label>
@@ -260,11 +260,11 @@ export default function SponsorRegistration() {
                   onChange={handleSelectChange}
                   value=""
                   required={formData.sponsorshipType.length === 0}
-                  className="w-full px-4 py-3 rounded-lg border border-[#665B6D]/30 bg-[#291920]/80 text-[#FEF3ED] focus:ring-2 focus:ring-[#CF9690] focus:border-transparent transition"
+                  className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent transition"
                 >
-                  <option value="" className="bg-[#1B1620] text-[#FEF3ED]">Select sponsorship type</option>
+                  <option value="" className="bg-[#0B1C2A] text-[#F4F1E8]">Select sponsorship type</option>
                   {sponsorshipOptions.map((option) => (
-                    <option key={option.value} value={option.value} className="bg-[#1B1620] text-[#FEF3ED]">
+                    <option key={option.value} value={option.value} className="bg-[#0B1C2A] text-[#F4F1E8]">
                       {option.label}
                     </option>
                   ))}
@@ -279,13 +279,13 @@ export default function SponsorRegistration() {
                     return (
                       <div
                         key={type}
-                        className="flex items-center bg-[#60434A]/50 border border-[#CF9690]/40 text-[#FEF3ED] px-3 py-1 rounded-full text-sm"
+                        className="flex items-center bg-[#0B1C2A] border border-[#D6B56C]/40 text-[#F4F1E8] px-3 py-1 rounded-full text-sm"
                       >
                         {label}
                         <button
                           type="button"
                           onClick={() => handleRemoveType(type)}
-                          className="ml-2 text-[#CF9690] hover:text-[#FEF3ED] focus:outline-none"
+                          className="ml-2 text-[#D6B56C] hover:text-[#E5C982] focus:outline-none"
                         >
                           ✕
                         </button>
@@ -300,7 +300,7 @@ export default function SponsorRegistration() {
             <div>
               <label
                 htmlFor="companyDetails"
-                className="block text-sm font-medium text-[#E6D8DB] mb-2"
+                className="block text-sm font-medium text-[#D9E2E8] mb-2"
               >
                 Any thought you would like to share *
               </label>
@@ -312,7 +312,7 @@ export default function SponsorRegistration() {
                 required
                 rows={6}
                 placeholder="Share your thoughts…"
-                className="w-full px-4 py-3 rounded-lg border border-[#665B6D]/30 bg-[#291920]/80 text-[#FEF3ED] placeholder-[#8E8391] focus:ring-2 focus:ring-[#CF9690] focus:border-transparent resize-vertical transition"
+                className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] placeholder-[#718394] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent resize-vertical transition"
               />
             </div>
 
@@ -321,7 +321,7 @@ export default function SponsorRegistration() {
                 type="submit"
                 disabled={isSubmitting}
                 borderRadius="1.75rem"
-                className="bg-gradient-to-r from-[#9D767E] via-[#CF9690] to-[#E8C0BB] text-[#1B1620] font-semibold border-none hover:opacity-95 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#CF9690]/25"
+                className="bg-[#D6B56C] text-[#08131D] font-semibold border-none hover:bg-[#E5C982] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#D6B56C]/25 transition-all"
               >
                 {isSubmitting ? "Submitting..." : "Submit Registration"}
               </Button>

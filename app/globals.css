@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Shippori+Mincho:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -5,65 +6,54 @@
 
 :root {
   /* Primary Theme Colors */
-  --primary: oklch(0.205 0 0);
-  --primary-light: #0033cc;
-  --primary-dark: #001366;
-  --primary-50: #f0f4ff;
-  --primary-100: #e0e9ff;
-  --primary-200: #c7d6ff;
-  --primary-300: #a5b8ff;
-  --primary-400: #7c94ff;
-  --primary-500: #5c73ff;
-  --primary-600: #4c5bff;
-  --primary-700: #3d47ff;
-  --primary-800: #001e80;
-  --primary-900: #001366;
+  --primary: #D6B56C;
+  --primary-foreground: #08131D;
+  --primary-light: #E5C982;
+  --primary-dark: #B89647;
 
   /* Secondary Colors */
-  --secondary: oklch(0.97 0 0);
-  --secondary-light: #33ddbb;
-  --secondary-dark: #00a888;
+  --secondary: #0B1C2A;
+  --secondary-foreground: #F4F1E8;
 
   /* Neutral Colors */
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --muted: #0B1C2A;
+  --muted-foreground: #718394;
+  --border: rgba(174, 188, 199, 0.15);
+  --input: rgba(174, 188, 199, 0.15);
+  --ring: #D6B56C;
 
   /* Success/Error Colors */
   --success: #10b981;
   --error: #ef4444;
-  --warning: #f59e0b;
+  --warning: #D6B56C;
 
   /* Fonts */
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+  --font-cinematic: 'Cinzel', 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Cormorant Garamond', Georgia, serif;
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #07131F;
+  --foreground: #AEBCC7;
+  --card: #102535;
+  --card-foreground: #F4F1E8;
+  --popover: #102535;
+  --popover-foreground: #F4F1E8;
+  --accent: #102535;
+  --accent-foreground: #D6B56C;
+  --destructive: #ef4444;
+  --chart-1: #D6B56C;
+  --chart-2: #8FAFC4;
+  --chart-3: #D9E2E8;
+  --chart-4: #E5C982;
+  --chart-5: #718394;
+  --sidebar: #0B1C2A;
+  --sidebar-foreground: #AEBCC7;
+  --sidebar-primary: #D6B56C;
+  --sidebar-primary-foreground: #08131D;
+  --sidebar-accent: #102535;
+  --sidebar-accent-foreground: #F4F1E8;
+  --sidebar-border: rgba(174, 188, 199, 0.15);
+  --sidebar-ring: #D6B56C;
 }
 
 @theme inline {
@@ -92,6 +82,7 @@
   --color-warning: var(--warning);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+  --font-cinematic: 'Cinzel', 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Cormorant Garamond', Georgia, serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -115,27 +106,20 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
 
-  /* OpenCode 2026 Brand Color Palette */
-  --color-brand-deep-plum: #291920;
-  --color-brand-dark-plum: #312C34;
-  --color-brand-dusty-purple: #665B6D;
-  --color-brand-dusty-rose: #9D767E;
-  --color-brand-soft-peach: #CF9690;
-  --color-brand-ivory: #FEF3ED;
+  /* Japanese Nighttime Cinematic Brand Palette */
+  --color-jp-night: #07131F;
+  --color-jp-night-secondary: #0B1C2A;
+  --color-jp-card: #102535;
+  --color-jp-glass: rgba(16, 37, 53, 0.55);
 
-  --color-brand-charcoal-plum: #3E3843;
-  --color-brand-muted-lavender: #7D6C7E;
-  --color-brand-sakura-dark: #60434A;
-  --color-brand-sakura: #785255;
-  --color-brand-warm-rose: #B88784;
-  --color-brand-light-blush: #E8C0BB;
+  --color-jp-heading: #F4F1E8;
+  --color-jp-mist: #D9E2E8;
+  --color-jp-body: #AEBCC7;
+  --color-jp-muted: #718394;
 
-  --color-brand-night: #1B1620;
-  --color-brand-slate: #4A4553;
-  --color-brand-muted-gray: #8E8391;
-  --color-brand-warm-gray: #C9BCC4;
-  --color-brand-mist: #E6D8DB;
-  --color-brand-snow: #F9F7F5;
+  --color-jp-gold: #D6B56C;
+  --color-jp-gold-hover: #E5C982;
+  --color-jp-moon-blue: #8FAFC4;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -154,11 +138,11 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --muted: #1e293b;
-    --muted-foreground: #94a3b8;
-    --border: #334155;
-    --input: #1e293b;
-    --ring: #4c5bff;
+    --muted: #0B1C2A;
+    --muted-foreground: #718394;
+    --border: rgba(174, 188, 199, 0.15);
+    --input: rgba(174, 188, 199, 0.15);
+    --ring: #D6B56C;
   }
 }
 
@@ -166,6 +150,8 @@ body {
   font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   font-variation-settings: normal;
+  background-color: #07131F;
+  color: #AEBCC7;
 }
 
 /* Custom scrollbar */
@@ -174,22 +160,22 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--muted);
+  background: #07131F;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary);
+  background: #102535;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-light);
+  background: #D6B56C;
 }
 
 /* Selection colors */
 ::selection {
-  background: var(--primary-100);
-  color: var(--primary-900);
+  background: rgba(214, 181, 108, 0.3);
+  color: #F4F1E8;
 }
 
 /* Focus styles */
@@ -203,45 +189,31 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 textarea:-webkit-autofill,
 select:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px #1a1a1a inset !important;
-  box-shadow: 0 0 0px 1000px #1a1a1a inset !important;
-  -webkit-text-fill-color: #ffffff !important;
-  caret-color: #ffffff !important;
+  -webkit-box-shadow: 0 0 0px 1000px #0B1C2A inset !important;
+  box-shadow: 0 0 0px 1000px #0B1C2A inset !important;
+  -webkit-text-fill-color: #F4F1E8 !important;
+  caret-color: #F4F1E8 !important;
   transition: background-color 9999s ease-in-out 0s;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #07131F;
+  --foreground: #AEBCC7;
+  --card: #102535;
+  --card-foreground: #F4F1E8;
+  --popover: #102535;
+  --popover-foreground: #F4F1E8;
+  --primary: #D6B56C;
+  --primary-foreground: #08131D;
+  --secondary: #0B1C2A;
+  --secondary-foreground: #F4F1E8;
+  --muted: #0B1C2A;
+  --muted-foreground: #718394;
+  --accent: #102535;
+  --accent-foreground: #D6B56C;
+  --border: rgba(174, 188, 199, 0.15);
+  --input: rgba(174, 188, 199, 0.15);
+  --ring: #D6B56C;
 }
 
 @layer base {
@@ -251,4 +223,8 @@ select:-webkit-autofill {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.font-cinematic {
+  font-family: 'Cinzel', 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', 'YuMincho', 'Cormorant Garamond', Georgia, serif;
 }

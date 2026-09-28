@@ -28,7 +28,7 @@ export default function Projects() {
   return (
     <div
       id="projects"
-      className="min-h-screen py-24 scroll-mt-20 bg-[radial-gradient(circle_at_50%_0%,rgba(102,91,109,0.22),rgba(41,25,32,0.95)_45%,rgba(27,22,32,1)),linear-gradient(180deg,#1B1620_0%,#291920_50%,#1B1620_100%)] border-b border-[#665B6D]/30 overflow-hidden"
+      className="min-h-screen py-24 scroll-mt-20 bg-[#07131F] border-b border-[#AEBCC7]/15 overflow-hidden"
     >
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
@@ -37,9 +37,9 @@ export default function Projects() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#9D767E]/40 bg-[#291920]/70 text-xs font-semibold uppercase tracking-[0.2em] text-[#FEF3ED] backdrop-blur-md mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#AEBCC7]/15 bg-[#102535]/55 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md mb-4"
           >
-            <FolderGit2 className="w-3.5 h-3.5 text-[#CF9690]" />
+            <FolderGit2 className="w-3.5 h-3.5 text-[#D6B56C]" />
             <span>Open Source Repositories</span>
           </motion.div>
 
@@ -47,10 +47,10 @@ export default function Projects() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#FEF3ED] tracking-tight"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#F4F1E8] tracking-tight"
           >
             Tracks &amp; Featured{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FEF3ED] via-[#CF9690] to-[#E8C0BB]">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C]">
               Projects
             </span>
           </motion.h2>
@@ -58,7 +58,7 @@ export default function Projects() {
           <div className="mt-4">
             <BlurText
               text="Explore our active repositories spanning enterprise web platforms, smart contracts, decentralized systems, AI pipelines, and mobile apps."
-              className="text-base sm:text-lg text-[#E6D8DB]/85 leading-relaxed"
+              className="text-base sm:text-lg text-[#AEBCC7] leading-relaxed"
               delay={25}
             />
           </div>
@@ -77,14 +77,14 @@ export default function Projects() {
                 }}
                 className={`relative px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "text-[#FEF3ED]"
-                    : "text-[#C9BCC4] hover:text-[#FEF3ED] bg-[#291920]/50 border border-[#665B6D]/30"
+                    ? "text-[#08131D]"
+                    : "text-[#AEBCC7] hover:text-[#F4F1E8] bg-[#102535]/55 border border-[#AEBCC7]/15 hover:border-[#D6B56C]/45"
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="projectFilterTab"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#60434A] via-[#785255] to-[#9D767E] shadow-md shadow-[#60434A]/40"
+                    className="absolute inset-0 rounded-full bg-[#D6B56C] shadow-md shadow-[#D6B56C]/30"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                   />
                 )}
@@ -108,15 +108,15 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35 }}
-                className="group relative flex flex-col justify-between rounded-2xl border border-[#665B6D]/30 bg-gradient-to-b from-[#291920]/90 to-[#1B1620]/90 backdrop-blur-xl overflow-hidden hover:border-[#CF9690]/60 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-25px_rgba(207,150,144,0.35)] transition-all duration-300"
+                className="group relative flex flex-col justify-between rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] backdrop-blur-xl overflow-hidden hover:border-[#D6B56C]/45 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-25px_rgba(214,181,108,0.25)] transition-all duration-300"
               >
                 {/* Card Content */}
                 <div className="p-6 flex flex-col flex-1 justify-between">
                   <div>
                     {/* Top Header Row: Domain Tag & GitHub Link */}
                     <div className="flex items-center justify-between gap-3 mb-4">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#3E3843]/60 border border-[#9D767E]/30 px-3 py-1 text-xs font-semibold text-[#CF9690]">
-                        <Layers className="w-3.5 h-3.5 text-[#CF9690]" />
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 px-3 py-1 text-xs font-semibold text-[#D6B56C]">
+                        <Layers className="w-3.5 h-3.5 text-[#D6B56C]" />
                         {project.domainLabel}
                       </span>
 
@@ -124,35 +124,35 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full bg-[#3E3843]/40 border border-[#665B6D]/30 text-[#C9BCC4] hover:text-[#FEF3ED] hover:bg-[#785255] hover:border-[#CF9690]/50 transition-all shadow-sm cursor-pointer"
+                        className="p-2 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 text-[#AEBCC7] hover:text-[#F4F1E8] hover:border-[#D6B56C]/45 transition-all shadow-sm cursor-pointer"
                         aria-label={`View ${project.title} on GitHub`}
                       >
                         <Github className="w-4 h-4" />
                       </a>
                     </div>
 
-                    <h3 className="text-xl font-bold text-[#FEF3ED] group-hover:text-[#CF9690] transition-colors mb-2">
+                    <h3 className="text-xl font-bold text-[#F4F1E8] group-hover:text-[#D6B56C] transition-colors mb-2">
                       {project.title}
                     </h3>
 
-                    <p className="text-sm text-[#E6D8DB]/80 leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-sm text-[#AEBCC7] leading-relaxed mb-4 line-clamp-3">
                       {project.description}
                     </p>
                   </div>
 
                   <div>
                     {/* Mentor Credit */}
-                    <div className="flex items-center gap-2 mb-4 text-xs text-[#CF9690]/90 font-medium">
-                      <User className="w-3.5 h-3.5 text-[#CF9690]" />
+                    <div className="flex items-center gap-2 mb-4 text-xs text-[#8FAFC4] font-medium">
+                      <User className="w-3.5 h-3.5 text-[#D6B56C]" />
                       <span>Mentor: {project.mentor}</span>
                     </div>
 
                     {/* Tech Badges */}
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#665B6D]/20">
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#AEBCC7]/15">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2.5 py-0.5 rounded-full bg-[#3E3843]/60 border border-[#665B6D]/30 text-[11px] font-medium text-[#E8C0BB]"
+                          className="px-2.5 py-0.5 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 text-[11px] font-medium text-[#AEBCC7]"
                         >
                           {tag}
                         </span>
@@ -170,26 +170,26 @@ export default function Projects() {
           <div className="mt-12 text-center">
             <button
               onClick={() => setVisibleCount((prev) => prev + 6)}
-              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#60434A] via-[#785255] to-[#9D767E] border border-[#CF9690]/40 px-8 py-3.5 text-sm font-semibold text-[#FEF3ED] shadow-lg shadow-[#60434A]/30 hover:brightness-110 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2.5 rounded-full border border-[#D6B56C]/45 bg-[#102535]/55 hover:bg-[#102535]/80 hover:border-[#E5C982] px-8 py-3.5 text-sm font-semibold text-[#F4F1E8] shadow-lg transition-all cursor-pointer"
             >
               <span>Show More Projects</span>
-              <span className="text-xs bg-[#1B1620]/60 px-2 py-0.5 rounded-full border border-[#CF9690]/30 text-[#CF9690]">
+              <span className="text-xs bg-[#07131F] px-2 py-0.5 rounded-full border border-[#D6B56C]/30 text-[#D6B56C]">
                 +{filteredProjects.length - visibleCount}
               </span>
-              <ChevronDown className="w-4 h-4 text-[#CF9690] animate-bounce" />
+              <ChevronDown className="w-4 h-4 text-[#D6B56C] animate-bounce" />
             </button>
           </div>
         )}
 
         {/* GitHub Org Link */}
         <div className="mt-12 text-center">
-          <p className="text-sm text-[#C9BCC4]">
+          <p className="text-sm text-[#718394]">
             Looking for all repositories?{" "}
             <a
               href="https://github.com/orgs/opencodeiiita/repositories"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[#CF9690] hover:text-[#FEF3ED] font-semibold underline underline-offset-4"
+              className="inline-flex items-center gap-1 text-[#D6B56C] hover:text-[#E5C982] font-semibold underline underline-offset-4"
             >
               Explore all OpenCode repos on GitHub
               <ExternalLink className="w-3.5 h-3.5" />
