@@ -12,7 +12,7 @@ export function Sponsors() {
   return (
     <section
       id="sponsors"
-      className="relative w-full py-24 bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.22),rgba(15,8,25,0.95)45%,rgba(9,5,16,1)),linear-gradient(180deg,#090514_0%,#0c061a_50%,#090514_100%)] border-b border-purple-900/30 scroll-mt-20 overflow-hidden"
+      className="relative w-full py-24 bg-[radial-gradient(circle_at_50%_0%,rgba(102,91,109,0.22),rgba(41,25,32,0.95)_45%,rgba(27,22,32,1)),linear-gradient(180deg,#1B1620_0%,#291920_50%,#1B1620_100%)] border-b border-[#665B6D]/30 scroll-mt-20 overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
@@ -21,9 +21,9 @@ export function Sponsors() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-400/30 bg-purple-950/40 text-xs font-semibold uppercase tracking-[0.2em] text-purple-300 backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#9D767E]/40 bg-[#291920]/70 text-xs font-semibold uppercase tracking-[0.2em] text-[#FEF3ED] backdrop-blur-md"
           >
-            <Award className="w-3.5 h-3.5 text-purple-400" />
+            <Award className="w-3.5 h-3.5 text-[#CF9690]" />
             <span>Ecosystem Leaders</span>
           </motion.div>
 
@@ -31,7 +31,7 @@ export function Sponsors() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-purple-300 via-fuchsia-300 to-indigo-300 drop-shadow-[0_0_22px_rgba(168,85,247,0.35)]"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FEF3ED] via-[#CF9690] to-[#E8C0BB] drop-shadow-[0_0_22px_rgba(207,150,144,0.35)]"
           >
             Sponsors &amp; Partners
           </motion.h2>
@@ -39,7 +39,7 @@ export function Sponsors() {
           <div className="mt-4">
             <BlurText
               text="Backed by the most influential developer platforms, cloud providers, and innovation boards worldwide."
-              className="text-base sm:text-lg text-purple-100/85 max-w-2xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg text-[#E6D8DB]/85 max-w-2xl mx-auto leading-relaxed"
               delay={25}
             />
           </div>
@@ -50,17 +50,17 @@ export function Sponsors() {
           {sponsorTiers.map((tierGroup, groupIdx) => (
             <div key={tierGroup.category} className="space-y-6">
               {/* Category Subheading */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-purple-500/20 gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-[#665B6D]/30 gap-2">
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white flex items-center gap-2.5">
-                    <Sparkles className="w-4 h-4 text-purple-400" />
+                  <h3 className="text-xl sm:text-2xl font-bold text-[#FEF3ED] flex items-center gap-2.5">
+                    <Sparkles className="w-4 h-4 text-[#CF9690]" />
                     {tierGroup.category}
                   </h3>
-                  <p className="text-xs sm:text-sm text-gray-400 mt-1">
+                  <p className="text-xs sm:text-sm text-[#C9BCC4] mt-1">
                     {tierGroup.description}
                   </p>
                 </div>
-                <span className="self-start sm:self-auto text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-purple-900/40 text-purple-300 border border-purple-500/30">
+                <span className="self-start sm:self-auto text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-[#60434A]/40 text-[#FEF3ED] border border-[#9D767E]/40">
                   {tierGroup.badge}
                 </span>
               </div>
@@ -84,17 +84,17 @@ export function Sponsors() {
                     transition={{ duration: 0.4, delay: (groupIdx * 2 + idx) * 0.08 }}
                   >
                     <SpotlightCard
-                      spotlightColor="rgba(168, 85, 247, 0.25)"
-                      className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-purple-300/60 hover:shadow-[0_20px_70px_-35px_rgba(168,85,247,0.55)] ${
+                      spotlightColor="rgba(207, 150, 144, 0.2)"
+                      className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#CF9690]/60 hover:shadow-[0_20px_50px_-25px_rgba(207,150,144,0.35)] ${
                         sponsor.highlight
-                          ? "border-purple-400/60 bg-gradient-to-b from-purple-900/30 via-[#160c2b] to-[#0f071e]"
-                          : "border-white/10 bg-white/5"
+                          ? "border-[#CF9690]/60 bg-gradient-to-b from-[#60434A]/40 via-[#291920] to-[#1B1620]"
+                          : "border-[#665B6D]/30 bg-gradient-to-b from-[#291920]/80 via-[#312C34]/40 to-[#1B1620]/90"
                       }`}
                     >
                       <div>
                         {/* Tier Badge */}
                         <div className="flex items-center justify-between gap-3 mb-4">
-                          <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-purple-200">
+                          <span className="rounded-full bg-[#3E3843]/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#E8C0BB]">
                             {sponsor.tier}
                           </span>
                           {sponsor.link && (
@@ -102,7 +102,7 @@ export function Sponsors() {
                               href={sponsor.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-xs text-purple-300/70 hover:text-purple-200 transition-colors"
+                              className="text-xs text-[#CF9690]/80 hover:text-[#FEF3ED] transition-colors"
                             >
                               Visit website &rarr;
                             </a>
@@ -120,14 +120,14 @@ export function Sponsors() {
                           />
                         </div>
 
-                        <p className="mt-3 text-sm text-gray-300 leading-relaxed">
+                        <p className="mt-3 text-sm text-[#E6D8DB]/80 leading-relaxed">
                           {sponsor.description}
                         </p>
                       </div>
 
                       {/* Engagement note */}
-                      <div className="mt-5 pt-3 border-t border-white/5 flex items-center gap-2 text-xs text-purple-200/90 font-medium">
-                        <span className="h-2 w-2 rounded-full bg-purple-400 shadow-[0_0_0_3px_rgba(168,85,247,0.25)] shrink-0" />
+                      <div className="mt-5 pt-3 border-t border-[#665B6D]/20 flex items-center gap-2 text-xs text-[#CF9690]/90 font-medium">
+                        <span className="h-2 w-2 rounded-full bg-[#CF9690] shadow-[0_0_0_3px_rgba(207,150,144,0.25)] shrink-0" />
                         <span>{sponsor.engagement}</span>
                       </div>
                     </SpotlightCard>
@@ -144,17 +144,17 @@ export function Sponsors() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-20 text-center max-w-2xl mx-auto rounded-2xl border border-purple-400/30 bg-purple-950/30 p-8 backdrop-blur-md"
+          className="mt-20 text-center max-w-2xl mx-auto rounded-2xl border border-[#9D767E]/40 bg-[#291920]/60 p-8 backdrop-blur-md shadow-lg shadow-[#291920]/40"
         >
-          <h4 className="text-xl sm:text-2xl font-bold text-white mb-2">
+          <h4 className="text-xl sm:text-2xl font-bold text-[#FEF3ED] mb-2">
             Want to see your company here?
           </h4>
-          <p className="text-purple-100/80 text-sm sm:text-base mb-6 leading-relaxed">
+          <p className="text-[#E6D8DB]/85 text-sm sm:text-base mb-6 leading-relaxed">
             Join our 2026 sponsorship cohort. Connect with 1,000+ student developers and champion open source innovation.
           </p>
           <Link
             href="/sponsor-registration"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-500 px-8 py-3 text-sm sm:text-base font-semibold text-white shadow-lg shadow-purple-600/30 hover:brightness-110 transition-all"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#60434A] via-[#785255] to-[#9D767E] px-8 py-3 text-sm sm:text-base font-semibold text-[#FEF3ED] border border-[#CF9690]/30 shadow-lg shadow-[#60434A]/40 hover:shadow-[#785255]/50 hover:brightness-110 transition-all cursor-pointer"
           >
             Become a Sponsor Partner
             <ArrowRight className="w-4 h-4" />

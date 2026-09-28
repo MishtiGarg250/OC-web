@@ -114,6 +114,29 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+
+  /* OpenCode 2026 Brand Color Palette */
+  --color-brand-deep-plum: #291920;
+  --color-brand-dark-plum: #312C34;
+  --color-brand-dusty-purple: #665B6D;
+  --color-brand-dusty-rose: #9D767E;
+  --color-brand-soft-peach: #CF9690;
+  --color-brand-ivory: #FEF3ED;
+
+  --color-brand-charcoal-plum: #3E3843;
+  --color-brand-muted-lavender: #7D6C7E;
+  --color-brand-sakura-dark: #60434A;
+  --color-brand-sakura: #785255;
+  --color-brand-warm-rose: #B88784;
+  --color-brand-light-blush: #E8C0BB;
+
+  --color-brand-night: #1B1620;
+  --color-brand-slate: #4A4553;
+  --color-brand-muted-gray: #8E8391;
+  --color-brand-warm-gray: #C9BCC4;
+  --color-brand-mist: #E6D8DB;
+  --color-brand-snow: #F9F7F5;
+
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

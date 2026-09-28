@@ -52,13 +52,13 @@ export default function LoadingOverlay() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_50%_20%,rgba(149,117,205,0.22),rgba(18,12,27,0.94)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#130b26_0%,#0d071f_55%,#080512_100%)]"
+          className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[radial-gradient(circle_at_50%_20%,rgba(207,150,144,0.18),rgba(41,25,32,0.95)_40%,rgba(27,22,32,0.98)),linear-gradient(180deg,#1B1620_0%,#291920_55%,#1B1620_100%)]"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.16),transparent_55%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(207,150,144,0.18),transparent_55%)]" />
           </div>
           <div className="relative flex flex-col items-center gap-6 px-6 text-center">
             <Player
@@ -66,9 +66,9 @@ export default function LoadingOverlay() {
               loop
               src="/code-dark.json"
               style={{ height: "380px", width: "380px" }}
-              className="drop-shadow-[0_20px_60px_rgba(168,85,247,0.35)]"
+              className="drop-shadow-[0_20px_60px_rgba(207,150,144,0.3)]"
             />
-            <p className="text-sm uppercase tracking-[0.2em] text-purple-100/80">
+            <p className="text-sm uppercase tracking-[0.2em] text-[#FEF3ED]/80 font-medium">
               Loading OpenCode experience
             </p>
           </div>

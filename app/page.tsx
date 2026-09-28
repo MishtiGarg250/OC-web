@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen antialiased bg-[radial-gradient(circle_at_50%_0%,rgba(149,117,205,0.24),rgba(18,12,27,0.92)38%,rgba(10,6,20,0.98)),linear-gradient(180deg,#130b26_0%,#0d071f_55%,#090512_100%)] overflow-x-hidden">
+    <main className="min-h-screen antialiased bg-[radial-gradient(circle_at_50%_0%,rgba(102,91,109,0.25),rgba(41,25,32,0.95)_40%,rgba(27,22,32,1)),linear-gradient(180deg,#1B1620_0%,#291920_50%,#1B1620_100%)] overflow-x-hidden">
       <LoadingOverlay />
       <HeroSection />
       <StatsRibbon />
