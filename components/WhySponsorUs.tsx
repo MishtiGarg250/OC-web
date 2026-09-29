@@ -99,11 +99,11 @@ export default function WhySponsorUs() {
                 className="flex group"
               >
                 <SpotlightCard
-                  spotlightColor="rgba(214, 181, 108, 0.15)"
-                  className="flex flex-col justify-between rounded-2xl bg-[#102535] border border-[#AEBCC7]/15 p-7 shadow-lg shadow-[#07131F]/50 hover:border-[#D6B56C]/45 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-20px_rgba(214,181,108,0.2)] transition-all duration-300 w-full"
+                  spotlightColor="rgba(143, 175, 196, 0.22)"
+                  className="flex flex-col justify-between rounded-2xl bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 border border-[#8FAFC4]/25 p-7 backdrop-blur-xl shadow-[0_16px_40px_-15px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:border-[#D6B56C]/50 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-20px_rgba(143,175,196,0.25)] transition-all duration-300 w-full"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2A] border border-[#AEBCC7]/15 flex items-center justify-center text-[#D6B56C] mb-5 group-hover:scale-110 group-hover:border-[#D6B56C]/45 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 flex items-center justify-center text-[#D6B56C] mb-5 group-hover:scale-110 group-hover:border-[#D6B56C]/50 transition-all duration-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
                       <Icon className="w-6 h-6" />
                     </div>
                     <h3 className="text-xl font-bold text-[#F4F1E8] mb-3 group-hover:text-[#D6B56C] transition-colors">
@@ -114,7 +114,7 @@ export default function WhySponsorUs() {
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#AEBCC7]/15 flex items-center text-xs font-semibold text-[#718394] uppercase tracking-wider">
+                  <div className="mt-6 pt-4 border-t border-[#8FAFC4]/15 flex items-center text-xs font-semibold text-[#8FAFC4] uppercase tracking-wider">
                     Pillar #{index + 1}
                   </div>
                 </SpotlightCard>
@@ -131,7 +131,7 @@ export default function WhySponsorUs() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 text-center max-w-3xl mx-auto"
         >
-          <div className="rounded-2xl border border-[#AEBCC7]/15 bg-[#102535]/80 p-8 sm:p-10 shadow-xl shadow-[#07131F]/80 backdrop-blur-md">
+          <div className="rounded-2xl border border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 p-8 sm:p-10 shadow-[0_20px_60px_-20px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] backdrop-blur-xl">
             <h3 className="text-2xl sm:text-3xl font-extrabold text-[#F4F1E8] mb-3">
               Co-create the next flagship track
             </h3>

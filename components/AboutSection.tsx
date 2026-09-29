@@ -83,11 +83,11 @@ export default function AboutSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.12 }}
-                className="group relative flex flex-col justify-between rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] p-6 backdrop-blur-md transition-all duration-300 hover:border-[#D6B56C]/45 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-20px_rgba(214,181,108,0.2)]"
+                className="group relative flex flex-col justify-between rounded-2xl border border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 p-6 backdrop-blur-xl transition-all duration-300 hover:border-[#D6B56C]/50 hover:-translate-y-1.5 shadow-[0_16px_40px_-15px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:shadow-[0_20px_50px_-20px_rgba(143,175,196,0.25)]"
               >
-                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_20%_20%,rgba(214,181,108,0.12),transparent_50%)] pointer-events-none" />
+                <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(circle_at_20%_20%,rgba(143,175,196,0.15),transparent_50%)] pointer-events-none" />
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-[#0B1C2A] border border-[#AEBCC7]/15 flex items-center justify-center text-[#D6B56C] mb-5 group-hover:scale-110 group-hover:border-[#D6B56C]/45 transition-all duration-300">
+                  <div className="w-12 h-12 rounded-xl bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 flex items-center justify-center text-[#D6B56C] mb-5 group-hover:scale-110 group-hover:border-[#D6B56C]/50 transition-all duration-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
                     <Icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-bold text-[#F4F1E8] mb-2.5 group-hover:text-[#D6B56C] transition-colors">
@@ -98,7 +98,7 @@ export default function AboutSection() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[#AEBCC7]/15 flex items-center text-xs font-semibold text-[#718394] uppercase tracking-wider">
+                <div className="mt-6 pt-4 border-t border-[#8FAFC4]/15 flex items-center text-xs font-semibold text-[#8FAFC4] uppercase tracking-wider">
                   <Terminal className="w-3.5 h-3.5 mr-1.5 text-[#D6B56C]" />
                   GeekHaven IIITA
                 </div>

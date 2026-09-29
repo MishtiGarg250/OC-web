@@ -176,18 +176,18 @@ export default function HowItWorks() {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="group relative flex flex-col justify-between rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] p-7 backdrop-blur-md transition-all duration-300 hover:border-[#D6B56C]/45 hover:-translate-y-2 hover:shadow-[0_20px_50px_-25px_rgba(214,181,108,0.25)] overflow-hidden"
+                  className="group relative flex flex-col justify-between rounded-2xl border border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 p-7 backdrop-blur-xl transition-all duration-300 hover:border-[#D6B56C]/50 hover:-translate-y-2 shadow-[0_16px_40px_-15px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:shadow-[0_20px_50px_-20px_rgba(143,175,196,0.25)] overflow-hidden"
                 >
-                  <div className="absolute top-3 right-4 text-6xl font-black text-[#718394]/15 group-hover:text-[#D6B56C]/20 transition-colors pointer-events-none select-none font-mono">
+                  <div className="absolute top-3 right-4 text-6xl font-black text-[#8FAFC4]/10 group-hover:text-[#D6B56C]/20 transition-colors pointer-events-none select-none font-mono">
                     {step.number}
                   </div>
 
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2A] border border-[#AEBCC7]/15 flex items-center justify-center text-[#D6B56C] mb-6 group-hover:scale-110 group-hover:border-[#D6B56C]/45 transition-all duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 flex items-center justify-center text-[#D6B56C] mb-6 group-hover:scale-110 group-hover:border-[#D6B56C]/50 transition-all duration-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
                       <Icon className="w-6 h-6" />
                     </div>
 
-                    <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 text-[11px] font-bold text-[#D6B56C] uppercase tracking-wider mb-2">
+                    <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 text-[11px] font-bold text-[#D6B56C] uppercase tracking-wider mb-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
                       Step {step.number}
                     </div>
 
@@ -200,7 +200,7 @@ export default function HowItWorks() {
                     </p>
                   </div>
 
-                  <div className="mt-8 pt-4 border-t border-[#AEBCC7]/15 flex items-center justify-between text-xs text-[#718394] font-medium">
+                  <div className="mt-8 pt-4 border-t border-[#8FAFC4]/15 flex items-center justify-between text-xs text-[#8FAFC4] font-medium">
                     <span>
                       {activeTab === "contributors" ? "Participant Track" : "Sponsor Track"}
                     </span>

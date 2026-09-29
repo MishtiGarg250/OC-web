@@ -102,7 +102,7 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="group relative flex flex-col justify-between rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] p-7 backdrop-blur-md hover:border-[#D6B56C]/45 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-20px_rgba(214,181,108,0.2)] transition-all duration-300"
+              className="group relative flex flex-col justify-between rounded-2xl border border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 p-7 backdrop-blur-xl shadow-[0_16px_40px_-15px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:border-[#D6B56C]/50 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-20px_rgba(143,175,196,0.25)] transition-all duration-300"
             >
               <div>
                 {/* Header with avatar & quote mark */}
@@ -126,7 +126,7 @@ export function Testimonials() {
                     </div>
                   </div>
 
-                  <Quote className="w-8 h-8 text-[#AEBCC7]/20 rotate-180 shrink-0" />
+                  <Quote className="w-8 h-8 text-[#8FAFC4]/25 rotate-180 shrink-0" />
                 </div>
 
                 {/* Quote Text */}
@@ -136,13 +136,13 @@ export function Testimonials() {
               </div>
 
               {/* Tag / Metrics Badge */}
-              <div className="pt-4 border-t border-[#AEBCC7]/15 flex items-center justify-between text-xs">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 text-[#D6B56C] font-semibold text-[11px]">
+              <div className="pt-4 border-t border-[#8FAFC4]/15 flex items-center justify-between text-xs">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 text-[#D6B56C] font-semibold text-[11px] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
                   <Sparkles className="w-3 h-3 text-[#D6B56C]" />
                   {item.prsOrPoints || item.tag}
                 </span>
 
-                <span className="text-[#718394] text-[11px] uppercase tracking-wider font-semibold">
+                <span className="text-[#8FAFC4] text-[11px] uppercase tracking-wider font-semibold">
                   {item.tag}
                 </span>
               </div>

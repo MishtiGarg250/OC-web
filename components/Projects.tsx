@@ -108,14 +108,14 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35 }}
-                className="group relative flex flex-col justify-between rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] backdrop-blur-xl overflow-hidden hover:border-[#D6B56C]/45 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-25px_rgba(214,181,108,0.25)] transition-all duration-300"
+                className="group relative flex flex-col justify-between rounded-2xl border border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 backdrop-blur-xl overflow-hidden hover:border-[#D6B56C]/50 hover:-translate-y-1.5 shadow-[0_16px_40px_-15px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:shadow-[0_20px_50px_-20px_rgba(143,175,196,0.25)] transition-all duration-300"
               >
                 {/* Card Content */}
                 <div className="p-6 flex flex-col flex-1 justify-between">
                   <div>
                     {/* Top Header Row: Domain Tag & GitHub Link */}
                     <div className="flex items-center justify-between gap-3 mb-4">
-                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 px-3 py-1 text-xs font-semibold text-[#D6B56C]">
+                      <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 px-3 py-1 text-xs font-semibold text-[#D6B56C] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
                         <Layers className="w-3.5 h-3.5 text-[#D6B56C]" />
                         {project.domainLabel}
                       </span>
@@ -124,7 +124,7 @@ export default function Projects() {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 text-[#AEBCC7] hover:text-[#F4F1E8] hover:border-[#D6B56C]/45 transition-all shadow-sm cursor-pointer"
+                        className="p-2 rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 text-[#AEBCC7] hover:text-[#F4F1E8] hover:border-[#D6B56C]/50 transition-all shadow-sm cursor-pointer"
                         aria-label={`View ${project.title} on GitHub`}
                       >
                         <Github className="w-4 h-4" />
@@ -148,11 +148,11 @@ export default function Projects() {
                     </div>
 
                     {/* Tech Badges */}
-                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#AEBCC7]/15">
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-[#8FAFC4]/15">
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2.5 py-0.5 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 text-[11px] font-medium text-[#AEBCC7]"
+                          className="px-2.5 py-0.5 rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 text-[11px] font-medium text-[#AEBCC7]"
                         >
                           {tag}
                         </span>

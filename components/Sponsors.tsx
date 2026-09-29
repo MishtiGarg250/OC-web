@@ -87,17 +87,17 @@ export function Sponsors() {
                     transition={{ duration: 0.4, delay: (groupIdx * 2 + idx) * 0.08 }}
                   >
                     <SpotlightCard
-                      spotlightColor="rgba(214, 181, 108, 0.15)"
-                      className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#D6B56C]/45 hover:shadow-[0_20px_45px_-20px_rgba(214,181,108,0.2)] ${
+                      spotlightColor="rgba(143, 175, 196, 0.22)"
+                      className={`group relative flex h-full flex-col justify-between overflow-hidden rounded-2xl border p-6 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1.5 ${
                         sponsor.highlight
-                          ? "border-[#D6B56C]/40 bg-gradient-to-b from-[#102535] via-[#102535]/90 to-[#0B1C2A]"
-                          : "border-[#AEBCC7]/15 bg-[#102535]"
+                          ? "border-[#D6B56C]/50 bg-gradient-to-b from-[#14334C]/90 via-[#102535]/80 to-[#0A1A28]/90 shadow-[0_20px_50px_-20px_rgba(214,181,108,0.3),inset_0_1px_1px_rgba(255,255,255,0.12)] hover:border-[#D6B56C]/75 hover:shadow-[0_25px_55px_-15px_rgba(214,181,108,0.35)]"
+                          : "border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 shadow-[0_16px_40px_-15px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:border-[#D6B56C]/50 hover:shadow-[0_20px_50px_-20px_rgba(143,175,196,0.25)]"
                       }`}
                     >
                       <div>
                         {/* Tier Badge */}
                         <div className="flex items-center justify-between gap-3 mb-4">
-                          <span className="rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#D6B56C]">
+                          <span className="rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#D6B56C] shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
                             {sponsor.tier}
                           </span>
                           {sponsor.link && (
@@ -112,8 +112,8 @@ export function Sponsors() {
                           )}
                         </div>
 
-                        {/* Logo Container */}
-                        <div className="relative my-4 flex h-16 items-center justify-start">
+                        {/* Logo Container with frosted glass dock */}
+                        <div className="relative my-4 flex h-16 items-center justify-start rounded-xl bg-[#07131F]/45 border border-[#8FAFC4]/15 px-4 py-2 backdrop-blur-sm">
                           <Image
                             src={sponsor.logo}
                             alt={sponsor.name}
@@ -129,7 +129,7 @@ export function Sponsors() {
                       </div>
 
                       {/* Engagement note */}
-                      <div className="mt-5 pt-3 border-t border-[#AEBCC7]/15 flex items-center gap-2 text-xs text-[#D6B56C] font-medium">
+                      <div className="mt-5 pt-3 border-t border-[#8FAFC4]/15 flex items-center gap-2 text-xs text-[#D6B56C] font-medium">
                         <span className="h-2 w-2 rounded-full bg-[#D6B56C] shadow-[0_0_0_3px_rgba(214,181,108,0.25)] shrink-0" />
                         <span>{sponsor.engagement}</span>
                       </div>
@@ -147,7 +147,7 @@ export function Sponsors() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-20 text-center max-w-2xl mx-auto rounded-2xl border border-[#AEBCC7]/15 bg-[#102535]/80 p-8 backdrop-blur-md shadow-xl shadow-[#07131F]/80"
+          className="mt-20 text-center max-w-2xl mx-auto rounded-2xl border border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 p-8 backdrop-blur-xl shadow-[0_20px_60px_-20px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)]"
         >
           <h4 className="text-xl sm:text-2xl font-bold text-[#F4F1E8] mb-2">
             Want to see your company here?
