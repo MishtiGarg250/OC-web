@@ -142,7 +142,7 @@ export default function CinematicIntro() {
           <div className="absolute inset-0 z-0 overflow-hidden">
             <video
               ref={videoRef}
-              src="/videos/JAPANESE2.mp4"
+              src="/videos/beginning.mp4"
               poster="/images/hero-japanese-bg.jpg"
               autoPlay
               playsInline

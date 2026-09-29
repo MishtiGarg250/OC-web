@@ -70,8 +70,7 @@ function HeroSection() {
           onEnded={handleVideoEnded}
           className="w-full h-full object-cover object-center pointer-events-none"
         >
-          <source src="/videos/ENTRY.mp4" type="video/mp4" />
-          <source src="/videos/ENTRY.mov" type="video/quicktime" />
+          <source src="/videos/ending.mp4" type="video/mp4" />
         </video>
         {/* Subtle dark tint to ensure headline text readability */}
         <div className="absolute inset-0 bg-black/40 pointer-events-none" />
