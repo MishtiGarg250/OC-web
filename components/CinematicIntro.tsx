@@ -239,10 +239,10 @@ export default function CinematicIntro() {
             <button
               type="button"
               onClick={handleEnter}
-              className="font-cinematic group inline-flex items-center gap-3.5 bg-transparent border-none p-2 text-xl sm:text-2xl md:text-3xl font-semibold sm:font-bold tracking-[0.18em] sm:tracking-[0.24em] text-[#F4F1E8] drop-shadow-[0_0_20px_rgba(255,255,255,0.85)] hover:drop-shadow-[0_0_35px_rgba(255,255,255,1)] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer select-none"
+              className="font-sans group inline-flex items-center gap-3.5 bg-transparent border-none p-2 text-xl sm:text-2xl md:text-3xl font-bold tracking-wide text-[#F4F1E8] drop-shadow-[0_2px_15px_rgba(7,19,31,0.9)] hover:text-[#D6B56C] hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer select-none"
             >
               <span>Enter OpenCode World</span>
-              <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 text-[#F4F1E8] drop-shadow-[0_0_15px_rgba(255,255,255,0.9)] transition-transform duration-300 group-hover:translate-x-2" />
+              <ArrowRight className="h-5 w-5 sm:h-6 sm:w-6 text-[#D6B56C] transition-transform duration-300 group-hover:translate-x-2" />
             </button>
           </motion.div>
         </motion.div>
