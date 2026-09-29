@@ -134,24 +134,25 @@ function HeroSection() {
           </div>
         </motion.div>
 
-        {/* High-Impact Headline (Experiment: Harry Potter Font) */}
+        {/* High-Impact Headline (Experiment: Kanji Radical Asian Font) */}
         {/* REVERT NOTE:
-            - To revert to standard font: change "font-harry" to "font-sans", text-5xl sm:text-7xl md:text-8xl to text-4xl sm:text-6xl md:text-7xl, and leading to leading-[1.08]
-            - To switch to Japanese Hotsuka brush: change "font-harry" to "font-hotsuka"
-            - To switch to Japanese Henshin: change "font-harry" to "font-henshin"
+            - To revert to standard clean font: change "font-kanji" to "font-sans", text-4xl sm:text-6xl md:text-7xl, leading-[1.08]
+            - To switch to Harry Potter font: change "font-kanji" to "font-harry"
+            - To switch to Japanese Hotsuka brush: change "font-kanji" to "font-hotsuka"
+            - To switch to Japanese Henshin font: change "font-kanji" to "font-henshin"
         */}
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="font-harry mt-8 text-5xl sm:text-7xl md:text-8xl lg:text-[5.5rem] font-bold leading-[1.12] tracking-[0.04em] sm:tracking-[0.06em] text-[#F4F1E8] drop-shadow-[0_4px_30px_rgba(7,19,31,0.95)]"
+          className="font-kanji mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-bold leading-[1.2] tracking-wide text-[#F4F1E8] drop-shadow-[0_4px_30px_rgba(7,19,31,0.95)]"
         >
           Start Your{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C]">
             Open Source Odyssey
           </span>
           <br />
-          <span className="text-3xl sm:text-5xl md:text-6xl font-semibold text-[#D9E2E8]">
+          <span className="text-2xl sm:text-4xl md:text-5xl font-semibold text-[#D9E2E8]">
             Fueling the Next Wave of Open Tech
           </span>
         </motion.h1>
@@ -174,9 +175,9 @@ function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45 }}
-          className="mt-6"
+          className="mt-5"
         >
-          <h3 className="font-harry text-lg sm:text-2xl md:text-3xl font-bold tracking-[0.12em] sm:tracking-[0.16em] text-[#8FAFC4] drop-shadow-[0_2px_12px_rgba(7,19,31,0.9)] select-none">
+          <h3 className="font-kanji text-base sm:text-lg md:text-xl font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#8FAFC4] drop-shadow-[0_2px_12px_rgba(7,19,31,0.9)] select-none">
             Open Source <span className="text-[#D6B56C] mx-1.5">•</span> Open Minds
           </h3>
         </motion.div>
