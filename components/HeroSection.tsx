@@ -134,19 +134,20 @@ function HeroSection() {
           </div>
         </motion.div>
 
-        {/* High-Impact Headline */}
+        {/* High-Impact Headline (Experiment: Japanese Henshin Font) */}
+        {/* REVERT NOTE: To revert back to previous standard font, change "font-henshin" to "font-sans" and leading to leading-[1.08] */}
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="mt-8 text-4xl sm:text-6xl md:text-7xl font-black leading-[1.08] tracking-tight text-[#F4F1E8] drop-shadow-[0_4px_30px_rgba(7,19,31,0.95)]"
+          className="font-henshin mt-8 text-4xl sm:text-6xl md:text-7xl font-bold leading-[1.18] tracking-[0.03em] text-[#F4F1E8] drop-shadow-[0_4px_30px_rgba(7,19,31,0.95)]"
         >
           Start Your{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C]">
             Open Source Odyssey
           </span>
           <br />
-          <span className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#D9E2E8]">
+          <span className="text-2xl sm:text-4xl md:text-5xl font-semibold text-[#D9E2E8]">
             Fueling the Next Wave of Open Tech
           </span>
         </motion.h1>
@@ -171,7 +172,7 @@ function HeroSection() {
           transition={{ duration: 0.8, delay: 0.45 }}
           className="mt-5"
         >
-          <h3 className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-[0.25em] sm:tracking-[0.3em] text-[#8FAFC4] drop-shadow-[0_2px_12px_rgba(7,19,31,0.9)] select-none">
+          <h3 className="font-henshin text-base sm:text-lg md:text-xl font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#8FAFC4] drop-shadow-[0_2px_12px_rgba(7,19,31,0.9)] select-none">
             Open Source <span className="text-[#D6B56C] mx-1.5">•</span> Open Minds
           </h3>
         </motion.div>
