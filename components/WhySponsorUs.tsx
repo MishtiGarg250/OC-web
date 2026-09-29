@@ -49,7 +49,7 @@ export default function WhySponsorUs() {
   return (
     <section
       id="why-sponsor"
-      className="relative py-24 bg-[radial-gradient(circle_at_50%_0%,rgba(102,91,109,0.22),rgba(41,25,32,0.95)_45%,rgba(27,22,32,1)),linear-gradient(180deg,#1B1620_0%,#291920_50%,#1B1620_100%)] border-b border-[#665B6D]/30 scroll-mt-20 overflow-hidden"
+      className="relative py-24 bg-[#07131F] border-b border-[#AEBCC7]/15 scroll-mt-20 overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -58,9 +58,9 @@ export default function WhySponsorUs() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#9D767E]/40 bg-[#291920]/70 text-xs font-semibold uppercase tracking-[0.2em] text-[#FEF3ED] backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#AEBCC7]/15 bg-[#102535]/55 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md"
           >
-            <ShieldCheck className="w-3.5 h-3.5 text-[#CF9690]" />
+            <ShieldCheck className="w-3.5 h-3.5 text-[#D6B56C]" />
             <span>Value For Partners</span>
           </motion.div>
 
@@ -68,15 +68,18 @@ export default function WhySponsorUs() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#FEF3ED] via-[#CF9690] to-[#E8C0BB] drop-shadow-[0_0_20px_rgba(207,150,144,0.35)]"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#F4F1E8] tracking-tight"
           >
-            Why Sponsor OpenCode?
+            Why Sponsor{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C]">
+              OpenCode?
+            </span>
           </motion.h2>
 
           <div className="mt-4">
             <BlurText
               text="Join industry leaders who are championing open-source innovation, engaging with high-velocity developers, and securing premier technical talent."
-              className="text-base sm:text-lg text-[#E6D8DB]/85 leading-relaxed"
+              className="text-base sm:text-lg text-[#AEBCC7] leading-relaxed"
               delay={25}
             />
           </div>
@@ -93,25 +96,25 @@ export default function WhySponsorUs() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex"
+                className="flex group"
               >
                 <SpotlightCard
-                  spotlightColor="rgba(207, 150, 144, 0.2)"
-                  className="flex flex-col justify-between rounded-2xl bg-gradient-to-br from-[#291920]/90 to-[#1B1620]/95 border border-[#665B6D]/30 p-7 shadow-[0_20px_50px_-30px_rgba(207,150,144,0.3)] hover:border-[#CF9690]/60 hover:-translate-y-1.5 transition-all duration-300 w-full"
+                  spotlightColor="rgba(214, 181, 108, 0.15)"
+                  className="flex flex-col justify-between rounded-2xl bg-[#102535] border border-[#AEBCC7]/15 p-7 shadow-lg shadow-[#07131F]/50 hover:border-[#D6B56C]/45 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-20px_rgba(214,181,108,0.2)] transition-all duration-300 w-full"
                 >
                   <div>
-                    <div className="w-12 h-12 rounded-xl bg-[#60434A]/40 border border-[#9D767E]/35 flex items-center justify-center text-[#CF9690] mb-5">
+                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2A] border border-[#AEBCC7]/15 flex items-center justify-center text-[#D6B56C] mb-5 group-hover:scale-110 group-hover:border-[#D6B56C]/45 transition-all duration-300">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <h3 className="text-xl font-bold text-[#FEF3ED] mb-3">
+                    <h3 className="text-xl font-bold text-[#F4F1E8] mb-3 group-hover:text-[#D6B56C] transition-colors">
                       {pillar.title}
                     </h3>
-                    <p className="text-sm text-[#E6D8DB]/80 leading-relaxed">
+                    <p className="text-sm text-[#AEBCC7] leading-relaxed">
                       {pillar.description}
                     </p>
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-[#665B6D]/20 flex items-center text-xs font-semibold text-[#B88784]">
+                  <div className="mt-6 pt-4 border-t border-[#AEBCC7]/15 flex items-center text-xs font-semibold text-[#718394] uppercase tracking-wider">
                     Pillar #{index + 1}
                   </div>
                 </SpotlightCard>
@@ -128,16 +131,16 @@ export default function WhySponsorUs() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-16 text-center max-w-3xl mx-auto"
         >
-          <div className="rounded-2xl border border-[#9D767E]/40 bg-gradient-to-r from-[#60434A]/25 via-[#785255]/20 to-[#291920]/30 p-8 sm:p-10 shadow-[0_20px_60px_-30px_rgba(207,150,144,0.3)] backdrop-blur-md">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#FEF3ED] mb-3">
+          <div className="rounded-2xl border border-[#AEBCC7]/15 bg-[#102535]/80 p-8 sm:p-10 shadow-xl shadow-[#07131F]/80 backdrop-blur-md">
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-[#F4F1E8] mb-3">
               Co-create the next flagship track
             </h3>
-            <p className="text-[#E6D8DB]/90 text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
+            <p className="text-[#AEBCC7] text-sm sm:text-base mb-8 max-w-xl mx-auto leading-relaxed">
               We tailor deliverables around your technical goals—keynotes, challenge prizes, workshops, or talent pipelining. Tell us what outcomes matter most to your brand.
             </p>
             <Link
               href="/sponsor-registration"
-              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#60434A] via-[#785255] to-[#9D767E] px-8 py-3.5 text-sm sm:text-base font-semibold text-[#FEF3ED] border border-[#CF9690]/30 shadow-xl shadow-[#60434A]/40 hover:brightness-110 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D6B56C] to-[#E5CB8F] px-8 py-3.5 text-sm sm:text-base font-bold text-[#07131F] shadow-lg shadow-[#D6B56C]/25 hover:brightness-110 hover:shadow-[#D6B56C]/35 hover:scale-105 active:scale-95 transition-all cursor-pointer"
             >
               Craft a Custom Package
               <ArrowRight className="w-4 h-4" />

@@ -28,7 +28,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="relative w-full py-24 bg-[radial-gradient(circle_at_50%_0%,rgba(102,91,109,0.22),rgba(41,25,32,0.95)_45%,rgba(27,22,32,1)),linear-gradient(180deg,#1B1620_0%,#291920_50%,#1B1620_100%)] border-b border-[#665B6D]/30 scroll-mt-20 overflow-hidden"
+      className="relative w-full py-24 bg-[#07131F] border-b border-[#AEBCC7]/15 scroll-mt-20 overflow-hidden"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -37,9 +37,9 @@ export function Testimonials() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#9D767E]/40 bg-[#291920]/70 text-xs font-semibold uppercase tracking-[0.2em] text-[#FEF3ED] backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#AEBCC7]/15 bg-[#102535]/55 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md"
           >
-            <Heart className="w-3.5 h-3.5 text-[#CF9690]" />
+            <Heart className="w-3.5 h-3.5 text-[#D6B56C]" />
             <span>Wall of Love</span>
           </motion.div>
 
@@ -47,15 +47,17 @@ export function Testimonials() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#FEF3ED] via-[#CF9690] to-[#E8C0BB] drop-shadow-[0_0_20px_rgba(207,150,144,0.35)]"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#F4F1E8] tracking-tight"
           >
-            Community Stories
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C]">
+              Community Stories
+            </span>
           </motion.h2>
 
           <div className="mt-4">
             <BlurText
               text="Hear from our top leaderboard finishers, alumni who translated OpenCode PRs into internships, and corporate mentors."
-              className="text-base sm:text-lg text-[#E6D8DB]/85 max-w-2xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg text-[#AEBCC7] max-w-2xl mx-auto leading-relaxed"
               delay={25}
             />
           </div>
@@ -74,14 +76,14 @@ export function Testimonials() {
                 }}
                 className={`relative px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                   isActive
-                    ? "text-[#FEF3ED]"
-                    : "text-[#C9BCC4] hover:text-[#FEF3ED] bg-[#291920]/50 border border-[#665B6D]/30"
+                    ? "text-[#07131F]"
+                    : "text-[#AEBCC7] hover:text-[#F4F1E8] bg-[#102535]/55 border border-[#AEBCC7]/15 hover:border-[#D6B56C]/45"
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="testimonialFilterTab"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-[#60434A] via-[#785255] to-[#9D767E] shadow-md shadow-[#60434A]/40"
+                    className="absolute inset-0 rounded-full bg-[#D6B56C] shadow-md shadow-[#D6B56C]/30"
                     transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                   />
                 )}
@@ -100,13 +102,13 @@ export function Testimonials() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.08 }}
-              className="group relative flex flex-col justify-between rounded-2xl border border-[#665B6D]/30 bg-gradient-to-b from-[#291920]/90 via-[#312C34]/60 to-[#1B1620]/95 p-7 backdrop-blur-md hover:border-[#CF9690]/60 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_-25px_rgba(207,150,144,0.35)] transition-all duration-300"
+              className="group relative flex flex-col justify-between rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] p-7 backdrop-blur-md hover:border-[#D6B56C]/45 hover:-translate-y-1.5 hover:shadow-[0_20px_45px_-20px_rgba(214,181,108,0.2)] transition-all duration-300"
             >
               <div>
                 {/* Header with avatar & quote mark */}
                 <div className="flex items-start justify-between mb-5">
                   <div className="flex items-center gap-3">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#CF9690]/60 shadow-md">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#D6B56C]/50 shadow-md">
                       <Image
                         src={item.avatar}
                         alt={item.name}
@@ -115,32 +117,32 @@ export function Testimonials() {
                       />
                     </div>
                     <div>
-                      <h4 className="text-base font-bold text-[#FEF3ED] group-hover:text-[#CF9690] transition-colors">
+                      <h4 className="text-base font-bold text-[#F4F1E8] group-hover:text-[#D6B56C] transition-colors">
                         {item.name}
                       </h4>
-                      <p className="text-xs text-[#CF9690]/90 font-medium">
+                      <p className="text-xs text-[#D6B56C] font-medium">
                         {item.company || item.role}
                       </p>
                     </div>
                   </div>
 
-                  <Quote className="w-8 h-8 text-[#9D767E]/30 rotate-180 shrink-0" />
+                  <Quote className="w-8 h-8 text-[#AEBCC7]/20 rotate-180 shrink-0" />
                 </div>
 
                 {/* Quote Text */}
-                <p className="text-sm text-[#E6D8DB]/90 leading-relaxed italic mb-6">
+                <p className="text-sm text-[#AEBCC7] leading-relaxed italic mb-6">
                   &ldquo;{item.quote}&rdquo;
                 </p>
               </div>
 
               {/* Tag / Metrics Badge */}
-              <div className="pt-4 border-t border-[#665B6D]/20 flex items-center justify-between text-xs">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#60434A]/40 border border-[#9D767E]/40 text-[#CF9690] font-semibold text-[11px]">
-                  <Sparkles className="w-3 h-3 text-[#CF9690]" />
+              <div className="pt-4 border-t border-[#AEBCC7]/15 flex items-center justify-between text-xs">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 text-[#D6B56C] font-semibold text-[11px]">
+                  <Sparkles className="w-3 h-3 text-[#D6B56C]" />
                   {item.prsOrPoints || item.tag}
                 </span>
 
-                <span className="text-[#C9BCC4] text-[11px] uppercase tracking-wider font-semibold">
+                <span className="text-[#718394] text-[11px] uppercase tracking-wider font-semibold">
                   {item.tag}
                 </span>
               </div>
