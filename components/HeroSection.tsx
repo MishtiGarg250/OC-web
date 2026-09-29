@@ -8,7 +8,7 @@ import { ArrowRight, Sparkles, Terminal } from "lucide-react";
 
 function HeroSection() {
   const heroVideoRef = useRef<HTMLVideoElement>(null);
-  const [, setIsFrozen] = useState(false);
+  const [isFrozen, setIsFrozen] = useState(false);
 
   useEffect(() => {
     const handleLandingEntered = () => {
@@ -36,13 +36,19 @@ function HeroSection() {
     };
   }, []);
 
+  const handleTimeUpdate = () => {
+    const video = heroVideoRef.current;
+    if (video && video.duration) {
+      if (video.currentTime >= video.duration - 0.15) {
+        video.pause();
+        setIsFrozen(true);
+      }
+    }
+  };
+
   const handleVideoEnded = () => {
     if (heroVideoRef.current) {
       heroVideoRef.current.pause();
-      // Lock precisely on the final frame/scene
-      if (heroVideoRef.current.duration) {
-        heroVideoRef.current.currentTime = heroVideoRef.current.duration;
-      }
     }
     setIsFrozen(true);
   };
@@ -60,6 +66,15 @@ function HeroSection() {
           WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 55%, rgba(0,0,0,0.85) 75%, transparent 100%)",
         }}
       >
+        {/* Frozen Background Image (Shows the exact final scene when video finishes or as fallback) */}
+        <img
+          src="/images/hero-japanese-bg.jpg"
+          alt="Japanese Village Night Background"
+          className={`absolute inset-0 w-full h-full object-cover object-center pointer-events-none transition-opacity duration-700 ${
+            isFrozen ? "opacity-100" : "opacity-0"
+          }`}
+        />
+
         <video
           ref={heroVideoRef}
           poster="/images/hero-japanese-bg.jpg"
@@ -67,8 +82,11 @@ function HeroSection() {
           muted
           autoPlay
           preload="auto"
+          onTimeUpdate={handleTimeUpdate}
           onEnded={handleVideoEnded}
-          className="w-full h-full object-cover object-center pointer-events-none"
+          className={`w-full h-full object-cover object-center pointer-events-none transition-opacity duration-500 ${
+            isFrozen ? "opacity-0" : "opacity-100"
+          }`}
         >
           <source src="/videos/ending.mp4" type="video/mp4" />
         </video>
