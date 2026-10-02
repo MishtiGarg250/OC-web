@@ -4,6 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { projectsData, ProjectItem } from "@/data/projectsData";
 import { ExternalLink, Github, FolderGit2, User, Layers, ChevronDown } from "lucide-react";
 import BlurText from "./BlurText";
+import CircularCarousel from "./CircularCarousel";
+
+const carouselItems = [
+  { src: '/images/valley.jpg', alt: 'Mist drifting through a valley', title: 'Valley', subtitle: 'Landscape' },
+  { src: '/images/portrait.jpg', alt: 'A studio portrait', title: 'Portrait', subtitle: 'Studio' },
+  { src: '/images/towers.jpg', alt: 'Glass towers from street level', title: 'Towers', subtitle: 'Architecture' }
+];
 
 const filterTabs = [
   { id: "all", label: "All Tracks" },
@@ -110,6 +117,19 @@ export default function Projects() {
                 transition={{ duration: 0.35 }}
                 className="group relative flex flex-col justify-between rounded-2xl border border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 backdrop-blur-xl overflow-hidden hover:border-[#D6B56C]/50 hover:-translate-y-1.5 shadow-[0_16px_40px_-15px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:shadow-[0_20px_50px_-20px_rgba(143,175,196,0.25)] transition-all duration-300"
               >
+                {/* Circular Carousel */}
+                <div style={{ width: '100%', height: '560px', position: 'relative' }}>
+                  <CircularCarousel
+                    items={carouselItems}
+                    preset="cylinder"
+                    intro="rise"
+                    cardWidth={220}
+                    aspectRatio={1}
+                    speed={14}
+                    captions
+                  />
+                </div>
+
                 {/* Card Content */}
                 <div className="p-6 flex flex-col flex-1 justify-between">
                   <div>
