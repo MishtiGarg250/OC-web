@@ -260,6 +260,11 @@ select:-webkit-autofill {
   body {
     @apply bg-background text-foreground;
   }
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
 }
 
 .font-cinematic {

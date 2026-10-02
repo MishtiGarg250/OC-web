@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { Button } from "@/components/ui/moving-border";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, ChevronDown, X } from "lucide-react";
 
 interface SponsorFormData {
   companyName: string;
@@ -190,7 +190,7 @@ export default function SponsorRegistration() {
                     onChange={handleInputChange}
                     required={field.label.includes("*")}
                     placeholder={field.placeholder}
-                    className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] placeholder-[#718394] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent transition"
+                    className="w-full h-[50px] px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] placeholder-[#718394] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent outline-none transition"
                   />
                 </div>
               ))}
@@ -203,20 +203,25 @@ export default function SponsorRegistration() {
                 >
                   Company Size
                 </label>
-                <select
-                  id="companySize"
-                  name="companySize"
-                  value={formData.companySize}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent transition"
-                >
-                  <option value="" className="bg-[#0B1C2A] text-[#F4F1E8]">Select company size</option>
-                  <option value="1-10" className="bg-[#0B1C2A] text-[#F4F1E8]">1-10 employees</option>
-                  <option value="11-50" className="bg-[#0B1C2A] text-[#F4F1E8]">11-50 employees</option>
-                  <option value="51-200" className="bg-[#0B1C2A] text-[#F4F1E8]">51-200 employees</option>
-                  <option value="201-1000" className="bg-[#0B1C2A] text-[#F4F1E8]">201-1000 employees</option>
-                  <option value="1000+" className="bg-[#0B1C2A] text-[#F4F1E8]">1000+ employees</option>
-                </select>
+                <div className="relative">
+                  <select
+                    id="companySize"
+                    name="companySize"
+                    value={formData.companySize}
+                    onChange={handleInputChange}
+                    className={`w-full h-[50px] px-4 py-3 pr-10 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] ${
+                      !formData.companySize ? "text-[#718394]" : "text-[#F4F1E8]"
+                    } focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent outline-none transition appearance-none cursor-pointer`}
+                  >
+                    <option value="" className="bg-[#0B1C2A] text-[#718394]">Select company size</option>
+                    <option value="1-10" className="bg-[#0B1C2A] text-[#F4F1E8]">1-10 employees</option>
+                    <option value="11-50" className="bg-[#0B1C2A] text-[#F4F1E8]">11-50 employees</option>
+                    <option value="51-200" className="bg-[#0B1C2A] text-[#F4F1E8]">51-200 employees</option>
+                    <option value="201-1000" className="bg-[#0B1C2A] text-[#F4F1E8]">201-1000 employees</option>
+                    <option value="1000+" className="bg-[#0B1C2A] text-[#F4F1E8]">1000+ employees</option>
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8FAFC4] pointer-events-none" />
+                </div>
               </div>
 
               {/* Industry */}
@@ -227,23 +232,28 @@ export default function SponsorRegistration() {
                 >
                   Industry
                 </label>
-                <select
-                  id="industry"
-                  name="industry"
-                  value={formData.industry}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent transition"
-                >
-                  <option value="" className="bg-[#0B1C2A] text-[#F4F1E8]">Select industry</option>
-                  <option value="Technology" className="bg-[#0B1C2A] text-[#F4F1E8]">Technology</option>
-                  <option value="Finance" className="bg-[#0B1C2A] text-[#F4F1E8]">Finance</option>
-                  <option value="Healthcare" className="bg-[#0B1C2A] text-[#F4F1E8]">Healthcare</option>
-                  <option value="Education" className="bg-[#0B1C2A] text-[#F4F1E8]">Education</option>
-                  <option value="E-commerce" className="bg-[#0B1C2A] text-[#F4F1E8]">E-commerce</option>
-                  <option value="Manufacturing" className="bg-[#0B1C2A] text-[#F4F1E8]">Manufacturing</option>
-                  <option value="Consulting" className="bg-[#0B1C2A] text-[#F4F1E8]">Consulting</option>
-                  <option value="Other" className="bg-[#0B1C2A] text-[#F4F1E8]">Other</option>
-                </select>
+                <div className="relative">
+                  <select
+                    id="industry"
+                    name="industry"
+                    value={formData.industry}
+                    onChange={handleInputChange}
+                    className={`w-full h-[50px] px-4 py-3 pr-10 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] ${
+                      !formData.industry ? "text-[#718394]" : "text-[#F4F1E8]"
+                    } focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent outline-none transition appearance-none cursor-pointer`}
+                  >
+                    <option value="" className="bg-[#0B1C2A] text-[#718394]">Select industry</option>
+                    <option value="Technology" className="bg-[#0B1C2A] text-[#F4F1E8]">Technology</option>
+                    <option value="Finance" className="bg-[#0B1C2A] text-[#F4F1E8]">Finance</option>
+                    <option value="Healthcare" className="bg-[#0B1C2A] text-[#F4F1E8]">Healthcare</option>
+                    <option value="Education" className="bg-[#0B1C2A] text-[#F4F1E8]">Education</option>
+                    <option value="E-commerce" className="bg-[#0B1C2A] text-[#F4F1E8]">E-commerce</option>
+                    <option value="Manufacturing" className="bg-[#0B1C2A] text-[#F4F1E8]">Manufacturing</option>
+                    <option value="Consulting" className="bg-[#0B1C2A] text-[#F4F1E8]">Consulting</option>
+                    <option value="Other" className="bg-[#0B1C2A] text-[#F4F1E8]">Other</option>
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8FAFC4] pointer-events-none" />
+                </div>
               </div>
 
               {/* Sponsorship type with tags */}
@@ -254,21 +264,24 @@ export default function SponsorRegistration() {
                 >
                   Sponsorship Type *
                 </label>
-                <select
-                  id="sponsorshipType"
-                  name="sponsorshipType"
-                  onChange={handleSelectChange}
-                  value=""
-                  required={formData.sponsorshipType.length === 0}
-                  className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent transition"
-                >
-                  <option value="" className="bg-[#0B1C2A] text-[#F4F1E8]">Select sponsorship type</option>
-                  {sponsorshipOptions.map((option) => (
-                    <option key={option.value} value={option.value} className="bg-[#0B1C2A] text-[#F4F1E8]">
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                <div className="relative">
+                  <select
+                    id="sponsorshipType"
+                    name="sponsorshipType"
+                    onChange={handleSelectChange}
+                    value=""
+                    required={formData.sponsorshipType.length === 0}
+                    className="w-full h-[50px] px-4 py-3 pr-10 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#718394] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent outline-none transition appearance-none cursor-pointer"
+                  >
+                    <option value="" className="bg-[#0B1C2A] text-[#718394]">Select sponsorship type</option>
+                    {sponsorshipOptions.map((option) => (
+                      <option key={option.value} value={option.value} className="bg-[#0B1C2A] text-[#F4F1E8]">
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-[#8FAFC4] pointer-events-none" />
+                </div>
 
                 {/* Tag-style chips */}
                 <div className="flex flex-wrap gap-2 mt-3">
@@ -279,15 +292,16 @@ export default function SponsorRegistration() {
                     return (
                       <div
                         key={type}
-                        className="flex items-center bg-[#0B1C2A] border border-[#D6B56C]/40 text-[#F4F1E8] px-3 py-1 rounded-full text-sm"
+                        className="flex items-center gap-1.5 bg-[#0B1C2A] border border-[#D6B56C]/40 text-[#F4F1E8] px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm"
                       >
-                        {label}
+                        <span>{label}</span>
                         <button
                           type="button"
                           onClick={() => handleRemoveType(type)}
-                          className="ml-2 text-[#D6B56C] hover:text-[#E5C982] focus:outline-none"
+                          className="ml-1 text-[#D6B56C] hover:text-[#E5C982] focus:outline-none cursor-pointer p-0.5 rounded-full hover:bg-[#D6B56C]/10 transition-colors"
+                          aria-label={`Remove ${label}`}
                         >
-                          ✕
+                          <X className="w-3.5 h-3.5" />
                         </button>
                       </div>
                     );
