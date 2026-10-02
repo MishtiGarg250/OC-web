@@ -4,6 +4,26 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, Code, GitPullRequest, Trophy, Building2, Lightbulb, Users, Award, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import BlurText from "./BlurText";
+import FlipCard from "./FlipCard";
+
+const japaneseThemePhotos = [
+  {
+    src: "/images/japanese-theme-1.jpg",
+    alt: "Japanese night landscape neon lights",
+  },
+  {
+    src: "/images/japanese-theme-2.jpg",
+    alt: "Traditional Japanese temple street at dusk",
+  },
+  {
+    src: "/images/japanese-theme-3.jpg",
+    alt: "Cherry blossom branch against nighttime pagoda",
+  },
+  {
+    src: "/images/japanese-theme-4.jpg",
+    alt: "Atmospheric Japanese night mountain and moon",
+  },
+];
 
 const contributorSteps = [
   {
@@ -170,42 +190,98 @@ export default function HowItWorks() {
           >
             {steps.map((step, index) => {
               const Icon = step.icon;
+              const photo = japaneseThemePhotos[index % japaneseThemePhotos.length];
               return (
                 <motion.div
                   key={step.title}
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="group relative flex flex-col justify-between rounded-2xl border border-[#8FAFC4]/25 bg-gradient-to-b from-[#102535]/85 via-[#0D2233]/70 to-[#0A1A28]/85 p-7 backdrop-blur-xl transition-all duration-300 hover:border-[#D6B56C]/50 hover:-translate-y-2 shadow-[0_16px_40px_-15px_rgba(7,19,31,0.9),inset_0_1px_1px_rgba(255,255,255,0.08)] hover:shadow-[0_20px_50px_-20px_rgba(143,175,196,0.25)] overflow-hidden"
+                  className="flex justify-center w-full"
                 >
-                  <div className="absolute top-3 right-4 text-6xl font-black text-[#8FAFC4]/10 group-hover:text-[#D6B56C]/20 transition-colors pointer-events-none select-none font-mono">
-                    {step.number}
-                  </div>
+                  <FlipCard
+                    front={
+                      <div className="relative w-full h-full overflow-hidden">
+                        <img
+                          src={photo.src}
+                          alt={photo.alt}
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#07131F]/90 via-[#07131F]/20 to-transparent pointer-events-none" />
 
-                  <div>
-                    <div className="w-12 h-12 rounded-xl bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 flex items-center justify-center text-[#D6B56C] mb-6 group-hover:scale-110 group-hover:border-[#D6B56C]/50 transition-all duration-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
-                      <Icon className="w-6 h-6" />
-                    </div>
+                        {/* Step Pill */}
+                        <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/30 backdrop-blur-md text-[11px] font-bold text-[#D6B56C] shadow-md">
+                          <span>Step {step.number}</span>
+                        </div>
 
-                    <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 text-[11px] font-bold text-[#D6B56C] uppercase tracking-wider mb-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
-                      Step {step.number}
-                    </div>
+                        {/* Bottom Overlay with Title & Flip Prompt */}
+                        <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-[#0B1C2A]/85 border border-[#8FAFC4]/25 backdrop-blur-md flex items-center justify-between">
+                          <div>
+                            <p className="text-xs text-[#AEBCC7]">Step {step.number}</p>
+                            <h4 className="text-sm sm:text-base font-bold text-[#F4F1E8] line-clamp-1">
+                              {step.title}
+                            </h4>
+                          </div>
+                          <span className="text-[11px] font-semibold text-[#D6B56C] px-2.5 py-1 rounded-full bg-[#D6B56C]/10 border border-[#D6B56C]/30 flex items-center gap-1 whitespace-nowrap">
+                            Flip ↻
+                          </span>
+                        </div>
+                      </div>
+                    }
+                    back={
+                      <div className="relative flex flex-col justify-between h-full p-6 sm:p-7 select-text">
+                        <div className="absolute top-3 right-4 text-6xl font-black text-[#8FAFC4]/10 pointer-events-none select-none font-mono">
+                          {step.number}
+                        </div>
 
-                    <h3 className="text-xl font-bold text-[#F4F1E8] mb-3 group-hover:text-[#D6B56C] transition-colors">
-                      {step.title}
-                    </h3>
+                        <div>
+                          <div className="w-12 h-12 rounded-xl bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 flex items-center justify-center text-[#D6B56C] mb-5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+                            <Icon className="w-6 h-6" />
+                          </div>
 
-                    <p className="text-sm text-[#AEBCC7] leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
+                          <div className="inline-block px-2.5 py-0.5 rounded-full bg-[#0B1C2A]/90 border border-[#8FAFC4]/25 text-[11px] font-bold text-[#D6B56C] uppercase tracking-wider mb-2 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+                            Step {step.number}
+                          </div>
 
-                  <div className="mt-8 pt-4 border-t border-[#8FAFC4]/15 flex items-center justify-between text-xs text-[#8FAFC4] font-medium">
-                    <span>
-                      {activeTab === "contributors" ? "Participant Track" : "Sponsor Track"}
-                    </span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#D6B56C]" />
-                  </div>
+                          <h3 className="text-xl font-bold text-[#F4F1E8] mb-2.5">
+                            {step.title}
+                          </h3>
+
+                          <p className="text-xs sm:text-sm text-[#AEBCC7] leading-relaxed">
+                            {step.description}
+                          </p>
+                        </div>
+
+                        <div className="mt-6 pt-3.5 border-t border-[#8FAFC4]/15 flex items-center justify-between text-xs text-[#8FAFC4] font-medium">
+                          <span>
+                            {activeTab === "contributors" ? "Participant Track" : "Sponsor Track"}
+                          </span>
+                          <ArrowRight className="w-3.5 h-3.5 text-[#D6B56C]" />
+                        </div>
+                      </div>
+                    }
+                    axis="y"
+                    flipOnClick
+                    draggable
+                    dragDistance={0}
+                    tilt
+                    tiltMax={12}
+                    glare
+                    glareOpacity={0.22}
+                    hoverScale={1.03}
+                    perspective={1100}
+                    stiffness={170}
+                    damping={20}
+                    width="100%"
+                    height={410}
+                    radius={22}
+                    background="linear-gradient(180deg, #102535 0%, #0D2233 50%, #0A1A28 100%)"
+                    color="#f5f5f5"
+                    shadow
+                    shadowColor="#000000"
+                    shadowOpacity={0.45}
+                    onFlipChange={flipped => console.log(flipped)}
+                  />
                 </motion.div>
               );
             })}
