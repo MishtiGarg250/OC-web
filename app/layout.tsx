@@ -16,6 +16,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Racing+Sans+One&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className="font-sans antialiased">
         <BackgroundAudio />
         <div className="relative w-full flex items-center justify-center">

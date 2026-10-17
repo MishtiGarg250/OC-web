@@ -7,6 +7,7 @@ interface SakuraCanvasProps {
   className?: string;
   petalCount?: number;
   position?: "fixed" | "absolute";
+  colors?: string[];
 }
 
 interface Petal {
@@ -28,11 +29,13 @@ interface Petal {
 }
 
 const PETAL_COLORS = [
+  "rgba(184, 229, 213, 0.85)", // Crisp Mint (#B8E5D5)
+  "rgba(88, 185, 154, 0.80)",  // Glowing Emerald (#58B99A)
+  "rgba(212, 241, 231, 0.80)", // Soft Mint Frost (#D4F1E7)
+  "rgba(62, 168, 137, 0.75)",  // Deep Luminous Emerald (#3EA889)
   "rgba(244, 241, 232, 0.85)", // Soft Moonlit White (#F4F1E8)
   "rgba(217, 226, 232, 0.80)", // Cool Misty Blue-White (#D9E2E8)
   "rgba(143, 175, 196, 0.75)", // Soft Desaturated Moon-Blue (#8FAFC4)
-  "rgba(214, 181, 108, 0.75)", // Moonlit Lantern Gold (#D6B56C)
-  "rgba(229, 201, 130, 0.70)", // Subtle Warm Gold Glow (#E5C982)
 ];
 
 export default function SakuraCanvas({
@@ -40,6 +43,7 @@ export default function SakuraCanvas({
   className = "",
   petalCount = 55,
   position = "fixed",
+  colors,
 }: SakuraCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mouseRef = useRef<{ x: number; y: number; vx: number; vy: number }>({
@@ -100,6 +104,7 @@ export default function SakuraCanvas({
     window.addEventListener("mouseleave", handleMouseLeave);
 
     // Initialize Petals
+    const activeColors = colors && colors.length > 0 ? colors : PETAL_COLORS;
     const petals: Petal[] = [];
     const createPetal = (randomY = true): Petal => ({
       x: Math.random() * (width + 200) - 100,
@@ -116,7 +121,7 @@ export default function SakuraCanvas({
       rotationSpeedY: (Math.random() - 0.5) * 0.05,
       rotationSpeedZ: (Math.random() - 0.5) * 0.03,
       opacity: Math.random() * 0.4 + 0.5,
-      color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
+      color: activeColors[Math.floor(Math.random() * activeColors.length)],
     });
 
     for (let i = 0; i < petalCount; i++) {
@@ -239,7 +244,7 @@ export default function SakuraCanvas({
       window.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [active, petalCount, position]);
+  }, [active, petalCount, position, colors]);
 
   return (
     <canvas
