@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Volume2, VolumeX, Film } from "lucide-react";
 import { openCinematicLanding } from "./CinematicIntro";
+import SpecularButton from "./SpecularButton";
 
 interface NavItem {
   name: string;
@@ -120,7 +121,7 @@ export default function Navbar({ className }: { className?: string }) {
             className="flex items-center group shrink-0"
           >
             <span className="text-lg sm:text-xl font-bold text-[#F4F1E8] tracking-tight group-hover:opacity-90 transition-opacity">
-              OpenCode<span className="text-[#D6B56C]">&apos;26</span>
+              OpenCode<span className="text-[#B8E5D5]">&apos;26</span>
             </span>
           </Link>
 
@@ -140,7 +141,7 @@ export default function Navbar({ className }: { className?: string }) {
                       {isHovered && (
                         <motion.div
                           layoutId="navbar-hover"
-                          className="absolute inset-0 z-[-1] rounded-full bg-[#102535] border border-[#D6B56C]/30 shadow-md shadow-[#102535]/50"
+                          className="absolute inset-0 z-[-1] rounded-full bg-[#102535] border border-[#58B99A]/30 shadow-md shadow-[#102535]/50"
                           transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                         />
                       )}
@@ -157,7 +158,7 @@ export default function Navbar({ className }: { className?: string }) {
                       {isHovered && (
                         <motion.div
                           layoutId="navbar-hover"
-                          className="absolute inset-0 z-[-1] rounded-full bg-[#102535] border border-[#D6B56C]/30 shadow-md shadow-[#102535]/50"
+                          className="absolute inset-0 z-[-1] rounded-full bg-[#102535] border border-[#58B99A]/30 shadow-md shadow-[#102535]/50"
                           transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                         />
                       )}
@@ -171,14 +172,27 @@ export default function Navbar({ className }: { className?: string }) {
 
           {/* Right: Sponsor Us CTA Button */}
           <div className="hidden sm:flex items-center">
-            <Button
-              className="rounded-full bg-[#D6B56C] hover:bg-[#E5C982] text-[#08131D] font-semibold text-sm px-4 py-1.5 sm:px-5 sm:py-2 shadow-md shadow-[#D6B56C]/20 transition-all cursor-pointer border-none"
-              asChild
+            <SpecularButton
+              size="sm"
+              radius={20}
+              tint="#B8E5D5"
+              tintOpacity={0.15}
+              textColor="#0C1C2C"
+              lineColor="#ffffff"
+              baseColor="#B8E5D5"
+              intensity={1}
+              idleIntensity={0.35}
+              shineSize={10}
+              shineFade={34}
+              thickness={1.2}
+              glow={1}
+              followMouse
+              proximity={200}
+              href="/sponsor-registration"
+              className="!bg-[#B8E5D5] hover:!bg-[#A3DAC7] !text-[#0C1C2C] font-semibold text-xs sm:text-sm px-4 py-1.5 sm:px-5 sm:py-2 shadow-md shadow-[#58B99A]/20"
             >
-              <Link href="/sponsor-registration">
-                Sponsor Us
-              </Link>
-            </Button>
+              <span>Sponsor Us</span>
+            </SpecularButton>
           </div>
 
           {/* Mobile Hamburger Toggle Button */}
@@ -204,14 +218,14 @@ export default function Navbar({ className }: { className?: string }) {
             type="button"
             onClick={() => openCinematicLanding()}
             className={cn(
-              "group flex items-center gap-2 rounded-full border border-[#AEBCC7]/20 bg-[#102535]/70 hover:bg-[#102535]/95 text-xs sm:text-sm font-semibold text-[#F4F1E8] backdrop-blur-md shadow-lg shadow-[#07131F]/80 hover:border-[#D6B56C]/45 transition-all duration-300 cursor-pointer",
+              "group flex items-center gap-2 rounded-full border border-[#AEBCC7]/20 bg-[#102535]/70 hover:bg-[#102535]/95 text-xs sm:text-sm font-semibold text-[#F4F1E8] backdrop-blur-md shadow-lg shadow-[#07131F]/80 hover:border-[#58B99A]/45 transition-all duration-300 cursor-pointer",
               isCompact
                 ? "px-3 sm:px-3.5 py-2.5"
                 : "px-3.5 sm:px-4 py-3 sm:py-3.5"
             )}
             title="Play cinematic trailer"
           >
-            <Film className="w-4 h-4 text-[#D6B56C] transition-transform duration-300 group-hover:scale-110" />
+            <Film className="w-4 h-4 text-[#58B99A] transition-transform duration-300 group-hover:scale-110" />
             <span className="hidden md:inline text-[#F4F1E8]">Play Trailer</span>
           </button>
 
@@ -220,7 +234,7 @@ export default function Navbar({ className }: { className?: string }) {
             type="button"
             onClick={toggleHeroSound}
             className={cn(
-              "group flex items-center gap-2 rounded-full border border-[#AEBCC7]/20 bg-[#102535]/70 hover:bg-[#102535]/95 text-xs sm:text-sm font-semibold text-[#F4F1E8] backdrop-blur-md shadow-lg shadow-[#07131F]/80 hover:border-[#D6B56C]/45 transition-all duration-300 cursor-pointer",
+              "group flex items-center gap-2 rounded-full border border-[#AEBCC7]/20 bg-[#102535]/70 hover:bg-[#102535]/95 text-xs sm:text-sm font-semibold text-[#F4F1E8] backdrop-blur-md shadow-lg shadow-[#07131F]/80 hover:border-[#58B99A]/45 transition-all duration-300 cursor-pointer",
               isCompact
                 ? "px-3 sm:px-3.5 py-2.5"
                 : "px-3.5 sm:px-4 py-3 sm:py-3.5"
@@ -229,19 +243,19 @@ export default function Navbar({ className }: { className?: string }) {
           >
             {heroMuted ? (
               <>
-                <VolumeX className="w-4 h-4 text-[#718394] transition-colors group-hover:text-[#D6B56C]" />
+                <VolumeX className="w-4 h-4 text-[#718394] transition-colors group-hover:text-[#58B99A]" />
                 <span className="hidden md:inline text-[#AEBCC7] group-hover:text-[#F4F1E8] transition-colors">
                   Sound Off
                 </span>
               </>
             ) : (
               <>
-                <Volume2 className="w-4 h-4 text-[#D6B56C] animate-pulse" />
+                <Volume2 className="w-4 h-4 text-[#58B99A] animate-pulse" />
                 <span className="hidden md:inline text-[#F4F1E8]">Sound On</span>
                 <span className="hidden md:flex items-end gap-0.5 h-3 ml-0.5">
-                  <span className="w-0.5 bg-[#D6B56C] animate-pulse h-2.5" />
-                  <span className="w-0.5 bg-[#D6B56C] animate-pulse h-1.5" />
-                  <span className="w-0.5 bg-[#D6B56C] animate-pulse h-3" />
+                  <span className="w-0.5 bg-[#58B99A] animate-pulse h-2.5" />
+                  <span className="w-0.5 bg-[#58B99A] animate-pulse h-1.5" />
+                  <span className="w-0.5 bg-[#58B99A] animate-pulse h-3" />
                 </span>
               </>
             )}
@@ -280,15 +294,28 @@ export default function Navbar({ className }: { className?: string }) {
               )
             )}
             <div className="pt-2 border-t border-[#AEBCC7]/15">
-              <Button
-                className="w-full rounded-full bg-[#D6B56C] hover:bg-[#E5C982] text-[#08131D] font-semibold text-base px-4 py-2.5 shadow-md shadow-[#D6B56C]/20 transition-all justify-center cursor-pointer border-none"
-                asChild
+              <SpecularButton
+                size="md"
+                radius={20}
+                tint="#B8E5D5"
+                tintOpacity={0.15}
+                textColor="#0C1C2C"
+                lineColor="#ffffff"
+                baseColor="#B8E5D5"
+                intensity={1}
+                idleIntensity={0.35}
+                shineSize={10}
+                shineFade={34}
+                thickness={1.2}
+                glow={1}
+                followMouse
+                proximity={200}
+                href="/sponsor-registration"
                 onClick={() => setIsMenuOpen(false)}
+                className="w-full !bg-[#B8E5D5] hover:!bg-[#A3DAC7] !text-[#0C1C2C] font-semibold text-base px-4 py-2.5 shadow-md shadow-[#58B99A]/20 justify-center"
               >
-                <Link href="/sponsor-registration">
-                  Sponsor Us
-                </Link>
-              </Button>
+                <span>Sponsor Us</span>
+              </SpecularButton>
             </div>
           </motion.div>
         )}

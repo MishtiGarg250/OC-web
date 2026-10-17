@@ -1,17 +1,17 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
-import { ComponentProps } from 'react';
+import SpecularButton from './SpecularButton';
 
-interface DownloadBrochureButtonProps
-  extends ComponentProps<typeof Button> {
+interface DownloadBrochureButtonProps {
   showIcon?: boolean;
+  className?: string;
+  size?: 'sm' | 'md' | 'lg';
+  [key: string]: any;
 }
 
 export default function DownloadBrochureButton({
-  variant = "default",
-  size = "lg",
+  size = "md",
   showIcon = true,
   className = "",
   ...props
@@ -26,19 +26,30 @@ export default function DownloadBrochureButton({
   };
 
   return (
-    <Button
-      variant={variant}
+    <SpecularButton
       size={size}
+      radius={24}
+      tint="#ffffff"
+      tintOpacity={0.06}
+      textColor="#F4F1E8"
+      lineColor="#58B99A"
+      baseColor="#102535"
+      intensity={1}
+      idleIntensity={0.35}
+      shineSize={10}
+      shineFade={34}
+      thickness={1.2}
+      glow={1}
+      followMouse
+      proximity={250}
       onClick={downloadBrochure}
-      className={
-        `group inline-flex items-center rounded-full border border-[#D6B56C]/45 bg-[#102535]/55 px-7 py-3 text-sm font-semibold text-[#F4F1E8] backdrop-blur-md shadow-lg transition hover:bg-[#102535]/80 hover:border-[#E5C982] active:scale-[0.98] ${className}`
-      }
+      className={`border border-[#58B99A]/50 !bg-[#102535]/80 hover:!bg-[#102535] !text-[#F4F1E8] font-semibold text-sm backdrop-blur-md shadow-lg ${className}`}
       {...props}
     >
       {showIcon && (
-        <Download className="w-5 h-5 text-[#D6B56C] transition-transform group-hover:translate-y-0.5" />
+        <Download className="w-4 h-4 text-[#58B99A] transition-transform group-hover:translate-y-0.5" />
       )}
-      Brochure
-    </Button>
+      <span>Brochure</span>
+    </SpecularButton>
   );
 }

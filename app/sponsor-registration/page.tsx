@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { Button } from "@/components/ui/moving-border";
 import { CheckCircle, ChevronDown, X } from "lucide-react";
+import SpecularButton from "@/components/SpecularButton";
 
 interface SponsorFormData {
   companyName: string;
@@ -133,7 +134,7 @@ export default function SponsorRegistration() {
       <div className="min-h-screen bg-[#07131F] text-[#AEBCC7] flex items-center justify-center pt-32 pb-20">
         <BackgroundGradient className="max-w-md mx-auto p-8 rounded-[22px] bg-[#102535] text-center border border-[#AEBCC7]/20">
           <div className="flex justify-center mb-4">
-            <CheckCircle className="h-12 w-12 text-[#D6B56C]" strokeWidth={1.5} />
+            <CheckCircle className="h-12 w-12 text-[#58B99A]" strokeWidth={1.5} />
           </div>
           <h2 className="text-2xl font-bold mb-4 text-[#F4F1E8]">Registration Successful!</h2>
           <p className="text-[#AEBCC7] mb-6">
@@ -142,13 +143,13 @@ export default function SponsorRegistration() {
             you about the next steps from geekhaven@iiita.ac.in.
           </p>
           {requestId && (
-            <p className="mb-6 rounded-lg border border-[#D6B56C]/30 bg-[#D6B56C]/10 px-4 py-3 text-sm text-[#F4F1E8]">
+            <p className="mb-6 rounded-lg border border-[#58B99A]/30 bg-[#58B99A]/10 px-4 py-3 text-sm text-[#F4F1E8]">
               Reference ID: <strong>{requestId}</strong>
             </p>
           )}
           <Button
             borderRadius="1.75rem"
-            className="bg-[#D6B56C] text-[#08131D] font-semibold hover:bg-[#E5C982] transition-colors"
+            className="bg-[#B8E5D5] text-[#0C1C2C] font-semibold hover:bg-[#A3DAC7] transition-colors"
             onClick={() => (window.location.href = "/")}
           >
             Return to Home
@@ -162,7 +163,7 @@ export default function SponsorRegistration() {
     <div className="min-h-screen bg-[#07131F] text-[#AEBCC7] antialiased pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C] mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#B8E5D5] mb-4">
             Sponsor Registration
           </h1>
           <p className="text-lg text-[#AEBCC7] max-w-3xl mx-auto">
@@ -190,7 +191,7 @@ export default function SponsorRegistration() {
                     onChange={handleInputChange}
                     required={field.label.includes("*")}
                     placeholder={field.placeholder}
-                    className="w-full h-[50px] px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] placeholder-[#718394] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent outline-none transition"
+                    className="w-full h-[50px] px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] placeholder-[#718394] focus:ring-2 focus:ring-[#58B99A] focus:border-transparent outline-none transition"
                   />
                 </div>
               ))}
@@ -211,7 +212,7 @@ export default function SponsorRegistration() {
                     onChange={handleInputChange}
                     className={`w-full h-[50px] px-4 py-3 pr-10 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] ${
                       !formData.companySize ? "text-[#718394]" : "text-[#F4F1E8]"
-                    } focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent outline-none transition appearance-none cursor-pointer`}
+                    } focus:ring-2 focus:ring-[#58B99A] focus:border-transparent outline-none transition appearance-none cursor-pointer`}
                   >
                     <option value="" className="bg-[#0B1C2A] text-[#718394]">Select company size</option>
                     <option value="1-10" className="bg-[#0B1C2A] text-[#F4F1E8]">1-10 employees</option>
@@ -240,7 +241,7 @@ export default function SponsorRegistration() {
                     onChange={handleInputChange}
                     className={`w-full h-[50px] px-4 py-3 pr-10 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] ${
                       !formData.industry ? "text-[#718394]" : "text-[#F4F1E8]"
-                    } focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent outline-none transition appearance-none cursor-pointer`}
+                    } focus:ring-2 focus:ring-[#58B99A] focus:border-transparent outline-none transition appearance-none cursor-pointer`}
                   >
                     <option value="" className="bg-[#0B1C2A] text-[#718394]">Select industry</option>
                     <option value="Technology" className="bg-[#0B1C2A] text-[#F4F1E8]">Technology</option>
@@ -271,7 +272,7 @@ export default function SponsorRegistration() {
                     onChange={handleSelectChange}
                     value=""
                     required={formData.sponsorshipType.length === 0}
-                    className="w-full h-[50px] px-4 py-3 pr-10 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#718394] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent outline-none transition appearance-none cursor-pointer"
+                    className="w-full h-[50px] px-4 py-3 pr-10 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#718394] focus:ring-2 focus:ring-[#58B99A] focus:border-transparent outline-none transition appearance-none cursor-pointer"
                   >
                     <option value="" className="bg-[#0B1C2A] text-[#718394]">Select sponsorship type</option>
                     {sponsorshipOptions.map((option) => (
@@ -292,13 +293,13 @@ export default function SponsorRegistration() {
                     return (
                       <div
                         key={type}
-                        className="flex items-center gap-1.5 bg-[#0B1C2A] border border-[#D6B56C]/40 text-[#F4F1E8] px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm"
+                        className="flex items-center gap-1.5 bg-[#0B1C2A] border border-[#58B99A]/40 text-[#F4F1E8] px-3 py-1.5 rounded-full text-xs sm:text-sm shadow-sm"
                       >
                         <span>{label}</span>
                         <button
                           type="button"
                           onClick={() => handleRemoveType(type)}
-                          className="ml-1 text-[#D6B56C] hover:text-[#E5C982] focus:outline-none cursor-pointer p-0.5 rounded-full hover:bg-[#D6B56C]/10 transition-colors"
+                          className="ml-1 text-[#58B99A] hover:text-[#B8E5D5] focus:outline-none cursor-pointer p-0.5 rounded-full hover:bg-[#58B99A]/15 transition-colors"
                           aria-label={`Remove ${label}`}
                         >
                           <X className="w-3.5 h-3.5" />
@@ -326,19 +327,33 @@ export default function SponsorRegistration() {
                 required
                 rows={6}
                 placeholder="Share your thoughts…"
-                className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] placeholder-[#718394] focus:ring-2 focus:ring-[#D6B56C] focus:border-transparent resize-vertical transition"
+                className="w-full px-4 py-3 rounded-lg border border-[#AEBCC7]/20 bg-[#0B1C2A] text-[#F4F1E8] placeholder-[#718394] focus:ring-2 focus:ring-[#58B99A] focus:border-transparent resize-vertical transition"
               />
             </div>
 
-            <div className="text-center pt-6">
-              <Button
+            <div className="text-center pt-6 flex justify-center">
+              <SpecularButton
                 type="submit"
                 disabled={isSubmitting}
-                borderRadius="1.75rem"
-                className="bg-[#D6B56C] text-[#08131D] font-semibold border-none hover:bg-[#E5C982] disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-[#D6B56C]/25 transition-all"
+                size="lg"
+                radius={28}
+                tint="#B8E5D5"
+                tintOpacity={0.16}
+                textColor="#0C1C2C"
+                lineColor="#ffffff"
+                baseColor="#B8E5D5"
+                intensity={1}
+                idleIntensity={0.35}
+                shineSize={10}
+                shineFade={34}
+                thickness={1.2}
+                glow={1}
+                followMouse
+                proximity={250}
+                className="!bg-[#B8E5D5] hover:!bg-[#A3DAC7] !text-[#0C1C2C] font-semibold text-base shadow-lg shadow-[#58B99A]/25 disabled:opacity-50 disabled:cursor-not-allowed px-8 py-3.5"
               >
-                {isSubmitting ? "Submitting..." : "Submit Registration"}
-              </Button>
+                <span>{isSubmitting ? "Submitting..." : "Submit Registration"}</span>
+              </SpecularButton>
             </div>
           </form>
         </BackgroundGradient>

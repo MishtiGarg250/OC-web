@@ -20,7 +20,7 @@ export default function Footer() {
           {/* Col 1: About OpenCode & GeekHaven */}
           <div className="space-y-5">
             <Link href="/" className="flex items-center space-x-2.5 group">
-              <div className="relative w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-[#D6B56C] via-[#8FAFC4] to-[#102535] p-[2px]">
+              <div className="relative w-9 h-9 rounded-full overflow-hidden bg-gradient-to-br from-[#58B99A] via-[#B8E5D5] to-[#102535] p-[2px]">
                 <div className="bg-[#07131F] rounded-full flex items-center justify-center w-full h-full">
                   <Image
                     src="/logo_rb-min.png"
@@ -31,7 +31,7 @@ export default function Footer() {
                   />
                 </div>
               </div>
-              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C] tracking-tight">
+              <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#B8E5D5] tracking-tight">
                 OpenCode 2026
               </span>
             </Link>
@@ -52,32 +52,32 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 text-sm text-[#AEBCC7]">
               <li>
-                <a href="#about" className="hover:text-[#D6B56C] transition-colors">
+                <a href="#about" className="hover:text-[#B8E5D5] transition-colors">
                   About OpenCode
                 </a>
               </li>
               <li>
-                <a href="#how-it-works" className="hover:text-[#D6B56C] transition-colors">
+                <a href="#how-it-works" className="hover:text-[#B8E5D5] transition-colors">
                   How It Works
                 </a>
               </li>
               <li>
-                <a href="#projects" className="hover:text-[#D6B56C] transition-colors">
+                <a href="#projects" className="hover:text-[#B8E5D5] transition-colors">
                   Tracks &amp; Repositories
                 </a>
               </li>
               <li>
-                <a href="#why-sponsor" className="hover:text-[#D6B56C] transition-colors">
+                <a href="#why-sponsor" className="hover:text-[#B8E5D5] transition-colors">
                   Why Sponsor Us
                 </a>
               </li>
               <li>
-                <a href="#sponsors" className="hover:text-[#D6B56C] transition-colors">
+                <a href="#sponsors" className="hover:text-[#B8E5D5] transition-colors">
                   Sponsors &amp; Partners
                 </a>
               </li>
               <li>
-                <a href="#faq" className="hover:text-[#D6B56C] transition-colors">
+                <a href="#faq" className="hover:text-[#B8E5D5] transition-colors">
                   Frequently Asked Questions
                 </a>
               </li>
@@ -86,7 +86,7 @@ export default function Footer() {
                   href="https://drive.google.com/file/d/1LQJai-gcyf6AvzlW06aw7WJ8qZUpwN4P/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#D6B56C] transition-colors inline-flex items-center gap-1"
+                  className="hover:text-[#B8E5D5] transition-colors inline-flex items-center gap-1"
                 >
                   Code of Conduct
                   <ExternalLink className="w-3 h-3" />
@@ -102,42 +102,42 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3 text-sm text-[#AEBCC7]">
               <li className="flex items-start gap-2">
-                <Phone className="w-4 h-4 text-[#D6B56C] mt-0.5 shrink-0" />
+                <Phone className="w-4 h-4 text-[#58B99A] mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-[#F4F1E8]">Abdul Azeem</p>
-                  <a href="tel:+917217492629" className="text-xs text-[#718394] hover:text-[#D6B56C]">
+                  <a href="tel:+917217492629" className="text-xs text-[#718394] hover:text-[#B8E5D5]">
                     +91 721 749 2629
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Phone className="w-4 h-4 text-[#D6B56C] mt-0.5 shrink-0" />
+                <Phone className="w-4 h-4 text-[#58B99A] mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-[#F4F1E8]">Adith Reganti</p>
-                  <a href="tel:+918618275578" className="text-xs text-[#718394] hover:text-[#D6B56C]">
+                  <a href="tel:+918618275578" className="text-xs text-[#718394] hover:text-[#B8E5D5]">
                     +91 861 827 5578
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-2">
-                <Phone className="w-4 h-4 text-[#D6B56C] mt-0.5 shrink-0" />
+                <Phone className="w-4 h-4 text-[#58B99A] mt-0.5 shrink-0" />
                 <div>
                   <p className="font-semibold text-[#F4F1E8]">Anubhav Sharma</p>
-                  <a href="tel:+919855488413" className="text-xs text-[#718394] hover:text-[#D6B56C]">
+                  <a href="tel:+919855488413" className="text-xs text-[#718394] hover:text-[#B8E5D5]">
                     +91 98554 88413
                   </a>
                 </div>
               </li>
               <li className="flex items-center gap-2 pt-2 border-t border-[#AEBCC7]/10">
-                <Mail className="w-4 h-4 text-[#D6B56C] shrink-0" />
-                <a href="mailto:geekhaven@iiita.ac.in" className="text-xs text-[#D6B56C] hover:underline">
+                <Mail className="w-4 h-4 text-[#58B99A] shrink-0" />
+                <a href="mailto:geekhaven@iiita.ac.in" className="text-xs text-[#B8E5D5] hover:underline">
                   geekhaven@iiita.ac.in
                 </a>
               </li>
               <li className="pt-1">
                 <Link
                   href="/sponsor-registration"
-                  className="inline-block text-xs font-semibold text-[#D6B56C] hover:text-[#E5C982] underline underline-offset-4"
+                  className="inline-block text-xs font-semibold text-[#B8E5D5] hover:text-[#A3DAC7] underline underline-offset-4"
                 >
                   Online Sponsor Registration Form &rarr;
                 </Link>
@@ -156,7 +156,7 @@ export default function Footer() {
                 href="https://discord.gg/SxBATvUPnC"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#D6B56C] transition-colors"
+                className="block hover:text-[#B8E5D5] transition-colors"
               >
                 Discord Community
               </a>
@@ -164,7 +164,7 @@ export default function Footer() {
                 href="https://github.com/opencodeiiita"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#D6B56C] transition-colors"
+                className="block hover:text-[#B8E5D5] transition-colors"
               >
                 GitHub Organizations
               </a>
@@ -172,7 +172,7 @@ export default function Footer() {
                 href="https://twitter.com/geekhaveniiita"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#D6B56C] transition-colors"
+                className="block hover:text-[#B8E5D5] transition-colors"
               >
                 Twitter / X
               </a>
@@ -180,7 +180,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/geekhaven-iiita"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#D6B56C] transition-colors"
+                className="block hover:text-[#B8E5D5] transition-colors"
               >
                 LinkedIn
               </a>
@@ -188,7 +188,7 @@ export default function Footer() {
                 href="https://www.instagram.com/geekhaven_iiita/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#D6B56C] transition-colors"
+                className="block hover:text-[#B8E5D5] transition-colors"
               >
                 Instagram
               </a>
@@ -196,7 +196,7 @@ export default function Footer() {
 
             <button
               onClick={scrollToTop}
-              className="inline-flex items-center gap-2 text-xs font-semibold text-[#D6B56C] hover:text-[#E5C982] pt-2 border-t border-[#AEBCC7]/10 cursor-pointer transition-colors"
+              className="inline-flex items-center gap-2 text-xs font-semibold text-[#B8E5D5] hover:text-[#A3DAC7] pt-2 border-t border-[#AEBCC7]/10 cursor-pointer transition-colors"
             >
               <ArrowUp className="w-3.5 h-3.5" />
               Back to top

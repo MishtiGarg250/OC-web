@@ -29,7 +29,7 @@ export default function FAQ() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#AEBCC7]/20 bg-[#102535]/70 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md"
           >
-            <HelpCircle className="w-3.5 h-3.5 text-[#D6B56C]" />
+            <HelpCircle className="w-3.5 h-3.5 text-[#58B99A]" />
             <span>Got Questions?</span>
           </motion.div>
 
@@ -37,7 +37,7 @@ export default function FAQ() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C]"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#B8E5D5]"
           >
             Frequently Asked Questions
           </motion.h2>
@@ -61,14 +61,14 @@ export default function FAQ() {
               }}
               className={`relative px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                 activeCategory === "contributor"
-                  ? "text-[#08131D]"
+                  ? "text-[#0C1C2C]"
                   : "text-[#AEBCC7] hover:text-[#F4F1E8]"
               }`}
             >
               {activeCategory === "contributor" && (
                 <motion.div
                   layoutId="faqCategoryTab"
-                  className="absolute inset-0 rounded-full bg-[#D6B56C] shadow-md shadow-[#D6B56C]/20"
+                  className="absolute inset-0 rounded-full bg-[#B8E5D5] shadow-md shadow-[#58B99A]/20"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                 />
               )}
@@ -85,14 +85,14 @@ export default function FAQ() {
               }}
               className={`relative px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
                 activeCategory === "sponsor"
-                  ? "text-[#08131D]"
+                  ? "text-[#0C1C2C]"
                   : "text-[#AEBCC7] hover:text-[#F4F1E8]"
               }`}
             >
               {activeCategory === "sponsor" && (
                 <motion.div
                   layoutId="faqCategoryTab"
-                  className="absolute inset-0 rounded-full bg-[#D6B56C] shadow-md shadow-[#D6B56C]/20"
+                  className="absolute inset-0 rounded-full bg-[#B8E5D5] shadow-md shadow-[#58B99A]/20"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
                 />
               )}
@@ -120,7 +120,7 @@ export default function FAQ() {
                 return (
                   <div
                     key={faq.id}
-                    className="rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-[#D6B56C]/45 hover:shadow-[0_10px_35px_-15px_rgba(7,19,31,0.8)]"
+                    className="rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-[#58B99A]/45 hover:shadow-[0_10px_35px_-15px_rgba(7,19,31,0.8)]"
                   >
                     <button
                       onClick={() => toggleAccordion(faq.id)}
@@ -132,7 +132,7 @@ export default function FAQ() {
                       <motion.div
                         animate={{ rotate: isOpen ? 180 : 0 }}
                         transition={{ duration: 0.25 }}
-                        className="p-1 rounded-full bg-[#0B1C2A] text-[#D6B56C] border border-[#AEBCC7]/15 shrink-0"
+                        className="p-1 rounded-full bg-[#0B1C2A] text-[#58B99A] border border-[#AEBCC7]/15 shrink-0"
                       >
                         <ChevronDown className="w-4 h-4" />
                       </motion.div>

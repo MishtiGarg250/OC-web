@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import SakuraCanvas from "./SakuraCanvas";
 import { ArrowRight, Sparkles, Terminal } from "lucide-react";
+import SpecularButton from "./SpecularButton";
 
 function HeroSection() {
   const heroVideoRef = useRef<HTMLVideoElement>(null);
@@ -120,40 +121,39 @@ function HeroSection() {
 
       <div className="relative z-30 mx-auto flex max-w-5xl flex-col items-center px-6 text-center">
         {/* Registration & Event Status Ribbon */}
+        {/* COLOR PALETTE TRIAL NOTE:
+            - Mint + Emerald Palette: #B8E5D5 (Mint), #58B99A (Emerald), #0C1C2C (Deep Navy)
+            - Original Gold Palette: #D6B56C (Gold), #E5C982 (Light Gold), #08131D (Dark Gold BG/Text)
+        */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center gap-3"
         >
-          <div className="flex items-center gap-2.5 rounded-full border border-[#AEBCC7]/15 bg-[#102535]/55 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md shadow-lg shadow-[#07131F]/70">
-            <Sparkles className="h-3.5 w-3.5 text-[#D6B56C] animate-pulse" />
+          <div className="flex items-center gap-2.5 rounded-full border border-[#58B99A]/30 bg-[#102535]/55 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md shadow-lg shadow-[#07131F]/70">
+            <Sparkles className="h-3.5 w-3.5 text-[#58B99A] animate-pulse" />
             <span>OpenCode 2026 • GeekHaven IIITA</span>
             <span className="hidden sm:inline text-[#718394]">•</span>
-            <span className="hidden sm:inline text-[#D6B56C] font-bold">Registration Live</span>
+            <span className="hidden sm:inline text-[#B8E5D5] font-bold">Registration Live</span>
           </div>
         </motion.div>
 
-        {/* High-Impact Headline (Experiment: Kanji Radical Asian Font) */}
-        {/* REVERT NOTE:
-            - To revert to standard clean font: change "font-kanji" to "font-sans", text-4xl sm:text-6xl md:text-7xl, leading-[1.08]
-            - To switch to Harry Potter font: change "font-kanji" to "font-harry"
-            - To switch to Japanese Hotsuka brush: change "font-kanji" to "font-hotsuka"
-            - To switch to Japanese Henshin font: change "font-kanji" to "font-henshin"
-        */}
+        {/* High-Impact Headline (Racing Sans One Font) */}
         <motion.h1
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.15 }}
-          className="font-kanji mt-8 text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-bold leading-[1.2] tracking-wide text-[#F4F1E8] drop-shadow-[0_4px_30px_rgba(7,19,31,0.95)]"
+          className="mt-8 text-3xl sm:text-5xl md:text-6xl lg:text-[4.75rem] leading-[1.14] text-[#F4F1E8] drop-shadow-[0_4px_30px_rgba(7,19,31,0.95)]"
         >
-          Start Your{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#D6B56C]">
-            Open Source Odyssey
+          <span className="font-racing uppercase tracking-[0.02em] sm:tracking-[0.04em]">
+            START YOUR{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#F4F1E8] via-[#D9E2E8] to-[#B8E5D5]">
+              OPEN SOURCE ODYSSEY
+            </span>
           </span>
-          <br />
-          <span className="text-2xl sm:text-4xl md:text-5xl font-semibold text-[#D9E2E8]">
-            Fueling the Next Wave of Open Tech
+          <span className="block mt-4 sm:mt-5 font-cormorant text-sm sm:text-lg md:text-xl lg:text-2xl font-medium uppercase tracking-[0.14em] sm:tracking-[0.18em] text-[#D9E2E8] drop-shadow-[0_2px_16px_rgba(7,19,31,0.9)]">
+            FUELING THE NEXT WAVE OF OPEN TECH
           </span>
         </motion.h1>
 
@@ -162,11 +162,11 @@ function HeroSection() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-6 text-base sm:text-xl text-[#AEBCC7] max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_14px_rgba(7,19,31,0.9)]"
+          className="font-zen mt-6 text-base sm:text-lg md:text-xl text-[#AEBCC7] max-w-3xl mx-auto leading-relaxed drop-shadow-[0_2px_14px_rgba(7,19,31,0.9)]"
         >
           A month-long open source celebration by{" "}
           <span className="font-semibold text-[#F4F1E8]">GeekHaven, IIITA</span> bringing together{" "}
-          <span className="font-semibold text-[#D6B56C]">1,000+ student developers</span>, 
+          <span className="font-semibold text-[#B8E5D5]">1,000+ student developers</span>, 
           seasoned maintainers, and leading industry sponsors.
         </motion.p>
 
@@ -175,10 +175,10 @@ function HeroSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45 }}
-          className="mt-5"
+          className="mt-6"
         >
-          <h3 className="font-kanji text-base sm:text-lg md:text-xl font-bold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#8FAFC4] drop-shadow-[0_2px_12px_rgba(7,19,31,0.9)] select-none">
-            Open Source <span className="text-[#D6B56C] mx-1.5">•</span> Open Minds
+          <h3 className="font-cormorant text-xs sm:text-sm md:text-base font-medium uppercase tracking-[0.22em] sm:tracking-[0.26em] text-[#8FAFC4] drop-shadow-[0_2px_12px_rgba(7,19,31,0.9)] select-none">
+            OPEN SOURCE <span className="text-[#58B99A] mx-1.5">•</span> OPEN MINDS
           </h3>
         </motion.div>
 
@@ -192,24 +192,54 @@ function HeroSection() {
           {/* Line 1: Contributor & Sponsor in a single line */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
             {/* Primary CTA: Contributor */}
-            <a
+            <SpecularButton
+              size="lg"
+              radius={24}
+              tint="#B8E5D5"
+              tintOpacity={0.16}
+              textColor="#0C1C2C"
+              lineColor="#ffffff"
+              baseColor="#B8E5D5"
+              intensity={1}
+              idleIntensity={0.35}
+              shineSize={10}
+              shineFade={34}
+              thickness={1.2}
+              glow={1}
+              followMouse
+              proximity={250}
               href="https://discord.gg/SxBATvUPnC"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 rounded-full bg-[#D6B56C] hover:bg-[#E5C982] px-7 py-3.5 text-sm sm:text-base font-semibold text-[#08131D] shadow-lg shadow-[#D6B56C]/25 transition hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
+              className="!bg-[#B8E5D5] hover:!bg-[#A3DAC7] !text-[#0C1C2C] font-semibold text-sm sm:text-base shadow-lg shadow-[#58B99A]/20"
             >
-              <Terminal className="w-4 h-4 text-[#08131D]" />
-              Join as Contributor
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
+              <Terminal className="w-4 h-4 text-[#0C1C2C]" />
+              <span>Join as Contributor</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-[#0C1C2C]" />
+            </SpecularButton>
 
             {/* Secondary CTA: Sponsor */}
-            <Link
+            <SpecularButton
+              size="lg"
+              radius={24}
+              tint="#ffffff"
+              tintOpacity={0.06}
+              textColor="#F4F1E8"
+              lineColor="#58B99A"
+              baseColor="#102535"
+              intensity={1}
+              idleIntensity={0.35}
+              shineSize={10}
+              shineFade={34}
+              thickness={1.2}
+              glow={1}
+              followMouse
+              proximity={250}
               href="/sponsor-registration"
-              className="inline-flex items-center gap-2 rounded-full border border-[#D6B56C]/45 bg-[#102535]/55 px-7 py-3.5 text-sm sm:text-base font-semibold text-[#F4F1E8] backdrop-blur-md transition hover:bg-[#102535]/80 hover:border-[#E5C982] hover:scale-105 active:scale-95 cursor-pointer whitespace-nowrap"
+              className="!bg-[#102535]/80 hover:!bg-[#102535] !text-[#F4F1E8] font-semibold text-sm sm:text-base border border-[#58B99A]/50 backdrop-blur-md"
             >
-              Become a Sponsor
-            </Link>
+              <span>Become a Sponsor</span>
+            </SpecularButton>
           </div>
 
           {/* Line 2: Brochure symmetrically centered between top two */}
