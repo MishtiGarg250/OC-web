@@ -1,90 +1,129 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { projectsData, ProjectItem } from "@/data/projectsData";
 import {
-  FolderGit2,
   Github,
   User,
-  Layers,
   ArrowRight,
   X,
   ExternalLink,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import BlurText from "./BlurText";
 import SpecularButton from "./SpecularButton";
 import SakuraCanvas from "./SakuraCanvas";
 import "./ProjectsGallery.css";
 
-// Exactly 3 curated exhibition chapters with 5 projects each = 15 total projects
-interface ExhibitionChapter {
+// Track filter definition inspired by Pinterest header navigation
+interface TrackFilter {
   id: string;
-  chapterNumber: string;
-  romanNumeral: string;
-  title: string;
-  rangeLabel: string;
-  subtitle: string;
-  startIndex: number;
-  endIndex: number;
+  label: string;
+  domain?: "ai" | "web" | "mobile" | "web3" | "cybersecurity";
 }
 
-const EXHIBITION_CHAPTERS: ExhibitionChapter[] = [
-  {
-    id: "chapter-1",
-    chapterNumber: "01",
-    romanNumeral: "I",
-    title: "Interactive Platforms & AI",
-    rangeLabel: "01–05",
-    subtitle:
-      "Automated NLP resume intelligence, high-concurrency websocket forums, and Solana generative token launchpads.",
-    startIndex: 0,
-    endIndex: 5,
-  },
-  {
-    id: "chapter-2",
-    chapterNumber: "02",
-    romanNumeral: "II",
-    title: "Systems, Security & Community",
-    rangeLabel: "06–10",
-    subtitle:
-      "Hands-on offensive/defensive CTF playgrounds, WebRTC peer spaces, alumni networks, and deep sentiment analysis.",
-    startIndex: 5,
-    endIndex: 10,
-  },
-  {
-    id: "chapter-3",
-    chapterNumber: "03",
-    romanNumeral: "III",
-    title: "Emerging Protocols & Frameworks",
-    rangeLabel: "11–15",
-    subtitle:
-      "Production-audited Solidity DeFi primitives, kernel forensics analysis drills, mobile trivia, and fluid animation UI.",
-    startIndex: 10,
-    endIndex: 15,
-  },
+const TRACK_FILTERS: TrackFilter[] = [
+  { id: "all", label: "ALL TRACKS" },
+  { id: "ai", label: "AI & INTELLIGENCE", domain: "ai" },
+  { id: "web", label: "WEB & FULLSTACK", domain: "web" },
+  { id: "cybersecurity", label: "SECURITY & SYSTEMS", domain: "cybersecurity" },
+  { id: "web3", label: "WEB3 & PROTOCOLS", domain: "web3" },
+  { id: "mobile", label: "MOBILE ECOSYSTEM", domain: "mobile" },
 ];
 
+// Snappy Apple/Stripe ease-out curve for instant responsive feel
+const TRANSITION_CONFIG = {
+  duration: 0.4,
+  ease: [0.16, 1, 0.3, 1] as const,
+};
+
+const subscribeWindowResize = (callback: () => void) => {
+  window.addEventListener("resize", callback);
+  return () => window.removeEventListener("resize", callback);
+};
+
+const getWindowWidth = () => (typeof window !== "undefined" ? window.innerWidth : 1200);
+const getServerWidth = () => 1200;
+
 export default function Projects() {
-  const [activeChapterIndex, setActiveChapterIndex] = useState(0);
+  const windowWidth = React.useSyncExternalStore(
+    subscribeWindowResize,
+    getWindowWidth,
+    getServerWidth
+  );
+  const [activeTrack, setActiveTrack] = useState<string>("all");
+  const [activeIndex, setActiveIndex] = useState<number>(0);
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [origin, setOrigin] = useState<{ x: number; y: number } | null>(null);
-  const lastActiveElementRef = React.useRef<HTMLElement | null>(null);
+  const lastActiveElementRef = useRef<HTMLElement | null>(null);
+  const isNavigatingRef = useRef<boolean>(false);
 
-  const currentChapter = EXHIBITION_CHAPTERS[activeChapterIndex];
-
-  // Exactly 5 unique projects for the active exhibition chapter
+  // Filter projects according to the active track
   const currentProjects = useMemo(() => {
-    return projectsData.slice(currentChapter.startIndex, currentChapter.endIndex);
-  }, [currentChapter]);
+    if (activeTrack === "all") return projectsData;
+    const filter = TRACK_FILTERS.find((t) => t.id === activeTrack);
+    if (!filter || !filter.domain) return projectsData;
+    return projectsData.filter((p) => p.domain === filter.domain);
+  }, [activeTrack]);
 
-  const handleSelectChapter = (index: number) => {
-    if (index === activeChapterIndex) return;
-    setActiveChapterIndex(index);
-    setSelectedProject(null);
+  // Preload all project images into memory so 1500 concurrent visitors experience zero decode lag
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      projectsData.forEach((project) => {
+        const img = new window.Image();
+        img.src = project.image;
+      });
+    }
+  }, []);
+
+  // Safe active index ensuring no out-of-bounds index
+  const safeActiveIndex = activeIndex < currentProjects.length ? activeIndex : 0;
+
+  // The active center project
+  const activeProject = currentProjects[safeActiveIndex] || currentProjects[0];
+
+  const handleTrackChange = (trackId: string) => {
+    setActiveTrack(trackId);
+    setActiveIndex(0);
   };
 
-  // Open detailed card, recording the card's screen position so it pops out from that spot
+  // Throttled navigation handlers to guarantee 60-120fps under rapid input
+  const handlePrev = useCallback(() => {
+    if (isNavigatingRef.current) return;
+    isNavigatingRef.current = true;
+    setActiveIndex((prev) => (prev - 1 + currentProjects.length) % currentProjects.length);
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 220);
+  }, [currentProjects.length]);
+
+  const handleNext = useCallback(() => {
+    if (isNavigatingRef.current) return;
+    isNavigatingRef.current = true;
+    setActiveIndex((prev) => (prev + 1) % currentProjects.length);
+    setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 220);
+  }, [currentProjects.length]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (selectedProject) return; // let modal handle escape
+      if (e.key === "ArrowLeft") {
+        handlePrev();
+      } else if (e.key === "ArrowRight") {
+        handleNext();
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handlePrev, handleNext, selectedProject]);
+
+  // Open detail popup modal
   const handleOpenDetail = useCallback(
     (project: ProjectItem, e?: React.MouseEvent | React.KeyboardEvent) => {
       if (e && "currentTarget" in e && e.currentTarget) {
@@ -109,84 +148,155 @@ export default function Projects() {
     }
   }, []);
 
-  // Keyboard navigation & body scroll lock while detailed modal is open
+  // Keyboard escape & body scroll lock while modal is open
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
+    const handleModalKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         handleCloseDetail();
       }
     };
     if (selectedProject) {
-      window.addEventListener("keydown", handleKeyDown);
+      window.addEventListener("keydown", handleModalKey);
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleModalKey);
       document.body.style.overflow = "";
     };
   }, [selectedProject, handleCloseDetail]);
+
+  // Compute circular 3D offset relative to active card
+  const getOffset = (index: number) => {
+    const total = currentProjects.length;
+    if (total <= 1) return 0;
+    let diff = index - safeActiveIndex;
+    while (diff > total / 2) diff -= total;
+    while (diff < -total / 2) diff += total;
+    return diff;
+  };
+
+  // Responsive dimension & GPU compositor transform calculations (strictly x, scale, rotateY, opacity)
+  const isMobile = windowWidth < 640;
+  const isTablet = windowWidth >= 640 && windowWidth < 1024;
+
+  const getCardTransform = (diff: number) => {
+    if (diff === 0) {
+      return {
+        x: 0,
+        scale: 1,
+        rotateY: 0,
+        zIndex: 30,
+        opacity: 1,
+        dimOpacity: 0,
+      };
+    }
+
+    if (diff === -1) {
+      return {
+        x: isMobile ? -135 : isTablet ? -230 : -295,
+        scale: isMobile ? 0.82 : 0.86,
+        rotateY: 16,
+        zIndex: 20,
+        opacity: isMobile ? 0.45 : 0.88,
+        dimOpacity: 0.32,
+      };
+    }
+
+    if (diff === 1) {
+      return {
+        x: isMobile ? 135 : isTablet ? 230 : 295,
+        scale: isMobile ? 0.82 : 0.86,
+        rotateY: -16,
+        zIndex: 20,
+        opacity: isMobile ? 0.45 : 0.88,
+        dimOpacity: 0.32,
+      };
+    }
+
+    if (diff === -2) {
+      return {
+        x: isMobile ? -250 : isTablet ? -400 : -520,
+        scale: 0.72,
+        rotateY: 25,
+        zIndex: 10,
+        opacity: isMobile ? 0 : 0.6,
+        dimOpacity: 0.65,
+      };
+    }
+
+    if (diff === 2) {
+      return {
+        x: isMobile ? 250 : isTablet ? 400 : 520,
+        scale: 0.72,
+        rotateY: -25,
+        zIndex: 10,
+        opacity: isMobile ? 0 : 0.6,
+        dimOpacity: 0.65,
+      };
+    }
+
+    // Fully hidden non-visible cards
+    return {
+      x: diff > 0 ? 650 : -650,
+      scale: 0.6,
+      rotateY: diff > 0 ? -30 : 30,
+      zIndex: 0,
+      opacity: 0,
+      dimOpacity: 0.9,
+    };
+  };
 
   return (
     <div
       id="projects"
       className="min-h-screen py-16 sm:py-24 scroll-mt-20 bg-[#07131F] border-b border-[#AEBCC7]/15 overflow-hidden relative select-none"
     >
-      {/* Background Photographic Art: Mystical Torii Gate & Mount Fuji Night Sky */}
+      {/* =========================================================================
+          1. HARDWARE-ACCELERATED AMBIENT ARTWORK BACKDROP
+          Pure CSS opacity fade on WebP image with static GPU blur (zero runtime recalculation)
+          ========================================================================= */}
       <div className="absolute inset-0 pointer-events-none select-none overflow-hidden z-0">
-        <img
-          src="/images/tracks-projects-bg.jpg"
-          alt="Torii Gate and Mount Fuji Night Landscape"
-          className="absolute inset-0 w-full h-full object-cover object-center opacity-75 sm:opacity-85 scale-105 pointer-events-none transition-opacity"
-        />
-        {/* Soft atmospheric night tint: allows Mount Fuji, starry galaxy, and glowing Torii horizon to shine through */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#07131F]/60 via-transparent to-[#07131F]/70 pointer-events-none" />
-        <div className="absolute inset-0 bg-[#07131F]/15 pointer-events-none" />
+        {activeProject && (
+          <img
+            key={activeProject.id}
+            src={activeProject.image}
+            alt=""
+            className="ambient-backdrop absolute inset-0 w-full h-full object-cover saturate-150 brightness-[0.32] pointer-events-none"
+          />
+        )}
+
+        {/* Ambient Dark Radial & Vignette Overlay */}
+        <div className="absolute inset-0 bg-[#07131F]/45 pointer-events-none" />
+        <div className="absolute inset-0 bg-radial from-transparent via-[#07131F]/65 to-[#07131F] pointer-events-none" />
       </div>
 
       {/* Top & Bottom Seamless Edge Transitions */}
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#07131F] to-transparent pointer-events-none z-10" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#07131F] to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#07131F] via-[#07131F]/70 to-transparent pointer-events-none z-10" />
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#07131F] via-[#07131F]/70 to-transparent pointer-events-none z-10" />
 
-      {/* Drifting Ethereal Petals & Spirit Lights in the Background */}
+      {/* Ethereal Falling Sakura Petals & Spirit Lights */}
       <SakuraCanvas
         active={true}
         position="absolute"
-        petalCount={45}
-        className="pointer-events-none z-10 opacity-75"
+        petalCount={30}
+        className="pointer-events-none z-10 opacity-70"
         colors={[
-          "rgba(184, 229, 213, 0.85)", // Glowing Mint (#B8E5D5)
-          "rgba(88, 185, 154, 0.80)",  // Luminous Emerald (#58B99A)
+          "rgba(184, 229, 213, 0.85)", // Glowing Mint
+          "rgba(88, 185, 154, 0.80)",  // Emerald
           "rgba(255, 183, 197, 0.75)", // Sakura Pink
-          "rgba(56, 189, 248, 0.70)",  // Ethereal Spirit Cyan
+          "rgba(56, 189, 248, 0.70)",  // Cyan
           "rgba(244, 241, 232, 0.80)", // Soft Moonlit Ivory
         ]}
       />
 
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20 overflow-visible">
         {/* =========================================================================
-            1. SECTION HEADER
-            Minimalist exhibition ribbon + Cormorant Garamond serif headline
+            2. SECTION HEADER
+            Minimalist Cormorant Garamond serif headline
             ========================================================================= */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          {/* Exhibition Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-[#58B99A]/25 bg-[#0A1A28]/80 text-xs tracking-wider text-[#D9E2E8] backdrop-blur-md mb-3 font-zen shadow-sm"
-          >
-            <FolderGit2 className="w-3.5 h-3.5 text-[#58B99A]" />
-            <span className="text-[11px] text-[#58B99A] uppercase tracking-[0.2em] font-mono font-medium">
-              EXHIBITION ARCHIVE
-            </span>
-            <span className="w-1 h-1 rounded-full bg-[#8FAFC4]/40" />
-            <span className="text-[10px] text-[#8FAFC4]/75 uppercase tracking-[0.2em] font-mono">
-              15 REPOSITORIES • 3 CHAPTERS
-            </span>
-          </motion.div>
-
+        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <motion.h2
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -201,253 +311,244 @@ export default function Projects() {
 
           <div className="mt-2.5">
             <BlurText
-              text="15 open-source initiatives curated across three exhibition chapters. Select a chapter below to explore repositories and inspect technical specifications."
+              text="Explore open-source initiatives curated across key technological tracks. Swipe, click flanking cards, or use arrows to navigate the 3D perspective gallery."
               className="text-sm sm:text-base text-[#AEBCC7] leading-relaxed font-zen justify-center text-center max-w-2xl mx-auto"
-              delay={20}
+              delay={15}
             />
           </div>
         </div>
 
         {/* =========================================================================
-            2. MINIMALIST JAPANESE CHAPTER SELECTORS
-            Clean horizontal editorial tabs anchored with fine dividers & active underline
+            3. PINTEREST-INSPIRED TRACKS NAVIGATION BAR
+            Horizontal editorial tabs with fine active underline indicator
             ========================================================================= */}
-        <div className="max-w-5xl mx-auto mb-7 sm:mb-9">
+        <div className="max-w-4xl mx-auto mb-8 sm:mb-12">
           <div
-            className="border-b border-white/10"
+            className="flex items-center justify-center flex-wrap gap-1 sm:gap-2 border-b border-white/10 pb-1"
             role="tablist"
-            aria-label="Exhibition Chapters"
+            aria-label="Technology Tracks"
           >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
-              {EXHIBITION_CHAPTERS.map((chapter, index) => {
-                const isActive = index === activeChapterIndex;
-                return (
-                  <button
-                    key={chapter.id}
-                    role="tab"
-                    id={`chapter-tab-${chapter.id}`}
-                    aria-selected={isActive}
-                    aria-controls={`chapter-panel-${chapter.id}`}
-                    tabIndex={0}
-                    onClick={() => handleSelectChapter(index)}
-                    className="group relative text-left py-3.5 sm:py-4 px-3 sm:px-4 transition-colors duration-300 cursor-pointer focus:outline-none rounded-t-lg hover:bg-white/[0.02]"
-                  >
-                    {/* Top Row: Chapter Numeral + Range Badge */}
-                    <div className="flex items-center justify-between text-xs font-mono mb-1.5">
-                      <span
-                        className={`tracking-widest uppercase transition-colors text-[11px] ${
-                          isActive
-                            ? "text-[#58B99A] font-semibold"
-                            : "text-white/40 group-hover:text-white/70"
-                        }`}
-                      >
-                        CHAPTER {chapter.chapterNumber}
-                      </span>
-                      <span
-                        className={`tracking-wider px-2 py-0.5 rounded-full text-[10px] transition-colors ${
-                          isActive
-                            ? "bg-[#58B99A]/15 text-[#B8E5D5] border border-[#58B99A]/30 font-semibold"
-                            : "bg-white/5 text-white/40 border border-white/10 group-hover:text-white/60"
-                        }`}
-                      >
-                        {chapter.rangeLabel}
-                      </span>
-                    </div>
+            {TRACK_FILTERS.map((filter) => {
+              const isActive = activeTrack === filter.id;
+              const count =
+                filter.id === "all"
+                  ? projectsData.length
+                  : projectsData.filter((p) => p.domain === filter.domain).length;
 
-                    {/* Chapter Title */}
-                    <h3
-                      className={`font-cormorant text-base sm:text-lg lg:text-[19px] font-bold tracking-wide transition-colors leading-snug ${
+              return (
+                <button
+                  key={filter.id}
+                  role="tab"
+                  aria-selected={isActive}
+                  tabIndex={0}
+                  onClick={() => handleTrackChange(filter.id)}
+                  className={`group relative px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-[13px] font-mono font-medium tracking-wider transition-colors duration-200 cursor-pointer focus:outline-none rounded-t-md ${
+                    isActive
+                      ? "text-[#F4F1E8]"
+                      : "text-white/45 hover:text-white/80"
+                  }`}
+                >
+                  <span className="flex items-center gap-1.5">
+                    <span>{filter.label}</span>
+                    <span
+                      className={`text-[10px] px-1.5 py-0.2 rounded-full transition-colors ${
                         isActive
-                          ? "text-[#F4F1E8]"
-                          : "text-white/60 group-hover:text-white/90"
+                          ? "bg-[#58B99A]/20 text-[#B8E5D5] border border-[#58B99A]/30"
+                          : "bg-white/5 text-white/30 group-hover:text-white/60"
                       }`}
                     >
-                      {chapter.title}
-                    </h3>
+                      {count}
+                    </span>
+                  </span>
 
-                    {/* Restrained active mint underline indicator */}
-                    {isActive && (
-                      <motion.div
-                        layoutId="activeExhibitionLine"
-                        className="absolute bottom-0 inset-x-0 h-[2px] bg-gradient-to-r from-[#58B99A] via-[#B8E5D5] to-[#58B99A]"
-                        transition={{
-                          type: "spring",
-                          stiffness: 400,
-                          damping: 34,
-                        }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+                  {/* Pinterest-style animated active underline */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTrackUnderline"
+                      className="absolute bottom-[-1px] inset-x-0 h-[2.5px] bg-gradient-to-r from-[#58B99A] via-[#B8E5D5] to-[#58B99A] shadow-[0_0_10px_rgba(88,185,154,0.7)]"
+                      transition={{
+                        type: "spring",
+                        stiffness: 420,
+                        damping: 34,
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
         {/* =========================================================================
-            3. ASYMMETRICAL FIVE-PROJECT ART WALL GALLERY
-            Desktop: All 5 projects visible simultaneously in a balanced 12-col grid
+            4. 3D PARALLAX PERSPECTIVE CAROUSEL STAGE
+            Optimized for locked 60-120fps compositor transforms (NO live filter animations)
             ========================================================================= */}
-        <div className="max-w-7xl mx-auto overflow-visible">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentChapter.id}
-              id={`chapter-panel-${currentChapter.id}`}
-              role="tabpanel"
-              aria-labelledby={`chapter-tab-${currentChapter.id}`}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -12 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="w-full overflow-visible"
-            >
-              <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 sm:gap-4 lg:gap-5 overflow-visible">
-                {currentProjects.map((project, index) => {
-                  const isHero = index === 0;
+        <div className="relative w-full max-w-7xl mx-auto py-2 overflow-visible">
+          {/* Navigation Arrows: Translucent glowing glass chevrons */}
+          <button
+            onClick={handlePrev}
+            aria-label="Previous project"
+            className="nav-arrow-btn absolute left-2 sm:left-4 lg:left-8 top-1/2 -translate-y-1/2 z-40 p-2.5 sm:p-3 rounded-full text-white/85 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#58B99A]"
+          >
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
 
-                  // Responsive Column Spans
-                  let spanClass = "col-span-1 md:col-span-12 lg:col-span-4";
-                  let heightClass = "h-[390px] sm:h-[400px] lg:h-[350px]";
+          <button
+            onClick={handleNext}
+            aria-label="Next project"
+            className="nav-arrow-btn absolute right-2 sm:right-4 lg:right-8 top-1/2 -translate-y-1/2 z-40 p-2.5 sm:p-3 rounded-full text-white/85 hover:text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#58B99A]"
+          >
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          </button>
 
-                  if (index === 0) {
-                    spanClass = "col-span-1 md:col-span-7 lg:col-span-7";
-                    heightClass = "h-[400px] sm:h-[420px] lg:h-[420px]";
-                  } else if (index === 1) {
-                    spanClass = "col-span-1 md:col-span-5 lg:col-span-5";
-                    heightClass = "h-[400px] sm:h-[420px] lg:h-[420px]";
-                  } else if (index === 2) {
-                    spanClass = "col-span-1 md:col-span-6 lg:col-span-4";
-                    heightClass = "h-[380px] sm:h-[390px] lg:h-[350px]";
-                  } else if (index === 3) {
-                    spanClass = "col-span-1 md:col-span-6 lg:col-span-4";
-                    heightClass = "h-[380px] sm:h-[390px] lg:h-[350px]";
-                  } else if (index === 4) {
-                    spanClass = "col-span-1 md:col-span-12 lg:col-span-4";
-                    heightClass = "h-[380px] sm:h-[390px] lg:h-[350px]";
-                  }
+          {/* 3D Perspective Stage Container */}
+          <div className="perspective-stage relative w-full h-[500px] sm:h-[560px] lg:h-[620px] flex items-center justify-center overflow-visible">
+            {currentProjects.map((project, index) => {
+              const diff = getOffset(index);
+              const isCenter = diff === 0;
+              const isVisible = Math.abs(diff) <= 2;
+              const transformConfig = getCardTransform(diff);
 
-                  const isSelected = selectedProject?.id === project.id;
+              if (!isVisible && !isCenter) return null;
 
-                  return (
-                    <div
-                      key={project.id}
-                      onClick={(e) => handleOpenDetail(project, e)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" || e.key === " ") {
-                          e.preventDefault();
-                          handleOpenDetail(project, e);
-                        }
-                      }}
-                      tabIndex={0}
-                      role="button"
-                      aria-label={`Inspect ${project.title} (${project.domainLabel})`}
-                      aria-pressed={isSelected}
-                      className={`group exhibition-project-card ${spanClass} ${heightClass} cursor-pointer ${
-                        isSelected ? "exhibition-project-card--active" : ""
-                      }`}
-                    >
-                      {/* Full-bleed Photographic Artwork */}
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="exhibition-project-card__bg"
-                        loading="lazy"
-                      />
+              return (
+                <motion.div
+                  key={project.id}
+                  animate={{
+                    x: transformConfig.x,
+                    scale: transformConfig.scale,
+                    rotateY: transformConfig.rotateY,
+                    zIndex: transformConfig.zIndex,
+                    opacity: transformConfig.opacity,
+                  }}
+                  transition={TRANSITION_CONFIG}
+                  drag={isCenter ? "x" : false}
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={0.15}
+                  onDragEnd={(_, info) => {
+                    if (info.offset.x < -40) handleNext();
+                    else if (info.offset.x > 40) handlePrev();
+                  }}
+                  onClick={() => {
+                    if (!isCenter) {
+                      setActiveIndex(index);
+                    }
+                  }}
+                  className={`perspective-card-3d absolute w-[290px] sm:w-[360px] lg:w-[410px] h-[450px] sm:h-[510px] lg:h-[570px] rounded-2xl sm:rounded-3xl overflow-hidden border cursor-pointer ${
+                    isCenter
+                      ? "border-white/25 card-center-glow cursor-default"
+                      : "border-white/10 card-flanking-glow hover:border-white/20"
+                  }`}
+                  style={{
+                    transformOrigin: "center center",
+                  }}
+                >
+                  {/* Full-bleed Scenic Photography Background (Ultra-optimized WebP asset) */}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none"
+                    loading={isCenter ? "eager" : "lazy"}
+                  />
 
-                      {/* Ambient Base Night Tint */}
-                      <div className="exhibition-project-card__tint" />
+                  {/* Diagonal Glass Sheen & Gradients */}
+                  <div className="card-glass-sheen absolute inset-0 z-1" />
+                  <div
+                    className={`absolute inset-0 z-2 ${
+                      isCenter ? "card-night-tint" : "card-flanking-tint"
+                    }`}
+                  />
 
-                      {/* Layered Contrast Gradient: 100% Text Legibility */}
-                      <div className="exhibition-project-card__gradient" />
+                  {/* Hardware-Accelerated Dimmer Layer (Pure Opacity Composite, Zero Filter Cost) */}
+                  <motion.div
+                    animate={{ opacity: transformConfig.dimOpacity }}
+                    transition={TRANSITION_CONFIG}
+                    className="absolute inset-0 bg-[#07131F] pointer-events-none z-3"
+                  />
 
-                      {/* Content Container (Guaranteed 100% Opacity) */}
-                      <div className="exhibition-project-card__content p-4 sm:p-5 lg:p-6">
-                        {/* Top Metadata Header */}
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="flex items-center gap-2">
-                            {/* Catalog Serial Number */}
-                            <span className="font-mono text-xs font-semibold text-white/60 tracking-wider">
-                              #{String(project.id).padStart(2, "0")}
+                  {/* Flanking Card Minimalist Label (Visible when card is not centered) */}
+                  {!isCenter && (
+                    <div className="absolute inset-x-0 bottom-6 z-10 flex flex-col items-center justify-end text-center px-4 pointer-events-none">
+                      <span className="px-3 py-1 rounded-full bg-[#07131F]/85 border border-white/15 text-xs font-mono font-medium text-white/90 tracking-wide shadow-md">
+                        {project.title}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* =================================================================
+                      CENTER ACTIVE CARD CONTENT OVERLAY (Exact Pinterest Typography)
+                      ================================================================= */}
+                  {isCenter && (
+                    <div className="relative z-10 w-full h-full p-5 sm:p-7 flex flex-col justify-between">
+                      {/* Top Header: Serial Catalog + Hashtag Category Pill */}
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="px-2.5 py-1 rounded-full bg-[#07131F]/85 border border-white/15 text-[11px] font-mono text-white/75 shadow-xs">
+                          #{String(project.id).padStart(2, "0")} / {projectsData.length}
+                        </span>
+
+                        <span className="px-3 py-1 rounded-full bg-[#07131F]/85 border border-white/20 text-[11px] font-mono font-semibold tracking-wider text-[#B8E5D5] uppercase shadow-sm">
+                          #{project.domainLabel.split("/")[0].trim()}
+                        </span>
+                      </div>
+
+                      {/* Bottom Third: Dramatic Pinterest-style Bold Typography */}
+                      <div className="mt-auto pt-4">
+                        {/* Big Bold Headline */}
+                        <h3 className="font-sans font-black text-2xl sm:text-3xl lg:text-[34px] uppercase text-[#F4F1E8] tracking-wider leading-none drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
+                          {project.title}
+                        </h3>
+
+                        {/* Crisp Minimalist Accent Line */}
+                        <div className="w-14 h-[2.5px] bg-[#58B99A] my-3 rounded-full shadow-[0_0_10px_rgba(88,185,154,0.7)]" />
+
+                        {/* Subtitle / Tagline */}
+                        <p className="font-zen text-xs sm:text-sm text-white/90 line-clamp-2 leading-relaxed mb-3.5 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
+                          {project.description}
+                        </p>
+
+                        {/* Tech Stack Chips */}
+                        <div className="flex flex-wrap gap-1.5 mb-4">
+                          {project.tags.slice(0, 4).map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2 py-0.5 rounded bg-[#07131F]/80 border border-white/15 text-[10px] font-mono text-white/90"
+                            >
+                              {tag}
                             </span>
-
-                            <span className="w-1 h-1 rounded-full bg-white/20" />
-
-                            {/* Category / Track Badge */}
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-[10px] sm:text-[11px] font-mono text-white/90 backdrop-blur-sm shadow-sm transition-colors">
-                              <Layers className="w-3 h-3 text-[#58B99A]" />
-                              <span>{project.domainLabel}</span>
-                            </span>
-                          </div>
-
-                          {/* GitHub Quick Link Button */}
-                          <a
-                            href={project.github}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            aria-label={`View ${project.title} on GitHub`}
-                            className="p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 hover:border-white/30 text-white/80 hover:text-white backdrop-blur-sm transition-all duration-200 cursor-pointer shrink-0"
-                          >
-                            <Github className="w-3.5 h-3.5" />
-                          </a>
+                          ))}
                         </div>
 
-                        {/* Bottom Information Stack */}
-                        <div className="mt-auto pt-4">
-                          {/* Title with Vertical Mint / Vermilion Accent Bar */}
-                          <div className="flex items-center gap-2.5 mb-1.5">
-                            <span
-                              className={`w-1 rounded-full shrink-0 ${
-                                isHero
-                                  ? "h-6 sm:h-7 bg-[#C83E34]"
-                                  : "h-5 sm:h-6 bg-[#58B99A]"
-                              }`}
-                            />
-                            <h4
-                              className={`font-cormorant font-bold text-[#F4F1E8] tracking-wide leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)] ${
-                                isHero
-                                  ? "text-2xl sm:text-3xl lg:text-[32px]"
-                                  : "text-xl sm:text-2xl lg:text-[25px]"
-                              }`}
+                        {/* Action Bar: Specification Modal Button + GitHub Link + Mentor */}
+                        <div className="pt-3 border-t border-white/15 flex items-center justify-between gap-2">
+                          <div className="flex items-center gap-1.5 text-[11px] font-zen text-white/70">
+                            <User className="w-3.5 h-3.5 text-[#58B99A] shrink-0" />
+                            <span className="truncate max-w-[120px] sm:max-w-[150px]">
+                              {project.mentor}
+                            </span>
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            {/* GitHub Link */}
+                            <a
+                              href={project.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              aria-label={`View ${project.title} on GitHub`}
+                              className="p-2 rounded-full bg-[#07131F]/85 hover:bg-[#0E2333] border border-white/20 hover:border-white/40 text-white/80 hover:text-white transition-all duration-200 cursor-pointer shrink-0"
                             >
-                              {project.title}
-                            </h4>
-                          </div>
+                              <Github className="w-3.5 h-3.5" />
+                            </a>
 
-                          {/* Short Concise Description */}
-                          <p className="font-zen text-xs sm:text-[13px] text-white/85 line-clamp-2 leading-relaxed mb-3 drop-shadow-[0_1px_4px_rgba(0,0,0,0.9)]">
-                            {project.description}
-                          </p>
-
-                          {/* Tech Stack Badges */}
-                          <div className="flex flex-wrap gap-1.5 mb-3.5">
-                            {project.tags.slice(0, isHero ? 5 : 3).map((tag) => (
-                              <span
-                                key={tag}
-                                className="px-2 py-0.5 rounded bg-white/10 border border-white/15 text-[10px] font-mono text-white/85 backdrop-blur-sm shadow-xs"
-                              >
-                                {tag}
-                              </span>
-                            ))}
-                          </div>
-
-                          {/* Bottom Action Row: Mentor & View Specification */}
-                          <div className="pt-2.5 border-t border-white/15 flex items-center justify-between gap-2.5">
-                            <div className="flex items-center gap-1.5 text-[11px] font-zen text-white/60">
-                              <User className="w-3 h-3 text-white/50 shrink-0" />
-                              <span className="truncate max-w-[130px] sm:max-w-[170px]">
-                                {project.mentor}
-                              </span>
-                            </div>
-
+                            {/* View Specification Button */}
                             <SpecularButton
                               size="sm"
                               radius={16}
                               tint="#ffffff"
-                              tintOpacity={0.06}
+                              tintOpacity={0.08}
                               textColor="#ffffff"
                               lineColor="#58B99A"
-                              baseColor="#102535"
+                              baseColor="#0E2333"
                               intensity={1}
                               idleIntensity={0.35}
                               shineSize={10}
@@ -460,27 +561,56 @@ export default function Projects() {
                                 e.stopPropagation();
                                 handleOpenDetail(project, e);
                               }}
-                              className="!bg-white/10 hover:!bg-white/20 border border-white/20 hover:border-white/35 font-mono text-[10px] sm:text-[11px] tracking-wider px-3 py-1"
+                              className="!bg-[#07131F]/85 hover:!bg-[#0E2333] border border-white/25 hover:border-white/45 font-mono text-[10px] sm:text-[11px] tracking-wider px-3.5 py-1.5 shadow-md flex items-center gap-1.5"
                             >
                               <span>SPECIFICATION</span>
-                              <ArrowRight className="w-3 h-3 text-white transition-transform group-hover:translate-x-0.5" />
+                              <ArrowRight className="w-3 h-3 text-[#B8E5D5] transition-transform group-hover:translate-x-0.5" />
                             </SpecularButton>
                           </div>
                         </div>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* =========================================================================
+              5. PINTEREST-INSPIRED BOTTOM PAGINATION
+              Central glowing white dot indicator + clickable pagination dots
+              ========================================================================= */}
+          <div className="flex flex-col items-center justify-center mt-6 sm:mt-8 gap-3">
+            <div className="flex items-center justify-center gap-2 py-1 px-3 rounded-full bg-[#07131F]/85 border border-white/10 shadow-sm">
+              {currentProjects.map((p, idx) => {
+                const isCurrent = idx === safeActiveIndex;
+                return (
+                  <button
+                    key={p.id}
+                    onClick={() => setActiveIndex(idx)}
+                    aria-label={`Go to project ${p.title}`}
+                    className={`transition-all duration-300 rounded-full cursor-pointer focus:outline-none ${
+                      isCurrent
+                        ? "w-7 sm:w-8 h-2 sm:h-2.5 bg-[#F4F1E8] shadow-[0_0_12px_rgba(244,241,232,0.9)]"
+                        : "w-2 sm:w-2.5 h-2 sm:h-2.5 bg-white/25 hover:bg-white/60"
+                    }`}
+                  />
+                );
+              })}
+            </div>
+
+            {/* Catalog Position Counter */}
+            <div className="text-[11px] font-mono text-white/50 tracking-widest uppercase">
+              PROJECT {String(safeActiveIndex + 1).padStart(2, "0")} OF{" "}
+              {String(currentProjects.length).padStart(2, "0")}
+            </div>
+          </div>
         </div>
 
         {/* =========================================================================
-            4. ARCHIVE FOOTER
-            Minimalist link to explore all organization repositories
+            6. ARCHIVE LINK FOOTER
             ========================================================================= */}
-        <div className="mt-10 sm:mt-12 text-center">
+        <div className="mt-8 sm:mt-10 text-center">
           <p className="text-xs sm:text-sm text-[#718394] font-zen">
             Looking for all repositories?{" "}
             <a
@@ -497,9 +627,8 @@ export default function Projects() {
       </section>
 
       {/* =========================================================================
-          5. DETAILED PROJECT CARD POP-OUT
-          Gradually pops out from the exact position of the clicked gallery card.
-          Rendered with translucent glassy-blue styling, backdrop blur, and full specification.
+          7. DETAILED PROJECT SPECIFICATION POP-OUT MODAL
+          Preserves the full architecture and technical specification breakdown
           ========================================================================= */}
       <AnimatePresence>
         {selectedProject && (
@@ -509,22 +638,22 @@ export default function Projects() {
             aria-modal="true"
             aria-labelledby="detail-project-title"
           >
-            {/* Backdrop: Subtle transparent dark overlay so the background art & petals shine through */}
+            {/* Backdrop: Ambient blurred glass overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.28 }}
+              transition={{ duration: 0.25 }}
               onClick={handleCloseDetail}
-              className="absolute inset-0 bg-black/40 backdrop-blur-[3px] cursor-pointer"
+              className="absolute inset-0 bg-black/65 backdrop-blur-md cursor-pointer"
               aria-hidden="true"
             />
 
-            {/* Detailed Project Card: Frosted Glassmorphism pop-out */}
+            {/* Detailed Project Card Pop-out */}
             <motion.div
               initial={{
                 opacity: 0,
-                scale: 0.52,
+                scale: 0.75,
                 x: origin && typeof window !== "undefined" ? origin.x - window.innerWidth / 2 : 0,
                 y: origin && typeof window !== "undefined" ? origin.y - window.innerHeight / 2 : 0,
               }}
@@ -536,71 +665,67 @@ export default function Projects() {
               }}
               exit={{
                 opacity: 0,
-                scale: 0.52,
+                scale: 0.75,
                 x: origin && typeof window !== "undefined" ? origin.x - window.innerWidth / 2 : 0,
                 y: origin && typeof window !== "undefined" ? origin.y - window.innerHeight / 2 : 0,
               }}
               transition={{
-                duration: 0.42,
-                ease: [0.22, 1, 0.36, 1],
+                duration: 0.32,
+                ease: [0.16, 1, 0.3, 1],
               }}
               onClick={(e) => e.stopPropagation()}
-              className="relative z-10 w-full max-w-[620px] max-h-[85vh] flex flex-col rounded-2xl bg-[#0B1E30]/45 backdrop-blur-2xl backdrop-saturate-150 border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.85),inset_0_1px_1px_rgba(255,255,255,0.35),0_0_40px_rgba(88,185,154,0.12)] overflow-hidden text-[#F4F1E8]"
+              className="relative z-10 w-full max-w-[640px] max-h-[88vh] flex flex-col rounded-2xl bg-[#0B1E30]/90 border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),inset_0_1px_1px_rgba(255,255,255,0.35),0_0_40px_rgba(88,185,154,0.15)] overflow-hidden text-[#F4F1E8]"
             >
-              {/* Prismatic Diagonal Light Sheen Across Glass */}
+              {/* Diagonal Light Sheen */}
               <div className="absolute inset-0 bg-gradient-to-br from-white/[0.12] via-white/[0.02] to-transparent pointer-events-none z-10" />
 
-              {/* Delicate Top Mint Hairline Accent */}
-              <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#58B99A]/80 to-transparent z-20 pointer-events-none" />
+              {/* Delicate Top Accent Hairline */}
+              <div className="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#58B99A] to-transparent z-20 pointer-events-none" />
 
               {/* Close Button Top-Right */}
               <button
                 onClick={handleCloseDetail}
-                className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-30 p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 text-[#F4F1E8] hover:text-[#B8E5D5] backdrop-blur-md transition-all cursor-pointer shadow-md focus:outline-none focus:ring-2 focus:ring-[#58B99A]"
+                className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-30 p-1.5 sm:p-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/25 text-[#F4F1E8] hover:text-[#B8E5D5] transition-all cursor-pointer shadow-md focus:outline-none focus:ring-2 focus:ring-[#58B99A]"
                 aria-label="Close project specification"
               >
                 <X className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
               </button>
 
               {/* Header: Track & Project Title */}
-              <div className="p-4 sm:p-6 pb-3 sm:pb-4 pr-12 border-b border-white/10 bg-white/[0.04] backdrop-blur-md shrink-0 relative z-20">
+              <div className="p-4 sm:p-6 pb-3 sm:pb-4 pr-12 border-b border-white/10 bg-white/[0.04] shrink-0 relative z-20">
                 <div className="flex items-center gap-2 mb-1.5">
                   <span className="font-mono text-xs font-bold text-[#58B99A] tracking-wider">
-                    #{String(selectedProject.id).padStart(2, "0")} / 15
+                    #{String(selectedProject.id).padStart(2, "0")} / {projectsData.length}
                   </span>
                   <span className="w-1 h-1 rounded-full bg-white/30" />
                   <span className="text-[11px] font-mono font-semibold tracking-wider text-[#58B99A] uppercase">
                     {selectedProject.domainLabel}
                   </span>
-                  <span className="w-1 h-1 rounded-full bg-white/30 hidden sm:inline-block" />
-                  <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider hidden sm:inline-block">
-                    OpenCode '26 Archive
-                  </span>
                 </div>
                 <h3
                   id="detail-project-title"
-                  className="font-cormorant text-2xl sm:text-3xl font-bold text-[#F4F1E8] tracking-wide leading-tight drop-shadow-sm"
+                  className="font-sans font-bold text-2xl sm:text-3xl uppercase text-[#F4F1E8] tracking-wide leading-tight drop-shadow-sm"
                 >
                   {selectedProject.title}
                 </h3>
               </div>
 
-              {/* Scrollable Body with Detailed Specifications */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 overscroll-contain relative z-20">
-                {/* Banner Artwork */}
+              {/* Scrollable Body with Specifications */}
+              <div className="detail-modal-scrollbar flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 overscroll-contain relative z-20">
+                {/* Banner Image */}
                 {selectedProject.image && (
-                  <div className="relative h-36 sm:h-44 w-full rounded-xl overflow-hidden border border-white/20 shadow-lg shrink-0 bg-black/20">
+                  <div className="relative h-40 sm:h-48 w-full rounded-xl overflow-hidden border border-white/20 shadow-lg shrink-0 bg-black/20">
                     <img
                       src={selectedProject.image}
                       alt={selectedProject.title}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                   </div>
                 )}
 
-                {/* Problem / Overview */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xs">
+                {/* Problem & Objective */}
+                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08]">
                   <h4 className="font-mono text-[11px] font-bold tracking-[0.2em] text-[#F4F1E8] uppercase mb-1.5">
                     PROBLEM &amp; OBJECTIVE
                   </h4>
@@ -609,33 +734,33 @@ export default function Projects() {
                   </p>
                 </div>
 
-                {/* Solution & Engineering */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xs">
+                {/* Solution & Architecture */}
+                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08]">
                   <h4 className="font-mono text-[11px] font-bold tracking-[0.2em] text-[#58B99A] uppercase mb-1.5">
                     SOLUTION &amp; ARCHITECTURE
                   </h4>
                   <p className="text-xs sm:text-sm text-[#D9E2E8] font-zen leading-relaxed">
-                    Engineered during OpenCode 2026 as a modular, production-ready system utilizing{" "}
-                    {selectedProject.tags.slice(0, 3).join(", ")}. Architected with strict code quality
-                    guidelines, automated testing workflows, and verified open-source maintainer
-                    reviews.
+                    Engineered during OpenCode 2026 as a production-grade initiative utilizing{" "}
+                    {selectedProject.tags.slice(0, 3).join(", ")}. Follows modular architecture,
+                    strict TypeScript/linting standards, automated test workflows, and verified
+                    maintainer code reviews.
                   </p>
                 </div>
 
                 {/* Key Highlights */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xs">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08]">
                   <h4 className="font-mono text-[11px] font-bold tracking-[0.2em] text-[#58B99A] uppercase mb-1.5">
                     KEY HIGHLIGHTS
                   </h4>
                   <ul className="text-xs sm:text-sm text-[#D9E2E8] font-zen leading-relaxed space-y-1.5 list-disc list-inside">
-                    <li>Production-ready CI/CD automation &amp; unit test suites</li>
-                    <li>Extensible modular codebase with documented contribution guidelines</li>
+                    <li>Production-ready CI/CD pipelines &amp; comprehensive test coverage</li>
+                    <li>Extensible design with documented developer onboarding specs</li>
                     <li>Scalable architecture tailored for community collaboration</li>
                   </ul>
                 </div>
 
                 {/* Tech Stack */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xs">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08]">
                   <h4 className="font-mono text-[11px] font-bold tracking-[0.2em] text-[#8FAFC4] uppercase mb-2">
                     TECH STACK
                   </h4>
@@ -643,7 +768,7 @@ export default function Projects() {
                     {selectedProject.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 sm:px-3 py-1 rounded-md bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-xs font-mono font-medium text-[#F4F1E8] backdrop-blur-md shadow-xs transition-colors"
+                        className="px-2.5 sm:px-3 py-1 rounded-md bg-white/[0.08] hover:bg-white/[0.14] border border-white/15 text-xs font-mono font-medium text-[#F4F1E8] shadow-xs transition-colors"
                       >
                         {tag}
                       </span>
@@ -652,7 +777,7 @@ export default function Projects() {
                 </div>
 
                 {/* Mentorship */}
-                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xs">
+                <div className="p-3.5 sm:p-4 rounded-xl bg-white/[0.03] border border-white/[0.08]">
                   <h4 className="font-mono text-[11px] font-bold tracking-[0.2em] text-[#8FAFC4] uppercase mb-1.5">
                     PROJECT LEAD &amp; MENTORSHIP
                   </h4>
@@ -662,8 +787,8 @@ export default function Projects() {
                 </div>
               </div>
 
-              {/* Footer */}
-              <div className="p-4 sm:p-5 border-t border-white/10 bg-white/[0.04] backdrop-blur-md flex items-center justify-between gap-3 shrink-0 relative z-20">
+              {/* Modal Footer */}
+              <div className="p-4 sm:p-5 border-t border-white/10 bg-white/[0.04] flex items-center justify-between gap-3 shrink-0 relative z-20">
                 <span className="text-[11px] font-mono text-[#8FAFC4] hidden sm:inline">
                   OpenCode 2026 • Verified Repository
                 </span>
@@ -689,7 +814,7 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="!bg-[#F4F1E8] hover:!bg-[#B8E5D5] !text-[#07131F] font-mono text-xs font-bold tracking-wider shadow-lg px-5 py-2.5 ml-auto flex items-center gap-1.5"
                 >
-                  <span>VIEW PROJECT</span>
+                  <span>VIEW REPOSITORY</span>
                   <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                 </SpecularButton>
               </div>

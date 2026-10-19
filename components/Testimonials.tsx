@@ -1,12 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { testimonialsData, TestimonialItem } from "@/data/testimonialsData";
 import {
-  Quote,
   ChevronLeft,
   ChevronRight,
-  Heart,
   Sparkles,
   Trophy,
   Briefcase,
@@ -14,14 +13,13 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
-import BlurText from "./BlurText";
 import SakuraCanvas from "./SakuraCanvas";
 
 const filterCategories = ["All Stories", "Winner", "Internship", "Mentor", "Partner"] as const;
 
 export function Testimonials() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All Stories");
-  const [isAutoDrifting, setIsAutoDrifting] = useState<boolean>(true);
+  const [isAutoDrifting] = useState<boolean>(true);
 
   const reelRef = useRef<HTMLDivElement>(null);
   const isHoveredRef = useRef<boolean>(false);
@@ -280,17 +278,6 @@ export function Testimonials() {
       ───────────────────────────────────────────────────────────── */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 space-y-4">
-          {/* Subtle Journey Pill */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#AEBCC7]/15 bg-[#102535]/60 text-xs font-semibold uppercase tracking-[0.25em] text-[#D9E2E8] backdrop-blur-md shadow-sm"
-          >
-            <Heart className="w-3.5 h-3.5 text-[#58B99A]" />
-            <span>Memoirs of the Journey</span>
-          </motion.div>
-
           {/* Heading */}
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
@@ -442,14 +429,9 @@ export function Testimonials() {
                   <div className="absolute -top-16 -right-16 w-44 h-44 bg-gradient-to-br from-[#58B99A]/15 to-[#8B5CF6]/15 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-700" />
                   <div className="absolute -bottom-16 -left-16 w-40 h-40 bg-gradient-to-tr from-[#38BDF8]/10 to-transparent rounded-full blur-2xl pointer-events-none" />
 
-                  {/* Top Row: Scene / Memoir index + Category Tag + Monumental Quote Glyph */}
+                  {/* Top Row: Category Tag + Monumental Quote Glyph */}
                   <div className="relative z-10 flex items-start justify-between gap-4 mb-2 sm:mb-2.5">
                     <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                      {/* Film reel scene indicator */}
-                      <span className="font-mono text-[10px] sm:text-xs tracking-[0.2em] text-[#8FAFC4]/70 uppercase px-2.5 py-1 rounded-md bg-[#07131F]/60 border border-[#8FAFC4]/15">
-                        MEMOIR // 0{item.id}
-                      </span>
-
                       {/* Category Tag Badge */}
                       <span
                         className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border ${tagConfig.bg} ${tagConfig.border} ${tagConfig.badgeColor}`}

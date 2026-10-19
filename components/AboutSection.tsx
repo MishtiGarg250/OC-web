@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React from "react";
@@ -6,8 +7,6 @@ import {
   GitPullRequest,
   Users,
   Trophy,
-  Rocket,
-  Terminal,
   HeartHandshake,
 } from "lucide-react";
 import BlurText from "./BlurText";
@@ -114,16 +113,6 @@ export default function AboutSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Heading */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#58B99A]/30 bg-[#102535]/75 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md mb-4 font-zen shadow-lg shadow-[#07131F]/60"
-          >
-            <Rocket className="w-3.5 h-3.5 text-[#58B99A]" />
-            <span>The Movement</span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,14 +184,6 @@ export default function AboutSection() {
                   <p className="text-xs sm:text-sm text-[#AEBCC7] leading-relaxed group-hover:text-[#E2E8F0] transition-colors font-zen">
                     {item.description}
                   </p>
-                </div>
-
-                {/* Card Footer Tag */}
-                <div className="mt-6 pt-4 border-t border-[#8FAFC4]/20 flex items-center justify-start text-xs font-semibold text-[#8FAFC4] uppercase tracking-wider font-zen">
-                  <span className="inline-flex items-center text-[11px]">
-                    <Terminal className="w-3.5 h-3.5 mr-1.5 text-[#58B99A]" />
-                    GeekHaven IIITA
-                  </span>
                 </div>
               </motion.div>
             );

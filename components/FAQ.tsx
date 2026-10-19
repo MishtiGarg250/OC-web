@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { faqData, FAQItem } from "@/data/faqData";
-import { HelpCircle, ChevronDown, Code, Building2 } from "lucide-react";
+import { ChevronDown, Code, Building2 } from "lucide-react";
 import BlurText from "./BlurText";
 
 export default function FAQ() {
@@ -23,16 +23,6 @@ export default function FAQ() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#AEBCC7]/20 bg-[#102535]/70 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md"
-          >
-            <HelpCircle className="w-3.5 h-3.5 text-[#58B99A]" />
-            <span>Got Questions?</span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}

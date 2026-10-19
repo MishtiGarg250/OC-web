@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
@@ -214,9 +215,14 @@ export default function HowItWorks() {
   }, []);
 
   useEffect(() => {
-    updateDimensions();
+    const animId = requestAnimationFrame(() => {
+      updateDimensions();
+    });
     window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener("resize", updateDimensions);
+    };
   }, [updateDimensions]);
 
   // Smooth ease-out rotation to bring card k to the front
@@ -246,8 +252,8 @@ export default function HowItWorks() {
           targetAngleRef.current = null;
           pauseUntilRef.current = now + 1800; // 1.8s brief pause after landing in front before resuming orbit
         }
-      } else if (now > pauseUntilRef.current) {
-        // Continuous, majestic orbital drift
+      } else if (!isHoveredRef.current && now > pauseUntilRef.current) {
+        // Continuous, majestic orbital drift (pauses when user hovers a card)
         angleRef.current += 0.0024;
       }
 
@@ -368,16 +374,6 @@ export default function HowItWorks() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-7">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#AEBCC7]/15 bg-[#102535]/55 text-xs font-semibold uppercase tracking-[0.2em] text-[#D9E2E8] backdrop-blur-md mb-3"
-          >
-            <GitPullRequest className="w-3.5 h-3.5 text-[#58B99A]" />
-            <span>Process &amp; Workflow</span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}

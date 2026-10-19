@@ -2,7 +2,6 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import Link from "next/link";
 import {
   Users2,
   Megaphone,
@@ -140,21 +139,9 @@ export default function WhySponsorUs() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         {/* =========================================================================
             1. SECTION HEADER
-            Minimalist editorial eyebrow + Cormorant Garamond serif display
+            Minimalist Cormorant Garamond serif display
             ========================================================================= */}
         <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-white/10 bg-[#0A1A28]/80 text-xs tracking-wider text-[#D9E2E8] backdrop-blur-md mb-4 font-zen shadow-sm"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]" />
-            <span className="text-[10px] text-[#8FAFC4] uppercase tracking-[0.25em] font-mono">
-              PARTNERSHIP ARCHITECTURE • 2026
-            </span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -292,11 +279,6 @@ export default function WhySponsorUs() {
 
             <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 lg:gap-12">
               <div className="max-w-2xl space-y-3.5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-[#07131F]/80 text-[10px] font-mono uppercase tracking-[0.25em] text-[#8FAFC4]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#58B99A]" />
-                  <span>BESPOKE COLLABORATION</span>
-                </div>
-
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F4F1E8] font-cormorant tracking-wide">
                   Co-create the next flagship track
                 </h3>
