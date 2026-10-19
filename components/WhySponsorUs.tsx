@@ -209,30 +209,22 @@ export default function WhySponsorUs() {
 
                 {/* Top Content Area */}
                 <div>
-                  {/* Category Label & Understated Numerical Index */}
-                  <div className="flex items-center justify-between gap-3 mb-3 sm:mb-3.5">
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#58B99A]" />
-                      <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-[#58B99A] font-medium">
-                        {pillar.categoryLabel}
-                      </span>
+                  {/* Title with Icon Box & Numerical Index */}
+                  <div className="flex items-start justify-between gap-3 sm:gap-3.5 mb-3 sm:mb-3.5">
+                    <div className="flex items-center gap-3 sm:gap-3.5">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#07131F]/90 border border-white/10 flex items-center justify-center text-[#58B99A] shrink-0 group-hover:border-[#38BDF8]/40 transition-colors duration-300 shadow-inner">
+                        <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-bold text-[#F4F1E8] font-cormorant tracking-wide leading-snug">
+                        <span className="relative inline-block pb-0.5">
+                          {pillar.title}
+                          <span className="sponsor-ink-line" aria-hidden="true" />
+                        </span>
+                      </h3>
                     </div>
-                    <span className="font-mono text-2xl sm:text-3xl font-light text-white/15 group-hover:text-[#38BDF8]/40 transition-colors duration-300 select-none">
+                    <span className="font-mono text-2xl sm:text-3xl font-light text-white/15 group-hover:text-[#38BDF8]/40 transition-colors duration-300 select-none shrink-0">
                       {pillar.index}
                     </span>
-                  </div>
-
-                  {/* Title with Icon Box & Radiant Blue Ink-Line Reveal */}
-                  <div className="flex items-center gap-3 sm:gap-3.5 mb-2.5 sm:mb-3">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#07131F]/90 border border-white/10 flex items-center justify-center text-[#58B99A] shrink-0 group-hover:border-[#38BDF8]/40 transition-colors duration-300 shadow-inner">
-                      <Icon className="w-4.5 h-4.5 sm:w-5 sm:h-5" />
-                    </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-[#F4F1E8] font-cormorant tracking-wide leading-snug">
-                      <span className="relative inline-block pb-0.5">
-                        {pillar.title}
-                        <span className="sponsor-ink-line" aria-hidden="true" />
-                      </span>
-                    </h3>
                   </div>
 
                   {/* Compact Description */}

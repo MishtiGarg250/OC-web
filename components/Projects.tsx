@@ -479,18 +479,7 @@ export default function Projects() {
                       CENTER ACTIVE CARD CONTENT OVERLAY (Exact Pinterest Typography)
                       ================================================================= */}
                   {isCenter && (
-                    <div className="relative z-10 w-full h-full p-5 sm:p-7 flex flex-col justify-between">
-                      {/* Top Header: Serial Catalog + Hashtag Category Pill */}
-                      <div className="flex items-center justify-between gap-2">
-                        <span className="px-2.5 py-1 rounded-full bg-[#07131F]/85 border border-white/15 text-[11px] font-mono text-white/75 shadow-xs">
-                          #{String(project.id).padStart(2, "0")} / {projectsData.length}
-                        </span>
-
-                        <span className="px-3 py-1 rounded-full bg-[#07131F]/85 border border-white/20 text-[11px] font-mono font-semibold tracking-wider text-[#B8E5D5] uppercase shadow-sm">
-                          #{project.domainLabel.split("/")[0].trim()}
-                        </span>
-                      </div>
-
+                    <div className="relative z-10 w-full h-full p-5 sm:p-7 flex flex-col justify-end">
                       {/* Bottom Third: Dramatic Pinterest-style Bold Typography */}
                       <div className="mt-auto pt-4">
                         {/* Big Bold Headline */}
@@ -693,12 +682,8 @@ export default function Projects() {
 
               {/* Header: Track & Project Title */}
               <div className="p-4 sm:p-6 pb-3 sm:pb-4 pr-12 border-b border-white/10 bg-white/[0.04] shrink-0 relative z-20">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="font-mono text-xs font-bold text-[#58B99A] tracking-wider">
-                    #{String(selectedProject.id).padStart(2, "0")} / {projectsData.length}
-                  </span>
-                  <span className="w-1 h-1 rounded-full bg-white/30" />
-                  <span className="text-[11px] font-mono font-semibold tracking-wider text-[#58B99A] uppercase">
+                <div className="mb-1.5">
+                  <span className="text-xs font-mono font-semibold tracking-wider text-[#58B99A] uppercase">
                     {selectedProject.domainLabel}
                   </span>
                 </div>
