@@ -166,8 +166,8 @@ function HeroSection() {
         >
           A month-long open source celebration by{" "}
           <span className="font-semibold text-[#F4F1E8]">GeekHaven, IIITA</span> bringing together{" "}
-          <span className="font-semibold text-[#B8E5D5]">1,000+ student developers</span>, 
-          seasoned maintainers, and leading industry sponsors.
+          <span className="font-semibold text-[#B8E5D5]">1,000+ student developers</span> and 
+          seasoned open-source maintainers from across the globe.
         </motion.p>
 
         {/* Brand Tagline */}
@@ -189,7 +189,7 @@ function HeroSection() {
           transition={{ duration: 0.9, delay: 0.6 }}
           className="mt-14 sm:mt-18 md:mt-20 flex flex-col items-center justify-center gap-4 sm:gap-5 w-full"
         >
-          {/* Line 1: Contributor & Sponsor in a single line */}
+          {/* Line 1: Contributor & Explore Projects */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
             {/* Primary CTA: Contributor */}
             <SpecularButton
@@ -218,7 +218,7 @@ function HeroSection() {
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 text-[#0C1C2C]" />
             </SpecularButton>
 
-            {/* Secondary CTA: Sponsor */}
+            {/* Secondary CTA: Explore Projects */}
             <SpecularButton
               size="lg"
               radius={24}
@@ -235,10 +235,10 @@ function HeroSection() {
               glow={1}
               followMouse
               proximity={250}
-              href="/sponsor-registration"
+              href="#projects"
               className="!bg-[#102535]/80 hover:!bg-[#102535] !text-[#F4F1E8] font-semibold text-sm sm:text-base border border-[#58B99A]/50 backdrop-blur-md"
             >
-              <span>Become a Sponsor</span>
+              <span>Explore Projects</span>
             </SpecularButton>
           </div>
 

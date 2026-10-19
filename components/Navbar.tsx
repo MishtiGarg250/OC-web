@@ -18,7 +18,6 @@ interface NavItem {
 const navItems: NavItem[] = [
   { name: "How it works", href: "#how-it-works", isSection: true },
   { name: "Projects", href: "#projects", isSection: true },
-  { name: "Sponsors", href: "#sponsors", isSection: true },
   { name: "Testimonials", href: "#testimonials", isSection: true },
   { name: "FAQ", href: "#faq", isSection: true },
 ];
@@ -170,30 +169,6 @@ export default function Navbar({ className }: { className?: string }) {
             })}
           </div>
 
-          {/* Right: Sponsor Us CTA Button */}
-          <div className="hidden sm:flex items-center">
-            <SpecularButton
-              size="sm"
-              radius={20}
-              tint="#B8E5D5"
-              tintOpacity={0.15}
-              textColor="#0C1C2C"
-              lineColor="#ffffff"
-              baseColor="#B8E5D5"
-              intensity={1}
-              idleIntensity={0.35}
-              shineSize={10}
-              shineFade={34}
-              thickness={1.2}
-              glow={1}
-              followMouse
-              proximity={200}
-              href="/sponsor-registration"
-              className="!bg-[#B8E5D5] hover:!bg-[#A3DAC7] !text-[#0C1C2C] font-semibold text-xs sm:text-sm px-4 py-1.5 sm:px-5 sm:py-2 shadow-md shadow-[#58B99A]/20"
-            >
-              <span>Sponsor Us</span>
-            </SpecularButton>
-          </div>
 
           {/* Mobile Hamburger Toggle Button */}
           <div className="lg:hidden flex items-center gap-2">
@@ -293,30 +268,6 @@ export default function Navbar({ className }: { className?: string }) {
                 </Link>
               )
             )}
-            <div className="pt-2 border-t border-[#AEBCC7]/15">
-              <SpecularButton
-                size="md"
-                radius={20}
-                tint="#B8E5D5"
-                tintOpacity={0.15}
-                textColor="#0C1C2C"
-                lineColor="#ffffff"
-                baseColor="#B8E5D5"
-                intensity={1}
-                idleIntensity={0.35}
-                shineSize={10}
-                shineFade={34}
-                thickness={1.2}
-                glow={1}
-                followMouse
-                proximity={200}
-                href="/sponsor-registration"
-                onClick={() => setIsMenuOpen(false)}
-                className="w-full !bg-[#B8E5D5] hover:!bg-[#A3DAC7] !text-[#0C1C2C] font-semibold text-base px-4 py-2.5 shadow-md shadow-[#58B99A]/20 justify-center"
-              >
-                <span>Sponsor Us</span>
-              </SpecularButton>
-            </div>
           </motion.div>
         )}
       </AnimatePresence>

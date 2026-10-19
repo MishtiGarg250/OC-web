@@ -81,14 +81,4 @@ export const testimonialsData: TestimonialItem[] = [
     tag: "Winner",
     prsOrPoints: "171 PRs • 4,485 Pts",
   },
-  {
-    id: 8,
-    name: "Taskade Ecosystem Lead",
-    role: "Corporate Sponsor Partner",
-    company: "Taskade",
-    avatar: "/logos_taskade.svg",
-    quote: "Partnering with OpenCode gave us direct engagement with thousands of high-intent student builders. The velocity of projects built and issues resolved during the month was world-class.",
-    tag: "Partner",
-    prsOrPoints: "Ecosystem Partner",
-  },
 ];

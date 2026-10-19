@@ -4,9 +4,8 @@ import Navbar from "@/components/Navbar";
 import BackgroundAudio from "@/components/BackgroundAudio";
 
 export const metadata: Metadata = {
-  title: "OpenCode Events - Fuel Open Source Innovation",
-  description: "Join the movement that's shaping the future of technology. Sponsor our open-source events and connect with the brightest developers worldwide.",
-
+  title: "OpenCode '26 - Annual Month-Long Open Source Celebration",
+  description: "Join the movement shaping the future of technology. Contribute to impactful open-source projects, climb the leaderboard, and connect with developers worldwide.",
 };
 
 export default function RootLayout({

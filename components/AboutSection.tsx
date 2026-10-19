@@ -45,9 +45,9 @@ const highlights = [
     number: "04",
     badge: "Future",
     tag: "Career Pipeline",
-    title: "Sponsor & Hiring Pipeline",
+    title: "Career & Tech Pipeline",
     description:
-      "Industry sponsors engage directly with developers through dedicated bounties, technical workshops, and early talent discovery for summer internships.",
+      "High-velocity contributions showcase your real-world engineering skills, helping you stand out for summer internships and open source fellowships.",
   },
 ];
 

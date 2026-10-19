@@ -8,15 +8,10 @@ import {
   Code,
   GitPullRequest,
   Trophy,
-  Building2,
-  Lightbulb,
-  Users,
-  Award,
   ArrowRight,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import Link from "next/link";
 import BlurText from "./BlurText";
 
 const contributorSteps = [
@@ -47,37 +42,6 @@ const contributorSteps = [
     title: "Climb Leaderboard",
     description:
       "Watch your PR get merged! Points are automatically allocated to your profile on the live leaderboard. Compete with builders nationwide for cash prizes, swag kits, and certificates.",
-  },
-];
-
-const sponsorSteps = [
-  {
-    number: "01",
-    icon: Building2,
-    title: "Partner Registration",
-    description:
-      "Choose from our tiered sponsorship packages or design a custom partnership. Complete the quick onboarding to align event deliverables with your company's hiring and developer relations goals.",
-  },
-  {
-    number: "02",
-    icon: Lightbulb,
-    title: "Track & Bounty Creation",
-    description:
-      "Introduce a dedicated challenge track or developer bounty around your API, cloud platform, SDK, or protocol. Incentivize developers to build real-world applications on your stack.",
-  },
-  {
-    number: "03",
-    icon: Users,
-    title: "Direct Mentorship",
-    description:
-      "Host technical workshops, keynote sessions, and maintainer AMAs. Connect directly with high-intent developers, answer technical questions, and position your team as thought leaders.",
-  },
-  {
-    number: "04",
-    icon: Award,
-    title: "Talent Acquisition",
-    description:
-      "Gain direct visibility into contributors' git commits, problem-solving speed, and code quality. Fast-track top performers directly into your internship and full-time hiring pipeline.",
   },
 ];
 
@@ -148,7 +112,6 @@ function RealisticMoon({ className = "" }: { className?: string }) {
 }
 
 export default function HowItWorks() {
-  const [activeTab, setActiveTab] = useState<"contributors" | "sponsors">("contributors");
   const [activeIndex, setActiveIndex] = useState(0);
 
   const [dimensions, setDimensions] = useState<Dimensions>({
@@ -160,7 +123,7 @@ export default function HowItWorks() {
     isTablet: false,
   });
 
-  const steps = activeTab === "contributors" ? contributorSteps : sponsorSteps;
+  const steps = contributorSteps;
 
   // Refs for continuous 60fps RAF orbit
   const angleRef = useRef<number>(Math.PI / 2); // Initial angle has Card 0 at front (bottom)
@@ -325,12 +288,6 @@ export default function HowItWorks() {
     };
   }, [dimensions.isMobile, dimensions.rx, dimensions.ry, dimensions.isTablet]);
 
-  // Tab switch handler
-  const handleTabSwitch = (tab: "contributors" | "sponsors") => {
-    setActiveTab(tab);
-    rotateToCard(0);
-  };
-
   return (
     <section
       id="how-it-works"
@@ -373,7 +330,7 @@ export default function HowItWorks() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-7">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -388,57 +345,10 @@ export default function HowItWorks() {
 
           <div className="mt-3">
             <BlurText
-              text="Whether you are an aspiring developer looking to contribute or a company seeking elite engineering talent, OpenCode is structured for maximum impact."
+              text="From finding your first beginner issue to shipping production code and climbing the leaderboard, OpenCode is structured for maximum impact."
               className="text-base sm:text-lg text-[#AEBCC7] leading-relaxed"
               delay={25}
             />
-          </div>
-        </div>
-
-        {/* Tab Switcher */}
-        <div className="flex justify-center mb-7 sm:mb-9">
-          <div className="inline-flex items-center p-1.5 rounded-full bg-[#102535]/55 border border-[#AEBCC7]/15 backdrop-blur-xl shadow-lg">
-            <button
-              onClick={() => handleTabSwitch("contributors")}
-              className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                activeTab === "contributors"
-                  ? "text-[#0C1C2C]"
-                  : "text-[#AEBCC7] hover:text-[#F4F1E8]"
-              }`}
-            >
-              {activeTab === "contributors" && (
-                <motion.div
-                  layoutId="howItWorksTab"
-                  className="absolute inset-0 rounded-full bg-[#B8E5D5] shadow-md shadow-[#58B99A]/30"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <Code className="w-4 h-4" />
-                For Contributors
-              </span>
-            </button>
-
-            <button
-              onClick={() => handleTabSwitch("sponsors")}
-              className={`relative px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                activeTab === "sponsors"
-                  ? "text-[#0C1C2C]"
-                  : "text-[#AEBCC7] hover:text-[#F4F1E8]"
-              }`}
-            >
-              {activeTab === "sponsors" && (
-                <motion.div
-                  layoutId="howItWorksTab"
-                  className="absolute inset-0 rounded-full bg-[#B8E5D5] shadow-md shadow-[#58B99A]/30"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <Building2 className="w-4 h-4" />
-                For Sponsors &amp; Mentors
-              </span>
-            </button>
           </div>
         </div>
 
@@ -567,7 +477,7 @@ export default function HowItWorks() {
             <div className="relative min-h-[290px]">
               <AnimatePresence mode="wait">
                 <motion.div
-                  key={`${activeTab}-${activeIndex}`}
+                  key={activeIndex}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
@@ -657,25 +567,15 @@ export default function HowItWorks() {
             CONTEXTUAL CALL TO ACTION
             ========================================================================= */}
         <div className="mt-12 sm:mt-14 text-center">
-          {activeTab === "contributors" ? (
-            <a
-              href="https://discord.gg/SxBATvUPnC"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#B8E5D5] hover:bg-[#A3DAC7] px-7 py-3 text-sm font-semibold text-[#0C1C2C] shadow-lg shadow-[#58B99A]/20 transition-all cursor-pointer font-zen"
-            >
-              Get Started on Discord
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          ) : (
-            <Link
-              href="/sponsor-registration"
-              className="inline-flex items-center gap-2 rounded-full bg-[#B8E5D5] hover:bg-[#A3DAC7] px-7 py-3 text-sm font-semibold text-[#0C1C2C] shadow-lg shadow-[#58B99A]/20 transition-all cursor-pointer font-zen"
-            >
-              Register as Sponsor / Partner
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          )}
+          <a
+            href="https://discord.gg/SxBATvUPnC"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-[#B8E5D5] hover:bg-[#A3DAC7] px-7 py-3 text-sm font-semibold text-[#0C1C2C] shadow-lg shadow-[#58B99A]/20 transition-all cursor-pointer font-zen"
+          >
+            Get Started on Discord
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
       </div>
 

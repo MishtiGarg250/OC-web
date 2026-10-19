@@ -5,8 +5,6 @@ import AboutSection from "@/components/AboutSection";
 import HowItWorks from "@/components/HowItWorks";
 import GlobalJourney from "@/components/GlobalJourney";
 import Projects from "@/components/Projects";
-import WhySponsorUs from "@/components/WhySponsorUs";
-import { Sponsors } from "@/components/Sponsors";
 import { Testimonials } from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -21,8 +19,6 @@ export default function Home() {
       <AboutSection />
       <HowItWorks />
       <Projects />
-      <WhySponsorUs />
-      <Sponsors />
       <Testimonials />
       <FAQ />
       <Footer />
