@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUp, Mail, Phone, ExternalLink } from "lucide-react";
-import DownloadBrochureButton from "./DownloadBrochureButton";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -39,10 +38,6 @@ export default function Footer() {
             <p className="text-sm text-[#AEBCC7] leading-relaxed">
               Organized by <span className="text-[#F4F1E8] font-medium">GeekHaven</span>, the official technical society of IIIT Allahabad. Empowering student developers to master production open source and connect with world-class engineering teams.
             </p>
-
-            <div className="pt-2">
-              <DownloadBrochureButton />
-            </div>
           </div>
 
           {/* Col 2: Quick Links */}

@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import DownloadBrochureButton from "./DownloadBrochureButton";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import SakuraCanvas from "./SakuraCanvas";
@@ -182,14 +181,14 @@ function HeroSection() {
           </h3>
         </motion.div>
 
-        {/* Dual Persona CTAs & Brochure */}
+        {/* Action CTAs */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.6 }}
           className="mt-14 sm:mt-18 md:mt-20 flex flex-col items-center justify-center gap-4 sm:gap-5 w-full"
         >
-          {/* Line 1: Contributor & Explore Projects */}
+          {/* Contributor & Explore Projects */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
             {/* Primary CTA: Contributor */}
             <SpecularButton
@@ -208,7 +207,7 @@ function HeroSection() {
               glow={1}
               followMouse
               proximity={250}
-              href="https://discord.gg/SxBATvUPnC"
+              href="https://opencode-26.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
               className="!bg-[#B8E5D5] hover:!bg-[#A3DAC7] !text-[#0C1C2C] font-semibold text-sm sm:text-base shadow-lg shadow-[#58B99A]/20"
@@ -240,11 +239,6 @@ function HeroSection() {
             >
               <span>Explore Projects</span>
             </SpecularButton>
-          </div>
-
-          {/* Line 2: Brochure symmetrically centered between top two */}
-          <div className="flex items-center justify-center scale-100 hover:scale-105 active:scale-95 transition-transform">
-            <DownloadBrochureButton />
           </div>
         </motion.div>
       </div>
