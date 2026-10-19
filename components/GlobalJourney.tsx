@@ -34,22 +34,15 @@ const STAGES: JourneyStage[] = [
     targetId: "projects",
   },
   {
-    id: "creation",
+    id: "community",
     step: "04",
-    title: "Creation",
-    desc: "Shipping Production Code",
-    targetId: "why-sponsor",
-  },
-  {
-    id: "collaboration",
-    step: "05",
-    title: "Collaboration",
-    desc: "Mentors, Sponsors & Teams",
-    targetId: "sponsors",
+    title: "Community",
+    desc: "Student Voices & Stories",
+    targetId: "testimonials",
   },
   {
     id: "opensource",
-    step: "06",
+    step: "05",
     title: "Open Source",
     desc: "Global Community Ecosystem",
     targetId: "faq",
@@ -85,11 +78,9 @@ export default function GlobalJourney() {
         { id: "about", index: 0 },
         { id: "how-it-works", index: 1 },
         { id: "projects", index: 2 },
-        { id: "why-sponsor", index: 3 },
-        { id: "sponsors", index: 4 },
-        { id: "testimonials", index: 4 },
-        { id: "faq", index: 5 },
-        { id: "footer", index: 5 },
+        { id: "testimonials", index: 3 },
+        { id: "faq", index: 4 },
+        { id: "footer", index: 4 },
       ];
 
       for (let i = mapping.length - 1; i >= 0; i--) {

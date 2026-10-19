@@ -2,14 +2,11 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { faqData, FAQItem } from "@/data/faqData";
-import { ChevronDown, Code, Building2 } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import BlurText from "./BlurText";
 
 export default function FAQ() {
-  const [activeCategory, setActiveCategory] = useState<"contributor" | "sponsor">("contributor");
   const [openId, setOpenId] = useState<string | null>("eligibility");
-
-  const filteredFaqs = faqData.filter((item) => item.category === activeCategory);
 
   const toggleAccordion = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
@@ -34,120 +31,56 @@ export default function FAQ() {
 
           <div className="mt-4">
             <BlurText
-              text="Quick answers to common questions about participating, submitting pull requests, and corporate sponsorship."
+              text="Quick answers to common questions about participating, submitting pull requests, and climbing the leaderboard."
               className="text-base sm:text-lg text-[#AEBCC7] max-w-2xl mx-auto leading-relaxed"
               delay={25}
             />
           </div>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex items-center p-1.5 rounded-full bg-[#0B1C2A] border border-[#AEBCC7]/15 backdrop-blur-xl shadow-lg">
-            <button
-              onClick={() => {
-                setActiveCategory("contributor");
-                setOpenId("eligibility");
-              }}
-              className={`relative px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                activeCategory === "contributor"
-                  ? "text-[#0C1C2C]"
-                  : "text-[#AEBCC7] hover:text-[#F4F1E8]"
-              }`}
-            >
-              {activeCategory === "contributor" && (
-                <motion.div
-                  layoutId="faqCategoryTab"
-                  className="absolute inset-0 rounded-full bg-[#B8E5D5] shadow-md shadow-[#58B99A]/20"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <Code className="w-4 h-4" />
-                Contributor FAQs
-              </span>
-            </button>
-
-            <button
-              onClick={() => {
-                setActiveCategory("sponsor");
-                setOpenId("sponsor-benefits");
-              }}
-              className={`relative px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 cursor-pointer ${
-                activeCategory === "sponsor"
-                  ? "text-[#0C1C2C]"
-                  : "text-[#AEBCC7] hover:text-[#F4F1E8]"
-              }`}
-            >
-              {activeCategory === "sponsor" && (
-                <motion.div
-                  layoutId="faqCategoryTab"
-                  className="absolute inset-0 rounded-full bg-[#B8E5D5] shadow-md shadow-[#58B99A]/20"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
-                />
-              )}
-              <span className="relative z-10 flex items-center gap-2">
-                <Building2 className="w-4 h-4" />
-                Sponsor FAQs
-              </span>
-            </button>
-          </div>
-        </div>
-
         {/* Accordion List */}
         <div className="max-w-3xl mx-auto space-y-4">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeCategory}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -15 }}
-              transition={{ duration: 0.3 }}
-              className="space-y-4"
-            >
-              {filteredFaqs.map((faq: FAQItem) => {
-                const isOpen = openId === faq.id;
-                return (
-                  <div
-                    key={faq.id}
-                    className="rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-[#58B99A]/45 hover:shadow-[0_10px_35px_-15px_rgba(7,19,31,0.8)]"
+          {faqData.map((faq: FAQItem) => {
+            const isOpen = openId === faq.id;
+            return (
+              <div
+                key={faq.id}
+                className="rounded-2xl border border-[#AEBCC7]/15 bg-[#102535] backdrop-blur-md overflow-hidden transition-all duration-300 hover:border-[#58B99A]/45 hover:shadow-[0_10px_35px_-15px_rgba(7,19,31,0.8)]"
+              >
+                <button
+                  onClick={() => toggleAccordion(faq.id)}
+                  className="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer focus:outline-none"
+                >
+                  <span className="text-base sm:text-lg font-bold text-[#F4F1E8] pr-4">
+                    {faq.question}
+                  </span>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="p-1 rounded-full bg-[#0B1C2A] text-[#58B99A] border border-[#AEBCC7]/15 shrink-0"
                   >
-                    <button
-                      onClick={() => toggleAccordion(faq.id)}
-                      className="w-full flex items-center justify-between p-5 sm:p-6 text-left cursor-pointer focus:outline-none"
-                    >
-                      <span className="text-base sm:text-lg font-bold text-[#F4F1E8] pr-4">
-                        {faq.question}
-                      </span>
-                      <motion.div
-                        animate={{ rotate: isOpen ? 180 : 0 }}
-                        transition={{ duration: 0.25 }}
-                        className="p-1 rounded-full bg-[#0B1C2A] text-[#58B99A] border border-[#AEBCC7]/15 shrink-0"
-                      >
-                        <ChevronDown className="w-4 h-4" />
-                      </motion.div>
-                    </button>
+                    <ChevronDown className="w-4 h-4" />
+                  </motion.div>
+                </button>
 
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-5 pb-6 sm:px-6 pt-1 text-sm sm:text-base text-[#AEBCC7] leading-relaxed border-t border-[#AEBCC7]/10">
-                            {faq.answer}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-5 pb-6 sm:px-6 pt-1 text-sm sm:text-base text-[#AEBCC7] leading-relaxed border-t border-[#AEBCC7]/10">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

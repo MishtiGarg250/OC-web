@@ -3,7 +3,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUp, Mail, Phone, ExternalLink } from "lucide-react";
-import DownloadBrochureButton from "./DownloadBrochureButton";
 
 export default function Footer() {
   const scrollToTop = () => {
@@ -39,10 +38,6 @@ export default function Footer() {
             <p className="text-sm text-[#AEBCC7] leading-relaxed">
               Organized by <span className="text-[#F4F1E8] font-medium">GeekHaven</span>, the official technical society of IIIT Allahabad. Empowering student developers to master production open source and connect with world-class engineering teams.
             </p>
-
-            <div className="pt-2">
-              <DownloadBrochureButton />
-            </div>
           </div>
 
           {/* Col 2: Quick Links */}
@@ -67,13 +62,8 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#why-sponsor" className="hover:text-[#B8E5D5] transition-colors">
-                  Why Sponsor Us
-                </a>
-              </li>
-              <li>
-                <a href="#sponsors" className="hover:text-[#B8E5D5] transition-colors">
-                  Sponsors &amp; Partners
+                <a href="#testimonials" className="hover:text-[#B8E5D5] transition-colors">
+                  Community Testimonials
                 </a>
               </li>
               <li>
@@ -95,10 +85,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: For Sponsors & Contacts */}
+          {/* Col 3: Contact & Inquiries */}
           <div>
             <h3 className="text-base font-bold text-[#F4F1E8] mb-5 uppercase tracking-wider">
-              Sponsor Inquiries
+              Contact &amp; Inquiries
             </h3>
             <ul className="space-y-3 text-sm text-[#AEBCC7]">
               <li className="flex items-start gap-2">
@@ -133,14 +123,6 @@ export default function Footer() {
                 <a href="mailto:geekhaven@iiita.ac.in" className="text-xs text-[#B8E5D5] hover:underline">
                   geekhaven@iiita.ac.in
                 </a>
-              </li>
-              <li className="pt-1">
-                <Link
-                  href="/sponsor-registration"
-                  className="inline-block text-xs font-semibold text-[#B8E5D5] hover:text-[#A3DAC7] underline underline-offset-4"
-                >
-                  Online Sponsor Registration Form &rarr;
-                </Link>
               </li>
             </ul>
           </div>
